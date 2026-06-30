@@ -1,0 +1,67 @@
+# =====================================================================
+# 基于 Renko Chart 的期货量化系统 (future_6) 配置文件
+# 默认运行在 60 分钟 K 线
+# =====================================================================
+
+# ---------- 数据来源 ----------
+data:
+  db_path: "D:/work_ai/futures_data.db"   # 品种表所在 SQLite 库
+  symbol_table: "futures_top40"           # 读取的品种表 (futures_top40 / futures_all)
+  symbol_col: "symbol"
+  name_col: "name"
+  exchange_col: "exchange"
+  period: "60"                            # K线周期：60 分钟（小时线）
+  cache_dir: "D:/work_ai/quote_cache"     # future_data 共享缓存目录
+  cache_ttl_hours: 2                      # 缓存新鲜期（小时）
+  data_length: 2000                       # 拉取根数（小时线不需要太深）
+  # 数据后端（切换 = 改这一行，缓存目录共用，无需清盘）：
+  #   tqsdk    : 经 future_data 走 tqsdk（账号在 D:/work_ai/tq_auth.py）
+  #   bigquant : 经 BigQuant DAI 拉 1m → 60m 重采样（账号 bq5wec8s，凭证在 ~/.bigquant/config.json）
+  backend: "bigquant"
+
+# ---------- 策略参数 ----------
+strategy:
+  # Renko 参数
+  renko:
+    atr_period: 14                          # 用于计算砖块大小的 ATR 周期
+    brick_atr_mult: 0.5                     # 砖块大小 = ATR * 此系数（通常 0.3~1.0）
+    min_brick_size: 0.0001                  # 最小砖块大小，防止低价品种过小
+    min_brick_ratio: 0.0002                 # 砖块大小不得低于最新价的此比例（如 0.02%）
+    reversal_mult: 2.0                      # 反转所需砖数（传统 Renko = 2）
+    max_bricks_per_bar: 20                  # 单根 K 线最多生成砖数，防止异常数据
+
+  # 砖块 RSI
+  rsi:
+    period: 14                              # 以“砖块数量”为周期的 RSI
+    overbought: 75                          # 严重超买阈值
+    oversold: 25                            # 严重超卖阈值
+
+  # 密集区 / 支撑阻力
+  zones:
+    lookback_bricks: 60                     # 回看多少块砖找密集区
+    bin_mult: 1.5                           # 直方图 bin 宽度 = brick_size * bin_mult
+    min_cluster_bricks: 4                   # 一个有效密集区至少需要多少块砖
+    touch_tolerance_bricks: 0.8             # 价格进入密集区边缘的容差（砖数）
+    breakout_confirm_bricks: 2              # 突破后需要多少块同向砖确认
+
+  # 趋势回撤信号
+  trend:
+    confirm_bricks: 4                       # 确认趋势所需连续同向砖数量
+    pullback_max_ratio: 0.5                 # 回撤不得超过前期波段的 50%
+    entry_follow_bricks: 2                  # 回撤后需要连续几块同向砖才触发信号
+    min_trend_bricks: 3                     # 趋势波段至少多少块砖
+
+  # W 底 / M 顶形态
+  wm:
+    lookback_bricks: 120                    # 形态回看范围（砖数）
+    min_swing_bricks: 4                     # 两底/两顶之间至少间隔多少块砖
+    neckline_breakout_bricks: 1.0           # 突破颈线需越过多少块砖
+    max_tilt_bricks: 3.0                    # 两底/两顶高度差最大允许多少块砖
+
+# ---------- 输出 ----------
+output:
+  dir: "output"
+  signals_csv: "renko_signals_{timestamp}.csv"
+  summary_csv: "renko_summary_{timestamp}.csv"
+  charts_dir: "output/charts"
+  plot_top_n: 10                            # 为前 N 个信号品种画图

@@ -1,0 +1,20 @@
+[project]
+name = "future-quant"
+version = "0.2.0"
+description = "TqSdk-based quantitative trading research system for market structure and wedge reversal signals, with backtesting and parameter optimization."
+requires-python = ">=3.10"
+dependencies = [
+    "numpy>=1.23.0",
+    "pandas>=1.5.0",
+    "pyarrow>=12.0.0",
+    "tqsdk>=3.10.1",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=7.0.0",
+]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["."]

@@ -1,0 +1,4 @@
+numpy>=1.23.0
+pandas>=1.5.0
+pyarrow>=12.0.0
+tqsdk>=3.10.1
