@@ -5,25 +5,16 @@ strict wedge-reversal engine.
 
 Usage: cd /d/work_ai/future_1 && python tqsdk_scan.py
 """
-import sqlite3
 from datetime import datetime
-from pathlib import Path
 
 from future_quant.core.types import SignalSide
 from future_quant.data.tqsdk_provider import TqSdkProvider
+from future_quant.data.universe import load_top40_tuples
 from future_quant.engine import QuantEngine
-
-DB_PATH = Path("D:/work_ai/futures_data.db")
 
 
 def get_top40() -> list[tuple[str, str, str]]:
-    conn = sqlite3.connect(str(DB_PATH))
-    try:
-        cur = conn.cursor()
-        cur.execute("SELECT symbol, name, exchange FROM futures_top40 ORDER BY 排名")
-        return [(r[0], r[1], r[2]) for r in cur.fetchall()]
-    finally:
-        conn.close()
+    return load_top40_tuples()
 
 
 def run():

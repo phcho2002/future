@@ -18,6 +18,7 @@ from future_data import inject_many
 from future_quant.engine import QuantEngine
 from future_quant.config import QuantConfig
 from future_quant.core.types import SignalSide, ChannelType
+from future_quant.data.universe import load_top40
 
 # ─── 信号邻近度评分（参考 china-futures-data skill） ────
 def signal_proximity_score(result) -> float:
@@ -63,12 +64,8 @@ def main():
     print(f"  {pd.Timestamp.now().strftime('%Y-%m-%d %H:%M:%S')}")
     print(f"{'='*75}")
     
-    # 1. 从数据库读取 TOP40
-    DB = r"D:\work_ai\futures_data.db"
-    import sqlite3
-    conn = sqlite3.connect(DB)
-    symbols = pd.read_sql("SELECT 排名, symbol, name, exchange FROM futures_top40 ORDER BY 排名", conn).to_dict('records')
-    conn.close()
+    # 1. 从 futures_top40.json 读取 TOP40
+    symbols = load_top40()
     print(f"  加载 {len(symbols)} 个品种")
 
     # 注入模式：单连接批量注入 15m 缓存（滚动窗口 300 根）

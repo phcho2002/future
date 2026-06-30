@@ -6,7 +6,6 @@ TOP40 5分钟 三推衰竭信号扫描 (注入模式)
 import sys, time, warnings
 warnings.filterwarnings('ignore')
 import pandas as pd
-import sqlite3
 import numpy as np
 
 sys.path.insert(0, r'D:\work_ai')
@@ -15,11 +14,9 @@ sys.path.insert(0, r'D:\work_ai\future_1')
 from future_data import inject_many
 from future_quant.engine import QuantEngine
 from future_quant.core.types import SignalSide
+from future_quant.data.universe import load_top40
 
-DB = r'D:\work_ai\futures_data.db'
-conn = sqlite3.connect(DB)
-symbols = pd.read_sql("SELECT 排名, symbol, name, exchange FROM futures_top40 ORDER BY 排名", conn).to_dict('records')
-conn.close()
+symbols = load_top40()
 
 print('=' * 80)
 print('future_1 三推衰竭系统 — TOP40 5分钟K线扫描 (注入模式)')

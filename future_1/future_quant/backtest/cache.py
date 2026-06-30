@@ -6,13 +6,13 @@ into parquet snapshots, then re-read for every parameter combination.
 
 from __future__ import annotations
 
-import sqlite3
 from dataclasses import dataclass, field
 from pathlib import Path
 
 import pandas as pd
 
 from future_quant.data.tqsdk_provider import DEFAULT_CACHE_DIR, TqSdkProvider
+from future_quant.data.universe import DEFAULT_JSON_PATH, load_top40_tuples
 
 DEFAULT_DB_PATH = Path("D:/work_ai/futures_data.db")
 
@@ -26,16 +26,8 @@ class CacheManager:
     db_path: Path = field(default_factory=lambda: DEFAULT_DB_PATH)
 
     def load_symbols(self, limit: int | None = None) -> list[tuple[str, str, str]]:
-        """Read the ``(symbol, name, exchange)`` universe from futures_data.db."""
-        conn = sqlite3.connect(str(self.db_path))
-        try:
-            cur = conn.cursor()
-            sql = "SELECT symbol, name, exchange FROM futures_top40 ORDER BY 排名"
-            if limit:
-                sql += f" LIMIT {int(limit)}"
-            return [(r[0], r[1], r[2]) for r in cur.fetchall()]
-        finally:
-            conn.close()
+        """Read the ``(symbol, name, exchange)`` universe from futures_top40.json."""
+        return load_top40_tuples(DEFAULT_JSON_PATH, limit=limit)
 
     def build_cache(
         self,

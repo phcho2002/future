@@ -11,12 +11,12 @@ sys.path.insert(0, str(Path(r"D:\work_ai\future_1").resolve()))
 sys.path.insert(0, str(Path(r"D:\work_ai").resolve()))
 
 import pandas as pd
-import sqlite3
 import numpy as np
 
 from future_data import inject_many
 from future_quant.engine import QuantEngine
 from future_quant.core.types import SignalSide
+from future_quant.data.universe import load_top40
 
 
 def signal_to_dict(symbol, name, exchange, result, elapsed_s):
@@ -54,10 +54,7 @@ def main():
     print(f"启动时间: {pd.Timestamp.now().strftime('%Y-%m-%d %H:%M:%S')}", flush=True)
 
     # 读取 TOP40
-    DB = r"D:\work_ai\futures_data.db"
-    conn = sqlite3.connect(DB)
-    symbols = pd.read_sql("SELECT 排名, symbol, name, exchange FROM futures_top40 ORDER BY 排名", conn).to_dict('records')
-    conn.close()
+    symbols = load_top40()
     print(f"加载 {len(symbols)} 个品种", flush=True)
 
     # 注入模式：单连接批量注入 15m 缓存（滚动窗口 300 根），盘中可反复跑

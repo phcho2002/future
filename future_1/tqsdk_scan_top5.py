@@ -5,28 +5,20 @@ Designed for cron every 15 min during trading hours.
 Uses the unified TqSdkProvider for symbol construction and batched fetch.
 """
 import os
-import sqlite3
 from datetime import datetime, time as dtime
-from pathlib import Path
 
 from future_quant.core.types import ChannelType, SignalSide, TrendDirection
 from future_quant.data.tqsdk_provider import TqSdkProvider
+from future_quant.data.universe import load_top40_tuples
 from future_quant.engine import QuantEngine
 
-DB_PATH = Path("D:/work_ai/futures_data.db")
 PERIOD = "15"  # minute K-line
 DATA_LENGTH = 200
 TOP_N = 5
 
 
 def get_symbols() -> list[tuple[str, str, str]]:
-    conn = sqlite3.connect(str(DB_PATH))
-    try:
-        cur = conn.cursor()
-        cur.execute("SELECT symbol, name, exchange FROM futures_top40 ORDER BY 排名")
-        return [(r[0], r[1], r[2]) for r in cur.fetchall()]
-    finally:
-        conn.close()
+    return load_top40_tuples()
 
 
 def signal_proximity_score(result) -> dict:
