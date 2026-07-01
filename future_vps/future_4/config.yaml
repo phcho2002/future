@@ -1,0 +1,78 @@
+# =====================================================================
+# 双均线缠绕放量突破量化系统 (future_4) 配置文件
+# 默认运行在 30 分钟 K 线
+# =====================================================================
+
+# ---------- 数据来源 ----------
+data:
+  symbols_json: "futures_top40.json"      # 品种表 JSON（相对 future_vps 根；含 排名/symbol/name/exchange）
+  symbol_table: "futures_top40"           # 保留字段名（兼容 run_scan/optimize；JSON 版本忽略此值）
+  period: "30"                            # K线周期 (30分钟)
+  cache_dir: "cache"                      # K线 parquet 缓存目录（akshare 回退路径用）
+  cache_ttl_hours: 2                      # 缓存超时(小时)，超过则重新联网拉取
+  fetch_retries: 2                        # 单品种拉取失败重试次数
+  data_length: 8000                       # tqsdk 主路径拉取根数（深历史；akshare 仅~320，想兼容旧行为可改 320）
+  backend: "tqsdk"                        # 数据后端: tqsdk(默认,含全系统共享缓存) / akshare(回退)
+
+# ---------- 策略默认参数 (optimize.py 会把网格最优结果写回这里) ----------
+strategy:
+  ema_fast: 10  # 短期均线 EMA 默认
+  ema_slow: 26  # 长期均线 EMA 默认
+
+  # 缠绕带
+  twist_window: 30                        # 回看窗口(根)
+  min_crossings: 2                        # 窗口内最小交叉次数：2个及以上结形成缠绕带
+  twist_band_ratio: 0.015                 # 均线密集度上界(max|fast-slow|/close)，防伪缠绕
+
+  # 放量中阳 / 中阴
+  vol_factor: 1.6  # 放量因子: volume > 1.5 * MA20(vol)
+  prev_vol_factor: 1.6  # 相对前一根放量: volume > 1.6 * volume.shift(1)
+  vol_ma: 20                              # 成交量均线周期
+  body_pct: 0.005  # 中阳/中阴实体占比阈值 (默认 0.5%)
+  bar_window: 5                           # 交叉前后 ±N 根 K 线内出现放量K
+
+  # 加分项
+  bonus_higher_low: true                  # 多头: 缠绕带内底部抬高加分
+  bonus_lower_high: true                  # 空头: 缠绕带内高点降低加分
+  swing_lookback: 5                       # 判断局部极值的左右窗口
+
+  # 预警信号（辅助盯盘）
+  alert_enable: true                      # 是否启用预警信号
+  alert_band_ratio: 0.003                 # 价格与均线的贴近阈值(|close-ema|/close)
+  alert_cooldown_bars: 5                  # 同一品种连续预警的最小间隔(K线根数)
+
+# ---------- 回测 / 退出模型 ----------
+backtest:
+  atr_period: 14
+  atr_stop_mult: 1.5                      # 初始止损 = 入场价 ± atr_stop_mult * ATR
+  trailing_enable: true                   # 跟踪止盈
+  trailing_atr_mult: 1.5                  # 跟踪: 止损 = max(止损, 极值价 ∓ trailing_atr_mult*ATR)
+  require_index_atr: true                 # 进场前至少需要 atr_period 根数据
+
+# ---------- 优化 ----------
+optimize:
+  run_table: "futures_top40"              # 参与优化的品种表（保留字段名，data_loader 读取 JSON 时忽略）
+  grid:
+    ema_fast:       [6, 8, 10]
+    ema_slow:       [18, 21, 26]
+    vol_factor:     [1.4, 1.5, 1.6]
+    prev_vol_factor: [1.5, 1.6, 1.8]
+    body_pct:       [0.004, 0.005, 0.006]
+  fixed:                                  # 优化时不动的参数
+    twist_window: 30
+    min_crossings: 2
+    vol_ma: 20
+    bar_window: 5
+  # 选优约束(防过拟合/小样本)
+  min_trades: 30                          # 全局聚合样本数下限
+  min_winrate: 0.35                       # 胜率下限
+  metric: "profit_factor"                 # 主排序指标: profit_factor / sharpe / expectancy_r
+  workers: 4                              # 预留（当前单进程已向量化）
+
+# ---------- 输出 ----------
+output:
+  dir: "output"
+  signals_csv: "signals_latest.csv"
+  optimization_csv: "optimization_report.csv"
+  charts_dir: "charts"
+  plot_top_symbols: 10                    # 扫描后为前 N 个信号品种画图

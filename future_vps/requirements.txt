@@ -1,0 +1,19 @@
+# =====================================================================
+# future_vps 合并依赖（future_1 / future_4 / future_6 + 共享 future_data）
+# 安装：  python -m venv venv && source venv/bin/activate && pip install -r requirements.txt
+# =====================================================================
+
+# --- 核心（三个系统都需要）---
+numpy>=1.24.0
+pandas>=2.0.0
+pyarrow>=14.0.0
+pyyaml>=6.0
+
+# --- 数据后端 ---
+tqsdk>=3.10.1            # 主力后端（future_1/4/6 默认 backend=tqsdk）
+akshare>=1.14.0          # 回退/备选后端（future_4/6 的 backend=akshare）
+requests>=2.28.0         # akshare_provider 内部用
+
+# --- 绘图 / 报表 ---
+matplotlib>=3.7.0        # future_4 charts / future_6 plot
+openpyxl>=3.1.0          # future_4 excel 输出

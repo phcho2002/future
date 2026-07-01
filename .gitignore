@@ -1,0 +1,19 @@
+# 排除 tqsdk 认证文件（含账号密码，禁止入库）
+tq_auth.py
+
+# 排除临时 clone 目录（git push 用的中转）
+_gh_up/
+_gh_clone/
+
+# Python 字节码缓存
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+
+# 运行时缓存 / 输出（future_vps 及各子项目）
+quote_cache/
+future_vps/quote_cache/
+**/cache/*.parquet
+**/output/
