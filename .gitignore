@@ -16,4 +16,5 @@ venv/
 quote_cache/
 future_vps/quote_cache/
 **/cache/*.parquet
+**/cache/*.pkl
 **/output/

@@ -1,0 +1,2 @@
+﻿code,name,tier,dir,pattern,entry,stop,target,rr,vol_confirm,zone,reason,bars,latest
+IC0,中证500指数,T2,做空,Upthrust,8276.4,8355.0,8078.19,2.52,True,8322.2,Upthrust/上冲回落 — 假突破阻力区[8285.1-8359.4](中心8322.2)后第1根收回，刺穿高835,1023,2026-07-08 15:00:00
