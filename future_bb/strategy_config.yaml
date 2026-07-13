@@ -1,0 +1,85 @@
+# =====================================================================
+# 二次突破系统 (future_bb) 策略配置文件
+# 假突破 → 真突破 状态机,蓄势形态(箱体/收敛楔形)+ 移动止损
+# =====================================================================
+#
+# 品种池说明
+# ----------
+# 当前选定 6 个品种(基于 30分钟/小时级别历史回测的胜率与盈亏比筛选):
+#   SN0 锡 / LC0 碳酸锂      —— 顶级品种,高波动趋势性强,二次突破质量最高
+#   P0  棕榈油 / AO0 氧化铝   —— 优质品种,指标均衡,板块分散(油脂/有色)
+#   CF0 棉花 / AU0 黄金       —— 优质品种,胜率稳,板块分散(农产品/贵金属)
+#
+# 按月动态调整
+# ------------
+# 期货品种的趋势性会随宏观环境变化(如某些品种进入长期震荡后假突破增多),
+# 因此每月初应重新评估品种池,方法见本文件 `rebalance` 段落。
+# 评估标准(满足任一即移除,候选品种满足全部即纳入):
+#   移除:近60交易日 胜率<25% 且 盈亏比<1.0
+#         或 单月最大回撤 > 5%
+#   纳入:近60交易日 胜率>40% 且 盈亏比>1.5 且 信号≥8笔
+# 调仓时点:每月第一个交易日盘前,用过去60交易日数据跑 backtest_30m.py 评估。
+# 历史调仓记录写在 `rebalance.history` 里。
+
+# ---------- 品种池 ----------
+# 每个品种: symbol / name / exchange / multiplier(合约乘数)
+# exchange 取 tqsdk 风格小写: shfe/dce/czce/cffex/gfex/ine
+# multiplier 取自 futures_data.db futures_top40.合约乘数
+universe:
+  - {symbol: "SN0", name: "锡",       exchange: "shfe", multiplier: 1}
+  - {symbol: "LC0", name: "碳酸锂",   exchange: "gfex", multiplier: 1}
+  - {symbol: "P0",  name: "棕榈油",   exchange: "dce",  multiplier: 10}
+  - {symbol: "AO0", name: "氧化铝",   exchange: "shfe", multiplier: 20}
+  - {symbol: "CF0", name: "棉花",     exchange: "czce", multiplier: 5}
+  - {symbol: "AU0", name: "黄金",     exchange: "shfe", multiplier: 1000}
+
+# ---------- 按月品种池覆盖(预留) ----------
+# 未来如需不同月份用不同品种池,在此按 "YYYY-MM" 指定;
+# 缺省月份回退到上面的 `universe`。
+# 示例:
+#   monthly_overrides:
+#     "2026-08":
+#       - {symbol: "SN0", name: "锡", exchange: "shfe", multiplier: 1}
+#       - ... (该月品种池)
+monthly_overrides: {}
+
+# ---------- 回测/实盘通用参数 ----------
+backtest:
+  kline_period: "60"          # K线周期: "60"=小时级别(实测最优,二次突破信号密度与质量最佳)
+  kline_length: 8000          # 拉取根数(约4-5年小时线)
+  initial_capital: 5000000    # 初始资金(每品种独立账户,单位元)
+  commission_rate: 0.0003     # 手续费率(单边,万分之三)
+  slippage_ticks: 0           # 滑点(跳数)——优化版设0
+
+# ---------- 资金管理 ----------
+money_management:
+  risk_capital_ratio: 0.08    # 开仓:用当前资金 8% 作为保证金
+  add_capital_ratio: 0.03     # 加仓:每次用当前资金 3%(替代旧的 add_lots_ratio)
+  add_atr_step: 2.0           # 加仓触发:价格顺向每走 2×ATR 加仓一次(可多次)
+  hard_stop_loss: 0.03        # 灾难止损:总资金 3%(兜底,不频繁干扰)
+  margin_rate: 0.12           # 保证金率(用于手数换算)
+
+# ---------- 出场策略(让利润奔跑型,实测账户收益率+8.45%)----------
+# 设计要点:突破系统利润来自少数大趋势单,核心是"拿住盈利单",故:
+#   1. 纯移动止损,不用固定R止盈(避免截断利润)
+#   2. 移动止损给足呼吸空间(2.0×ATR),减少被正常波动震出
+#   3. 灾难止损放宽到3%,只在极端情况兜底,不频繁干扰
+exit_strategy:
+  initial_stop_atr: 1.5       # 初始止损 = 突破位 ∓ 1.5×ATR
+  trail_atr_mult: 2.0         # 移动止损 = 跟踪近期极值 ∓ 2.0×ATR(全程启用)
+  no_new_extreme_bars: 0      # 止盈:连续N根未创新极值全平(0=禁用,纯移动止损)
+  lookback: 20                # 前 N 根高/低点(创新极值判定窗口)
+
+# ---------- 按月调仓评估 ----------
+rebalance:
+  enabled: true                      # 是否启用按月调仓
+  eval_window_days: 60               # 评估窗口(交易日)
+  eval_period: "60"                  # 评估所用K线周期(小时级别更稳)
+  remove_win_rate: 0.25              # 移除门槛:胜率<25%
+  remove_profit_factor: 1.0          # 移除门槛:盈亏比<1.0
+  remove_max_drawdown: 0.05          # 移除门槛:单月最大回撤>5%
+  add_win_rate: 0.40                 # 纳入门槛:胜率>40%
+  add_profit_factor: 1.5             # 纳入门槛:盈亏比>1.5
+  add_min_signals: 8                 # 纳入门槛:信号≥8笔
+  candidate_pool: "futures_top40"    # 候选品种来源(剔除股指)
+  history: []                        # 历史调仓记录,格式 [{date, in:[], out:[]}]

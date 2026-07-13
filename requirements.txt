@@ -1,0 +1,31 @@
+# =====================================================================
+# work_ai 共享依赖（Python 3.12 + D:\work_ai\.venv）
+# 安装：
+#   py -3.12 -m venv .venv
+#   .\.venv\Scripts\python.exe -m pip install -U pip
+#   .\.venv\Scripts\python.exe -m pip install -r requirements.txt
+# 说明：
+#   xtquant（迅投行情 SDK）通过 PyPI 安装（pip install xtquant）
+#   akshare 为备份数据源（新浪期货 K 线，无需账号）
+# =====================================================================
+
+# --- 数值 / 表格 / 缓存 ---
+numpy>=1.24.0
+pandas>=2.0.0
+pyarrow>=14.0.0
+pyyaml>=6.0
+openpyxl>=3.1.0
+
+# --- 数据源 ---
+xtquant
+akshare>=1.14.0
+mootdx>=0.11.0
+requests>=2.28.0
+
+# --- 绘图 / 进度 ---
+matplotlib>=3.7.0
+mplfinance>=0.12.10b0
+tqdm>=4.66.0
+
+# --- 开发 / 测试（可选但常用）---
+pytest>=7.0.0

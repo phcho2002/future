@@ -1,0 +1,49 @@
+{
+  "notes": [
+    "universe=40 from futures_top40.json",
+    "daily_filter source=live asof=2026-07-09 16:08:10 n=39 ban_long_bottom=10 ban_short_top=10",
+    "60m bars loaded: 39/40",
+    "active=3 rejected=36 (in_position_raw=3) hist_second_breakouts=105 setups=21"
+  ],
+  "active": [
+    {
+      "symbol": "AU0",
+      "direction": -1,
+      "strength": 0.19157122020934292,
+      "daily_rank": 15,
+      "daily_score": 56.0,
+      "price": 898.86,
+      "reason": "first_probe_hold"
+    },
+    {
+      "symbol": "LC0",
+      "direction": -1,
+      "strength": 0.39590069207549333,
+      "daily_rank": 37,
+      "daily_score": 38.0,
+      "price": 153020.0,
+      "reason": "first_probe_hold"
+    },
+    {
+      "symbol": "IH0",
+      "direction": 1,
+      "strength": 0.3647764744145239,
+      "daily_rank": 7,
+      "daily_score": 64.0,
+      "price": 2939.8,
+      "reason": "first_probe_hold"
+    }
+  ],
+  "risk": {
+    "n_targets": 1,
+    "margin_usage": 0.004284560000000001,
+    "positions": [
+      {
+        "symbol": "LC0",
+        "direction": -1,
+        "lots": 1,
+        "margin": 21422.800000000003
+      }
+    ]
+  }
+}

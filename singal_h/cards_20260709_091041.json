@@ -1,0 +1,86 @@
+{
+  "timestamp": "2026-07-09T09:17:33.138751",
+  "scan_results": {
+    "wyckoff": "OK",
+    "dual_ma": "FAIL",
+    "renko_chart": "OK"
+  },
+  "cards": [
+    {
+      "rank": 1,
+      "symbol": "SC0",
+      "name": "上海原油",
+      "direction": "做多",
+      "score": 90.3,
+      "current_price": 439.2,
+      "entry_price": 439.2,
+      "support": "480.4",
+      "resistance": "489.2",
+      "trigger": "Phase_B — Spring/弹簧效应 — 价格假跌破支撑位437.67后迅速收回，最低探至435.60，第1根K线阳线放量收回，确认主",
+      "rsi": 34.0,
+      "risk": [
+        "暂无显著风险"
+      ],
+      "source_system": "future_2_wyckoff",
+      "hist_pf": 0,
+      "hist_winrate": 0
+    },
+    {
+      "rank": 2,
+      "symbol": "AU0",
+      "name": "黄金",
+      "direction": "做空",
+      "score": 75.4,
+      "current_price": 903.46,
+      "entry_price": 903.8,
+      "support": "890.3",
+      "resistance": "896.9",
+      "trigger": "缠绕突破 4次",
+      "rsi": null,
+      "risk": [
+        "暂无显著风险"
+      ],
+      "source_system": "future_4_dual_ma",
+      "hist_pf": 0,
+      "hist_winrate": 0
+    },
+    {
+      "rank": 3,
+      "symbol": "AU0",
+      "name": "黄金",
+      "direction": "做多",
+      "score": 71.7,
+      "current_price": 890.88,
+      "entry_price": 890.88,
+      "support": "890.3",
+      "resistance": "896.9",
+      "trigger": "W 底突破颈线 886.4800，左底 873.2800，右底 875.4800",
+      "rsi": 41.0,
+      "risk": [
+        "暂无显著风险"
+      ],
+      "source_system": "future_6_renko_chart",
+      "hist_pf": 0,
+      "hist_winrate": 0
+    },
+    {
+      "rank": 4,
+      "symbol": "IH0",
+      "name": "上证50指数期货",
+      "direction": "做空",
+      "score": 61.8,
+      "current_price": 2887.6,
+      "entry_price": 2882.4,
+      "support": "nan",
+      "resistance": "2893.5",
+      "trigger": "缠绕突破 2次",
+      "rsi": null,
+      "risk": [
+        "暂无显著风险"
+      ],
+      "source_system": "future_4_dual_ma",
+      "hist_pf": 0,
+      "hist_winrate": 0
+    }
+  ]
+}

@@ -15,7 +15,7 @@ data:
   cache_ttl_hours: 2                      # 缓存超时(小时)，超过则重新联网拉取
   fetch_retries: 2                        # 单品种拉取失败重试次数
   data_length: 8000                       # tqsdk 主路径拉取根数（深历史；akshare 仅~320，想兼容旧行为可改 320）
-  backend: "akshare"                     # 数据后端: tqsdk(默认,含全系统共享缓存) / akshare(回退)
+  backend: "xtquant"                      # 数据后端: xtquant(默认,迅投行情) / akshare(备份)
 
 # ---------- 策略默认参数 (optimize.py 会把网格最优结果写回这里) ----------
 strategy:
@@ -25,13 +25,13 @@ strategy:
   # 缠绕带
   twist_window: 30                        # 回看窗口(根)
   min_crossings: 2                        # 窗口内最小交叉次数：2个及以上结形成缠绕带
-  twist_band_ratio: 0.015                 # 均线密集度上界(max|fast-slow|/close)，防伪缠绕
+  twist_band_ratio: 0.03                  # 均线密集度上界(max|fast-slow|/close)，防伪缠绕
 
   # 放量中阳 / 中阴
-  vol_factor: 1.6  # 放量因子: volume > 1.5 * MA20(vol)
-  prev_vol_factor: 1.6  # 相对前一根放量: volume > 1.6 * volume.shift(1)
+  vol_factor: 1.2  # 放量因子: volume > 1.2 * MA20(vol)
+  prev_vol_factor: 1.2  # 相对前一根放量: volume > 1.2 * volume.shift(1)
   vol_ma: 20                              # 成交量均线周期
-  body_pct: 0.005  # 中阳/中阴实体占比阈值 (默认 0.5%)
+  body_pct: 0.003  # 中阳/中阴实体占比阈值 (默认 0.3%)
   bar_window: 5                           # 交叉前后 ±N 根 K 线内出现放量K
 
   # 加分项

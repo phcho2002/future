@@ -1,7 +1,8 @@
 """Parquet cache management for backtest / grid search.
 
-Keeps backtests reproducible and avoids hammering TqSdk: data is fetched once
-into parquet snapshots, then re-read for every parameter combination.
+Keeps backtests reproducible and avoids hammering the data backend: data is
+fetched once into parquet snapshots, then re-read for every parameter
+combination.
 """
 
 from __future__ import annotations
@@ -14,7 +15,9 @@ import pandas as pd
 from future_quant.data.tqsdk_provider import DEFAULT_CACHE_DIR, TqSdkProvider
 from future_quant.data.universe import DEFAULT_JSON_PATH, load_top40_tuples
 
-DEFAULT_DB_PATH = Path("D:/work_ai/futures_data.db")
+# 默认数据库路径：与仓库根目录同级的 futures_data.db（可通过 db_path 参数覆盖）
+_REPO_ROOT = Path(__file__).resolve().parents[2]  # future_quant/backtest -> future_1
+DEFAULT_DB_PATH = _REPO_ROOT.parent / "futures_data.db"
 
 
 @dataclass
@@ -37,8 +40,8 @@ class CacheManager:
     ) -> dict[str, pd.DataFrame]:
         """Fetch all symbols once and persist to parquet.
 
-        TqSdk trial mode returns up to 8964 bars per request, so ``length`` of
-        a few thousand bars (a few months of 15-min data) is safe.
+        xtquant can fetch deep history, so ``length`` of a few thousand bars
+        (a few months of 15-min data) is safe.
         """
         provider = provider or TqSdkProvider(period=self.period, cache_dir=self.cache_dir)
         symbols = symbols if symbols is not None else self.load_symbols()

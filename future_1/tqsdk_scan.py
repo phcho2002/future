@@ -1,6 +1,6 @@
 """
-Scan all futures symbols from futures_data.db using TqSdk via the unified
-TqSdkProvider (single batched connection). Each symbol is analyzed with the
+Scan all futures symbols from futures_data.db using xtquant via the unified
+DataProvider (single batched connection). Each symbol is analyzed with the
 strict wedge-reversal engine.
 
 Usage: cd /d/work_ai/future_1 && python tqsdk_scan.py
@@ -8,7 +8,7 @@ Usage: cd /d/work_ai/future_1 && python tqsdk_scan.py
 from datetime import datetime
 
 from future_quant.core.types import SignalSide
-from future_quant.data.tqsdk_provider import TqSdkProvider
+from future_quant.data.tqsdk_provider import DataProvider
 from future_quant.data.universe import load_top40_tuples
 from future_quant.engine import QuantEngine
 
@@ -20,9 +20,9 @@ def get_top40() -> list[tuple[str, str, str]]:
 def run():
     engine = QuantEngine()
     symbols = get_top40()
-    provider = TqSdkProvider(period="15", data_length=200, wait_timeout=25.0)
+    provider = DataProvider(period="15", data_length=200)
 
-    print(f"[{datetime.now():%H:%M:%S}] TqSdk 扫描 — {len(symbols)} 品种, 15分钟K线 (单连接批量)")
+    print(f"[{datetime.now():%H:%M:%S}] xtquant 扫描 — {len(symbols)} 品种, 15分钟K线 (单连接批量)")
     print()
 
     signals_found = []

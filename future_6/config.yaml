@@ -15,9 +15,9 @@ data:
   cache_ttl_hours: 2                      # 缓存新鲜期（小时）
   data_length: 2000                       # 拉取根数（小时线不需要太深）
   # 数据后端（切换 = 改这一行，缓存目录共用，无需清盘）：
-  #   tqsdk    : 经 future_data 走 tqsdk（账号在 D:/work_ai/tq_auth.py）
-  #   bigquant : 经 BigQuant DAI 拉 1m → 60m 重采样（账号 bq5wec8s，凭证在 ~/.bigquant/config.json）
-  backend: "bigquant"
+  #   xtquant  : 经 future_data 走 xtquant（迅投 token 模式，凭证在 D:/work_ai/xt_token.py）
+  #   akshare  : 经 akshare/Sina 拉 K 线（备份，无需账号）
+  backend: "xtquant"
 
 # ---------- 策略参数 ----------
 strategy:

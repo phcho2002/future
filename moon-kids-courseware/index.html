@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>白天为什么也能看到月亮 · 给小朋友的月亮课</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <main class="app-shell">
+      <!-- 左侧：两个互动画面 -->
+      <section class="stage-panel" aria-label="月球互动动画">
+        <header class="topbar">
+          <div>
+            <p class="eyebrow">给 4-5 岁小朋友的月亮课</p>
+            <h1>白天为什么也能看到月亮？</h1>
+          </div>
+          <button id="voiceToggle" class="icon-button" type="button" aria-label="播放当前讲解的配音">
+            <span aria-hidden="true">🔊</span>
+          </button>
+        </header>
+
+        <!-- 画面一：太空俯视，讲反射原理与月相 -->
+        <div class="view-block">
+          <div class="view-head">
+            <span class="view-tag">画面一</span>
+            <h2>从太空看：月亮把太阳光弹回来</h2>
+          </div>
+          <div class="canvas-wrap space-wrap">
+            <canvas id="spaceCanvas" aria-label="太阳、地球和月亮的太空俯视动画"></canvas>
+            <p class="hint-line">提示：用鼠标或手指<strong>拖动月亮</strong>，让它绕地球转一圈。</p>
+          </div>
+        </div>
+
+        <!-- 画面二：地面天空，讲白天看月亮 -->
+        <div class="view-block">
+          <div class="view-head">
+            <span class="view-tag view-tag-2">画面二</span>
+            <h2>从地面看：抬头看白天的天空</h2>
+          </div>
+          <div class="canvas-wrap sky-wrap">
+            <canvas id="skyCanvas" aria-label="从地面仰望天空看到的太阳和月亮"></canvas>
+            <p id="skyStatus" class="sky-status">白天能不能看到月亮？</p>
+          </div>
+        </div>
+
+        <!-- 控制条 -->
+        <div class="control-strip" aria-label="动画控制">
+          <button id="prevStep" type="button" class="tool-button" aria-label="上一课">‹</button>
+          <button id="playPause" type="button" class="primary-button">暂停</button>
+          <button id="nextStep" type="button" class="tool-button" aria-label="下一课">›</button>
+          <label class="speed-control">
+            <span>月亮速度</span>
+            <input id="speedRange" type="range" min="0" max="2" step="0.05" value="0.6" />
+          </label>
+          <label class="toggle-control">
+            <input id="lightPathToggle" type="checkbox" checked />
+            <span>显示光的路线</span>
+          </label>
+          <label class="toggle-control">
+            <input id="dayZoneToggle" type="checkbox" checked />
+            <span>显示白天看月亮的好位置</span>
+          </label>
+        </div>
+      </section>
+
+      <!-- 右侧：讲解 -->
+      <aside class="lesson-panel" aria-label="文字讲解">
+        <div class="lesson-card">
+          <p id="stepCount" class="step-count">1 / 5</p>
+          <div class="phase-row">
+            <canvas id="phaseCanvas" width="130" height="130" aria-label="地球上看月亮的样子"></canvas>
+            <div class="phase-cap">
+              <p class="phase-label">地球上看月亮</p>
+              <p id="phaseName" class="phase-name">满月</p>
+              <p id="phaseBright" class="phase-bright">亮的部分：100%</p>
+            </div>
+          </div>
+          <h2 id="lessonTitle">太阳是最大的一盏灯</h2>
+          <p id="lessonText">太阳是一盏很大很大的灯，它的光照亮地球，也照亮月亮。</p>
+        </div>
+
+        <div class="question-box">
+          <h3>问一问小朋友</h3>
+          <p id="promptText">你能找到天上最亮的太阳吗？</p>
+        </div>
+
+        <div class="mini-notes">
+          <h3>给老师 / 家长</h3>
+          <p id="teacherNote">月亮自己不会发光。我们之所以能看见月亮，是因为太阳光照到月亮上，月亮再把光反射进我们的眼睛。</p>
+        </div>
+      </aside>
+    </main>
+
+    <script src="script.js"></script>
+  </body>
+</html>

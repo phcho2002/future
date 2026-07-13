@@ -1,0 +1,87 @@
+{
+  "timestamp": "2026-07-10T13:55:57.779147",
+  "data_source": "DB(hourly_5dim) + future_2(120min) + future_4(30min) + future_6(60min) + akshare",
+  "total_scanned": 40,
+  "cards": [
+    {
+      "rank": 1,
+      "symbol": "C0",
+      "name": "玉米",
+      "sector": "农产品",
+      "direction": "做多",
+      "score": 320.0,
+      "current_price": 2693.0,
+      "db_judgment": "★★★★ 强势",
+      "db_total": 74,
+      "change_pct": 0.0003715,
+      "sys_count": 2,
+      "sys_details": [
+        "dual_ma:做多",
+        "renko_chart:做多"
+      ],
+      "risk": [
+        "暂无显著风险"
+      ]
+    },
+    {
+      "rank": 2,
+      "symbol": "V0",
+      "name": "PVC",
+      "sector": "化工",
+      "direction": "做多",
+      "score": 317.0,
+      "current_price": 4542.0,
+      "db_judgment": "★★★★ 强势",
+      "db_total": 77,
+      "change_pct": 0.0104561,
+      "sys_count": 1,
+      "sys_details": [
+        "renko_chart:做多"
+      ],
+      "risk": [
+        "无多系统共振确认"
+      ]
+    },
+    {
+      "rank": 3,
+      "symbol": "FG0",
+      "name": "玻璃",
+      "sector": "其他",
+      "direction": "做多",
+      "score": 303.5,
+      "current_price": 969.0,
+      "db_judgment": "★★★★ 强势",
+      "db_total": 69,
+      "change_pct": 0.0146597,
+      "sys_count": 3,
+      "sys_details": [
+        "dual_ma:做多",
+        "renko_chart:做空",
+        "renko_chart:做空"
+      ],
+      "risk": [
+        "暂无显著风险"
+      ]
+    },
+    {
+      "rank": 4,
+      "symbol": "I0",
+      "name": "铁矿石",
+      "sector": "黑色",
+      "direction": "做多",
+      "score": 296.5,
+      "current_price": 749.0,
+      "db_judgment": "★★★★ 强势",
+      "db_total": 68,
+      "change_pct": 0.0053691,
+      "sys_count": 2,
+      "sys_details": [
+        "dual_ma:做多",
+        "renko_chart:做多"
+      ],
+      "risk": [
+        "暂无显著风险"
+      ]
+    }
+  ]
+}

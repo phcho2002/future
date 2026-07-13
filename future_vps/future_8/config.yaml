@@ -1,0 +1,76 @@
+# future_8 假突破反转系统 — 策略参数
+# 所有可调参数集中在此，回测/扫描共用。
+
+# ── 品种池（跨周期稳定性筛选，详见 cross_tf_stability.csv）──
+# 依据 30m/60m/日线 三周期回测结果分层。
+universe:
+  # 第一梯队：3/3 周期全部盈利，实盘首选
+  tier1:
+    - {symbol: PP0, name: 聚丙烯,    exchange: DCE,  multiplier: 5.0, note: 三周期全盈 PF1.69/2.35/∞}
+    - {symbol: IM0, name: 中证1000,  exchange: CFFEX, multiplier: 200.0, note: 三周期全盈}
+  # 第二梯队：2/3 周期盈利且合计为正（30m+60m 强，日线弱）
+  tier2:
+    - {symbol: LC0, name: 碳酸锂,   exchange: GFEX, multiplier: 1.0, note: 30m/60m盈 高波动}
+    - {symbol: JM0, name: 焦煤,     exchange: DCE,  multiplier: 60.0, note: 30m/60m盈 PF1.15/1.80}
+    - {symbol: SC0, name: 原油,     exchange: INE,  multiplier: 1000.0, note: 30m/60m盈}
+    - {symbol: IC0, name: 中证500,  exchange: CFFEX, multiplier: 200.0, note: 30m/60m盈}
+  # 明确淘汰：跨周期全亏或仅1周期盈利，不稳定
+  excluded:
+    - {symbol: SN0, reason: 0/3全亏}
+    - {symbol: MA0, reason: 仅30m微盈 60m/日线亏}
+    - {symbol: EB0, reason: 仅60m盈}
+    - {symbol: AG0, reason: 仅30m盈}
+
+data:
+  period: "15"            # K线周期（分钟字符串）
+  length: 300             # 实盘扫描滚动窗口根数
+  ttl_hours: 2            # 回测深历史缓存新鲜期（小时）
+
+strategy:
+  # ── 趋势闸（swing 波峰波谷结构）──
+  # 用波峰波谷逐步递升/递降判定趋势，替代旧的"N根累计跌幅"。
+  # 下降趋势(LH+LL) + 反弹中 → 允许做空 setup
+  # 上升趋势(HH+HL) + 回落中 → 允许做多 setup
+  swing_lookback: 3        # swing 点检测左右窗口
+  n_swings: 2              # 判定趋势取最近几个 swing 点（2=最近一对同向比较）
+  swing_window: 60         # swing 结构回看根数
+  pullback_atr: 0.8        # 反弹/回落需达到的幅度(ATR倍)，过滤趋势中继
+
+  # ── 成交密集区（关键位）──
+  zone_window: 60         # 密集区回看根数
+  zone_bin_mult: 0.75     # 密集区宽度 = ATR * 此值
+  zone_min_vol_ratio: 0.10  # 密集区最小成交量占比
+
+  # ── 假突破触发 ──
+  signal_lookback: 12     # 信号检测窗口（最近多少根找假突破）
+  break_atr: 0.3          # 假突破刺穿深度(ATR倍)
+  post_break_bars: 5      # 突破后追踪多少根判定失败
+  recover_volume_ratio: 1.2  # 收回放量倍数
+
+  # ── 突破失败分档打分 ──
+  # 三档特征可叠加（满分100），用 min_failure_score 过滤弱失败。
+  # A 快速反击：突破后第1根就是明显反向K且收回关键位 → 最早最弱但快
+  # B 不创新极值：post_break_bars 内未再突破 break_bar 的极值 → 中间档
+  # C 跌破突破点(2B)：收回不仅止于关键位，还越过突破起始点 → 最强最晚
+  score_fast_recoil: 40     # A档分值
+  score_no_new_extreme: 30  # B档分值
+  score_2b_beyond: 30       # C档分值
+  min_failure_score: 40     # 低于此分不视为有效失败信号（40=至少命中A档）
+  recoil_atr: 0.5           # A档"明显反击"幅度(ATR倍)：反向K实体≥此值
+  beyond_atr: 0.3           # C档越过突破起始点的深度(ATR倍)
+
+  # ── 出场 ──
+  target_atr: 2.0         # 目标位ATR倍数
+
+backtest:
+  signal_valid_bars: 5    # 触发后N根内有效（宽松定位）
+  commission_rate: 0.00005  # 单边手续费率
+  slippage_points: 0.0    # 单边滑点(价格点)，默认无滑点
+  warmup: 120             # 回测预热根数
+  initial_capital: 5000000  # 初始资金500万
+  # ── 仓位管理 ──
+  position_pct: 0.08      # 每次开仓名义价值占总资金比例
+  hard_stop_pct: 0.009    # 未加仓时硬止损(总资金的0.9%)
+  add_bars: 5             # 加仓/止盈判定窗口N根
+  add_ratio: 0.5          # 加仓比例(初始仓位的)
+  trail_atr_mult: 1.2     # 跟踪止损 ATR 倍数

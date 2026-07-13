@@ -1,0 +1,86 @@
+{
+  "timestamp": "2026-07-09T13:37:38.803192",
+  "scan_results": {
+    "wyckoff": "OK",
+    "dual_ma": "OK",
+    "renko_chart": "OK"
+  },
+  "cards": [
+    {
+      "rank": 1,
+      "symbol": "SC0",
+      "name": "上海原油",
+      "direction": "做多",
+      "score": 90.3,
+      "current_price": 439.2,
+      "entry_price": 439.2,
+      "support": "482.3",
+      "resistance": "nan",
+      "trigger": "Phase_B — Spring/弹簧效应 — 价格假跌破支撑位437.67后迅速收回，最低探至435.60，第1根K线阳线放量收回，确认主",
+      "rsi": 34.0,
+      "risk": [
+        "暂无显著风险"
+      ],
+      "source_system": "future_2_wyckoff",
+      "hist_pf": 0,
+      "hist_winrate": 0
+    },
+    {
+      "rank": 2,
+      "symbol": "CU0",
+      "name": "铜",
+      "direction": "做空",
+      "score": 72.9,
+      "current_price": 102560.0,
+      "entry_price": 102560.0,
+      "support": "102058.5",
+      "resistance": "102580.5",
+      "trigger": "缠绕突破 3次",
+      "rsi": null,
+      "risk": [
+        "暂无显著风险"
+      ],
+      "source_system": "future_4_dual_ma",
+      "hist_pf": 0,
+      "hist_winrate": 0
+    },
+    {
+      "rank": 3,
+      "symbol": "JM0",
+      "name": "焦煤",
+      "direction": "做多",
+      "score": 65.8,
+      "current_price": 1291.0,
+      "entry_price": 1287.5,
+      "support": "1284.2",
+      "resistance": "nan",
+      "trigger": "缠绕突破 2次",
+      "rsi": null,
+      "risk": [
+        "暂无显著风险"
+      ],
+      "source_system": "future_4_dual_ma",
+      "hist_pf": 0,
+      "hist_winrate": 0
+    },
+    {
+      "rank": 4,
+      "symbol": "HC0",
+      "name": "热轧卷板",
+      "direction": "做空",
+      "score": 66.6,
+      "current_price": 3298.0,
+      "entry_price": 3298.0,
+      "support": "3284.8",
+      "resistance": "3297.4",
+      "trigger": "缠绕突破 2次",
+      "rsi": null,
+      "risk": [
+        "暂无显著风险"
+      ],
+      "source_system": "future_4_dual_ma",
+      "hist_pf": 0,
+      "hist_winrate": 0
+    }
+  ]
+}

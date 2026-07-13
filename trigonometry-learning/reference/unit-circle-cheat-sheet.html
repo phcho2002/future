@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>单位圆速查卡 | 三角函数</title>
+  <link rel="stylesheet" href="../assets/style.css">
+  <style>
+    .cheat-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.5rem;
+      margin: 1.5rem 0;
+    }
+    @media (max-width: 600px) {
+      .cheat-grid { grid-template-columns: 1fr; }
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 1rem 0;
+      font-size: 0.95rem;
+    }
+    th, td {
+      border: 1px solid var(--border);
+      padding: 0.5rem 0.6rem;
+      text-align: center;
+    }
+    th {
+      background: var(--code-bg);
+      font-weight: 600;
+    }
+    .q-sign {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.5rem;
+      text-align: center;
+    }
+    .q-box {
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 0.6rem;
+      background: #fff;
+    }
+    .q-box strong {
+      display: block;
+      margin-bottom: 0.3rem;
+      color: var(--accent);
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>单位圆速查卡</h1>
+    <p class="muted">一份可打印的快速参考：单位圆、特殊角、象限符号与核心恒等式。</p>
+
+    <figure>
+      <svg viewBox="-130 -130 260 260" width="420" height="420">
+        <!-- Grid -->
+        <line x1="-120" y1="0" x2="120" y2="0" stroke="#999" stroke-width="1"/>
+        <line x1="0" y1="-120" x2="0" y2="120" stroke="#999" stroke-width="1"/>
+        <circle cx="0" cy="0" r="100" fill="none" stroke="#b03a2e" stroke-width="2"/>
+
+        <!-- Special angle points and labels -->
+        <!-- 30° = π/6 -->
+        <circle cx="86.6" cy="-50" r="3" fill="#b03a2e"/>
+        <text x="92" y="-55" font-size="11" fill="#333">30°</text>
+        <text x="92" y="-42" font-size="10" fill="#666">π/6</text>
+
+        <!-- 45° = π/4 -->
+        <circle cx="70.7" cy="-70.7" r="3" fill="#b03a2e"/>
+        <text x="78" y="-80" font-size="11" fill="#333">45°</text>
+        <text x="78" y="-67" font-size="10" fill="#666">π/4</text>
+
+        <!-- 60° = π/3 -->
+        <circle cx="50" cy="-86.6" r="3" fill="#b03a2e"/>
+        <text x="55" y="-95" font-size="11" fill="#333">60°</text>
+        <text x="55" y="-82" font-size="10" fill="#666">π/3</text>
+
+        <!-- 90° = π/2 -->
+        <circle cx="0" cy="-100" r="3" fill="#b03a2e"/>
+        <text x="6" y="-105" font-size="11" fill="#333">90°</text>
+        <text x="6" y="-92" font-size="10" fill="#666">π/2</text>
+
+        <!-- 120° = 2π/3 -->
+        <circle cx="-50" cy="-86.6" r="3" fill="#b03a2e"/>
+        <text x="-70" y="-95" font-size="11" fill="#333">120°</text>
+        <text x="-70" y="-82" font-size="10" fill="#666">2π/3</text>
+
+        <!-- 135° = 3π/4 -->
+        <circle cx="-70.7" cy="-70.7" r="3" fill="#b03a2e"/>
+        <text x="-100" y="-80" font-size="11" fill="#333">135°</text>
+        <text x="-100" y="-67" font-size="10" fill="#666">3π/4</text>
+
+        <!-- 150° = 5π/6 -->
+        <circle cx="-86.6" cy="-50" r="3" fill="#b03a2e"/>
+        <text x="-115" y="-55" font-size="11" fill="#333">150°</text>
+        <text x="-115" y="-42" font-size="10" fill="#666">5π/6</text>
+
+        <!-- 180° = π -->
+        <circle cx="-100" cy="0" r="3" fill="#b03a2e"/>
+        <text x="-115" y="-5" font-size="11" fill="#333">180°</text>
+        <text x="-115" y="8" font-size="10" fill="#666">π</text>
+
+        <!-- 210° = 7π/6 -->
+        <circle cx="-86.6" cy="50" r="3" fill="#b03a2e"/>
+        <text x="-115" y="48" font-size="11" fill="#333">210°</text>
+        <text x="-115" y="61" font-size="10" fill="#666">7π/6</text>
+
+        <!-- 225° = 5π/4 -->
+        <circle cx="-70.7" cy="70.7" r="3" fill="#b03a2e"/>
+        <text x="-100" y="75" font-size="11" fill="#333">225°</text>
+        <text x="-100" y="88" font-size="10" fill="#666">5π/4</text>
+
+        <!-- 240° = 4π/3 -->
+        <circle cx="-50" cy="86.6" r="3" fill="#b03a2e"/>
+        <text x="-70" y="92" font-size="11" fill="#333">240°</text>
+        <text x="-70" y="105" font-size="10" fill="#666">4π/3</text>
+
+        <!-- 270° = 3π/2 -->
+        <circle cx="0" cy="100" r="3" fill="#b03a2e"/>
+        <text x="6" y="115" font-size="11" fill="#333">270°</text>
+        <text x="6" y="128" font-size="10" fill="#666">3π/2</text>
+
+        <!-- 300° = 5π/3 -->
+        <circle cx="50" cy="86.6" r="3" fill="#b03a2e"/>
+        <text x="55" y="100" font-size="11" fill="#333">300°</text>
+        <text x="55" y="113" font-size="10" fill="#666">5π/3</text>
+
+        <!-- 315° = 7π/4 -->
+        <circle cx="70.7" cy="70.7" r="3" fill="#b03a2e"/>
+        <text x="78" y="85" font-size="11" fill="#333">315°</text>
+        <text x="78" y="98" font-size="10" fill="#666">7π/4</text>
+
+        <!-- 330° = 11π/6 -->
+        <circle cx="86.6" cy="50" r="3" fill="#b03a2e"/>
+        <text x="92" y="55" font-size="11" fill="#333">330°</text>
+        <text x="92" y="68" font-size="10" fill="#666">11π/6</text>
+
+        <!-- 0° = 2π -->
+        <circle cx="100" cy="0" r="3" fill="#b03a2e"/>
+        <text x="105" y="-5" font-size="11" fill="#333">0°</text>
+        <text x="105" y="8" font-size="10" fill="#666">2π</text>
+
+        <!-- Example radius for 45° -->
+        <line x1="0" y1="0" x2="70.7" y2="-70.7" stroke="#1f77b4" stroke-width="1.5"/>
+        <line x1="70.7" y1="0" x2="70.7" y2="-70.7" stroke="#1f77b4" stroke-width="1" stroke-dasharray="4 2"/>
+        <text x="35" y="-35" font-size="10" fill="#1f77b4">r = 1</text>
+        <text x="75" y="-35" font-size="10" fill="#1f77b4">y = sin θ</text>
+        <text x="35" y="8" font-size="10" fill="#1f77b4">x = cos θ</text>
+      </svg>
+      <figcaption>单位圆：半径 r = 1 的圆。点 P 的横坐标是 cos θ，纵坐标是 sin θ。</figcaption>
+    </figure>
+
+    <h2>定义（从单位圆出发）</h2>
+    <div class="definition">
+      <p><strong>sin θ</strong> = 点 P 的纵坐标（y）</p>
+      <p><strong>cos θ</strong> = 点 P 的横坐标（x）</p>
+      <p><strong>tan θ</strong> = sin θ / cos θ = y / x（x ≠ 0）</p>
+    </div>
+
+    <h2>特殊角的三角函数值</h2>
+    <table>
+      <tr>
+        <th>角度</th>
+        <th>弧度</th>
+        <th>sin</th>
+        <th>cos</th>
+        <th>tan</th>
+      </tr>
+      <tr>
+        <td>0°</td><td>0</td><td>0</td><td>1</td><td>0</td>
+      </tr>
+      <tr>
+        <td>30°</td><td>π/6</td><td>1/2</td><td>√3/2</td><td>√3/3</td>
+      </tr>
+      <tr>
+        <td>45°</td><td>π/4</td><td>√2/2</td><td>√2/2</td><td>1</td>
+      </tr>
+      <tr>
+        <td>60°</td><td>π/3</td><td>√3/2</td><td>1/2</td><td>√3</td>
+      </tr>
+      <tr>
+        <td>90°</td><td>π/2</td><td>1</td><td>0</td><td>不存在</td>
+      </tr>
+    </table>
+
+    <h2>象限符号速记</h2>
+    <div class="q-sign">
+      <div class="q-box">
+        <strong>第二象限</strong>
+        sin +, cos −, tan −
+      </div>
+      <div class="q-box">
+        <strong>第一象限</strong>
+        sin +, cos +, tan +
+      </div>
+      <div class="q-box">
+        <strong>第三象限</strong>
+        sin −, cos −, tan +
+      </div>
+      <div class="q-box">
+        <strong>第四象限</strong>
+        sin −, cos +, tan −
+      </div>
+    </div>
+    <p style="text-align:center; font-size:0.9rem; color: var(--muted);">口诀：一全正，二正弦，三正切，四余弦。</p>
+
+    <h2>核心恒等式</h2>
+    <div class="definition">
+      <p><strong>毕达哥拉斯恒等式：</strong> sin²θ + cos²θ = 1</p>
+      <p><strong>正切定义：</strong> tan θ = sin θ / cos θ</p>
+      <p><strong>角度 ↔ 弧度：</strong> 弧度 = 角度 × π/180；角度 = 弧度 × 180/π</p>
+    </div>
+
+    <h2>常用弧度对应</h2>
+    <table>
+      <tr><th>角度</th><th>30°</th><th>45°</th><th>60°</th><th>90°</th><th>180°</th><th>270°</th><th>360°</th></tr>
+      <tr><td>弧度</td><td>π/6</td><td>π/4</td><td>π/3</td><td>π/2</td><td>π</td><td>3π/2</td><td>2π</td></tr>
+    </table>
+
+    <div class="nav">
+      <span></span>
+      <a href="../lessons/0001-unit-circle-and-radians.html">→ 第 1 课：单位圆与弧度制</a>
+    </div>
+
+    <footer>
+      三角函数学习资料 · 中学阶段
+    </footer>
+  </div>
+</body>
+</html>

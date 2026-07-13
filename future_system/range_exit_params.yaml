@@ -1,0 +1,40 @@
+# 震荡腿止损/止盈参数（RangeExitConfig）
+# 修改后可在代码中：
+#   from future_system.range_exits import RangeExitConfig
+#   import yaml; RangeExitConfig(**yaml.safe_load(open(...)))
+#
+# 优化时优先扫描本文件中的键（见 range_exits.exit_param_space）
+
+exits:
+  # 止损
+  failed_stop_buffer_atr: 0.35   # 假突破：极值外侧缓冲(ATR)
+  fade_stop_buffer_atr: 0.30     # 边沿：箱外侧缓冲(ATR)
+  min_stop_atr: 0.45             # 最小风险距离
+  max_stop_atr: 1.60             # 最大风险距离
+  enable_structure_invalidate: true
+  rebreak_atr: 0.20              # 收盘反向再破箱 → 失效
+
+  # 止盈
+  tp_mode: hybrid                # hybrid | mid | opposite | r_multiple
+  tp1_r: 1.0
+  tp2_r: 2.0
+  tp1_fraction: 0.50             # TP1 平仓比例
+  use_mid_as_tp1: true
+  mid_offset_atr: 0.05
+  use_opposite_as_tp2: true
+  opposite_buffer_atr: 0.15
+  min_reward_risk_tp1: 0.80      # TP1 盈亏比不足则弃单
+
+  # 保本 / 移动
+  enable_breakeven: true
+  breakeven_trigger_r: 0.80
+  breakeven_lock_atr: 0.05
+  enable_trail_after_tp1: true
+  trail_atr: 1.00
+  trail_activate_r: 1.00
+
+  # 时间
+  max_hold_bars: 24
+  enable_time_stop: true
+  time_stop_frac: 0.50
+  time_stop_min_r: 0.25

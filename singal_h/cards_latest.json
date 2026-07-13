@@ -1,0 +1,87 @@
+{
+  "timestamp": "2026-07-10T14:56:00.003880",
+  "data_source": "DB(hourly_5dim) + future_2(120min) + future_4(30min) + future_6(60min) + akshare",
+  "total_scanned": 40,
+  "cards": [
+    {
+      "rank": 1,
+      "symbol": "NI0",
+      "name": "镍",
+      "sector": "有色",
+      "direction": "做多",
+      "score": 337.1,
+      "current_price": 128330.0,
+      "db_judgment": "★★★★ 强势",
+      "db_total": 78,
+      "change_pct": 0.0107112,
+      "sys_count": 2,
+      "sys_details": [
+        "dual_ma:做多",
+        "renko_chart:做多"
+      ],
+      "risk": [
+        "暂无显著风险"
+      ]
+    },
+    {
+      "rank": 2,
+      "symbol": "I0",
+      "name": "铁矿石",
+      "sector": "黑色",
+      "direction": "做多",
+      "score": 332.6,
+      "current_price": 749.5,
+      "db_judgment": "★★★★ 强势",
+      "db_total": 77,
+      "change_pct": 0.0060403,
+      "sys_count": 2,
+      "sys_details": [
+        "dual_ma:做多",
+        "renko_chart:做多"
+      ],
+      "risk": [
+        "暂无显著风险"
+      ]
+    },
+    {
+      "rank": 3,
+      "symbol": "SP0",
+      "name": "纸浆",
+      "sector": "软商品",
+      "direction": "做多",
+      "score": 315.6,
+      "current_price": 4848.0,
+      "db_judgment": "★★★★ 强势",
+      "db_total": 74,
+      "change_pct": 0.0358974,
+      "sys_count": 2,
+      "sys_details": [
+        "renko_chart:做多",
+        "renko_chart:做多"
+      ],
+      "risk": [
+        "暂无显著风险"
+      ]
+    },
+    {
+      "rank": 4,
+      "symbol": "OI0",
+      "name": "菜油",
+      "sector": "农产品",
+      "direction": "做多",
+      "score": 312.1,
+      "current_price": 9910.0,
+      "db_judgment": "★★★★ 强势",
+      "db_total": 74,
+      "change_pct": 0.0013135,
+      "sys_count": 2,
+      "sys_details": [
+        "renko_chart:做多",
+        "renko_chart:做多"
+      ],
+      "risk": [
+        "暂无显著风险"
+      ]
+    }
+  ]
+}

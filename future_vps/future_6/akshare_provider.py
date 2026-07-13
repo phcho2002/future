@@ -100,7 +100,7 @@ def fetch_klines_akshare(
     period: str = "60",
     length: int = 2000,
 ) -> pd.DataFrame:
-    """通过 akshare/Sina 拉取 60m K 线，返回与 tqsdk 路径一致的 DataFrame。"""
+    """通过 akshare/Sina 拉取 60m K 线，返回与 xtquant 路径一致的 DataFrame。"""
     if not _HAS_AKSHARE:
         raise RuntimeError("akshare 未安装")
     specific = _resolve_contract(symbol, exchange or '')

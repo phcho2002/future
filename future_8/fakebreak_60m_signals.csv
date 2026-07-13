@@ -1,2 +1,4 @@
-﻿code,name,tier,dir,pattern,entry,stop,target,rr,vol_confirm,zone,reason,bars,latest
-IC0,中证500指数,T2,做空,Upthrust,8276.4,8355.0,8078.19,2.52,True,8322.2,Upthrust/上冲回落 — 假突破阻力区[8285.1-8359.4](中心8322.2)后第1根收回，刺穿高835,1023,2026-07-08 15:00:00
+﻿code,name,tier,dir,pattern,entry,stop,target,rr,vol_confirm,zone,reason
+AL0,铝,T3,做多,Spring,23045.0,22850.0,23223.18,0.91,True,23039.9,Spring/弹簧效应 — 假跌破支撑区[23006.5-23073.3](中心23039.9)后第
+V0,PVC,T3,做多,Spring,4499.0,4452.0,4559.2,1.28,True,4489.1,Spring/弹簧效应 — 假跌破支撑区[4477.8-4500.4](中心4489.1)后第1根收
+SP0,纸浆,T3,做空,Upthrust,4682.0,4708.0,4636.26,1.76,False,4700.5,Upthrust/上冲回落 — 假突破阻力区[4691.9-4709.1](中心4700.5)后第1

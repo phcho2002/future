@@ -1,13 +1,13 @@
 """缓存性能基准：量化"本地分钟数据缓存"的提速收益。
 
 对比三条路径（同一批 top40 品种、同一 period/length）：
-    (a) akshare 逐品种拉取（原 future_3/futures_30min_signals 的模式，sleep 0.3s/品种）
-    (b) tqsdk fetch_many 批量拉取（单连接）
+    (a) akshare 逐品种拉取（备份后端，sleep 0.3s/品种）
+    (b) xtquant fetch_many 批量拉取（主后端，单次连接）
     (c) 缓存命中（首次冷拉后二次纯读盘）
 
 预期（实测会因网络/品种数不同）：
     (a) ≈ 40-60s  （0.3s sleep + 网络往返 × N）
-    (b) ≈ 10-20s  （单连接批量）
+    (b) ≈ 10-20s  （单次连接批量）
     (c) ≈ 0.3-1s  （纯 parquet 读盘）
     → 缓存命中相对 akshare 提速 50-100×
 """
@@ -24,7 +24,7 @@ from future_data.universe import read_symbols
 
 
 def _bench_akshare(symbols, period):
-    """akshare 逐品种（复刻原 future_3 模式）。"""
+    """akshare 逐品种（备份后端模式）。"""
     try:
         import akshare as ak
     except ImportError:
@@ -44,15 +44,15 @@ def _bench_akshare(symbols, period):
     return (total, ok), None
 
 
-def _bench_tqsdk(symbols, period, length):
-    """tqsdk 单连接批量。"""
+def _bench_xtquant(symbols, period, length):
+    """xtquant 单次连接批量（主后端）。"""
     t0 = time.time()
     try:
         out = fetch_many(symbols, period=period, length=length)
         dt = time.time() - t0
         return (dt, len(out)), None
     except Exception as e:
-        return None, f"tqsdk 失败: {e}"
+        return None, f"xtquant 失败: {e}"
 
 
 def _bench_cache(symbols, period, length, ttl_hours=9999):
@@ -87,7 +87,7 @@ def run_benchmark(n_symbols: int = 10, period: str = "15", length: int = 200):
 
     rows = []
 
-    print("[1/3] akshare 逐品种（含 0.3s sleep/品种）...")
+    print("[1/3] akshare 逐品种（备份后端，含 0.3s sleep/品种）...")
     res, err = _bench_akshare(syms, period)
     if err:
         print(f"  跳过: {err}")
@@ -97,15 +97,15 @@ def run_benchmark(n_symbols: int = 10, period: str = "15", length: int = 200):
         print(f"  -> {dt:.2f}s, {ok}/{len(syms)} 成功")
         rows.append({"路径": "akshare 逐品种", "耗时(s)": round(dt, 2), "成功": f"{ok}/{len(syms)}", "备注": "0.3s sleep/品种"})
 
-    print("[2/3] tqsdk 批量（单连接）...")
-    res, err = _bench_tqsdk(syms, period, length)
+    print("[2/3] xtquant 批量（主后端，单次连接）...")
+    res, err = _bench_xtquant(syms, period, length)
     if err:
         print(f"  {err}")
-        rows.append({"路径": "tqsdk 批量", "耗时(s)": None, "成功": "-", "备注": err})
+        rows.append({"路径": "xtquant 批量", "耗时(s)": None, "成功": "-", "备注": err})
     else:
         dt, ok = res
         print(f"  -> {dt:.2f}s, {ok}/{len(syms)} 成功")
-        rows.append({"路径": "tqsdk 批量", "耗时(s)": round(dt, 2), "成功": f"{ok}/{len(syms)}", "备注": "单连接"})
+        rows.append({"路径": "xtquant 批量", "耗时(s)": round(dt, 2), "成功": f"{ok}/{len(syms)}", "备注": "单连接"})
 
     print("[3/3] 缓存命中（纯读盘）...")
     res, err = _bench_cache(syms, period, length)
@@ -122,12 +122,12 @@ def run_benchmark(n_symbols: int = 10, period: str = "15", length: int = 200):
     # 提速倍数
     ak_t = rows[0]["耗时(s)"]
     cache_t = rows[-1]["耗时(s)"]
-    tq_t = rows[1]["耗时(s)"]
+    xt_t = rows[1]["耗时(s)"]
     print()
     if isinstance(ak_t, (int, float)) and isinstance(cache_t, (int, float)) and cache_t > 0:
         print(f"  缓存命中 vs akshare 提速: {ak_t/cache_t:.0f}×")
-    if isinstance(tq_t, (int, float)) and isinstance(cache_t, (int, float)) and cache_t > 0:
-        print(f"  缓存命中 vs tqsdk 批量提速: {tq_t/cache_t:.0f}×")
+    if isinstance(xt_t, (int, float)) and isinstance(cache_t, (int, float)) and cache_t > 0:
+        print(f"  缓存命中 vs xtquant 批量提速: {xt_t/cache_t:.0f}×")
 
 
 if __name__ == "__main__":

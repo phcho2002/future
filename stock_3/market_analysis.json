@@ -1,0 +1,1773 @@
+{
+  "date": "2026-07-03",
+  "index": {
+    "sh": {
+      "latest": {
+        "open": 4031.34,
+        "high": 4073.88,
+        "low": 4027.26,
+        "close": 4043.64,
+        "change_pct": 0.37
+      },
+      "prev_5day": [
+        {
+          "date": "06-29",
+          "close": 4073.9,
+          "change": 1.16
+        },
+        {
+          "date": "06-30",
+          "close": 4094.4,
+          "change": 0.5
+        },
+        {
+          "date": "07-01",
+          "close": 4112.45,
+          "change": 0.44
+        },
+        {
+          "date": "07-02",
+          "close": 4028.9,
+          "change": -2.03
+        },
+        {
+          "date": "07-03",
+          "close": 4043.64,
+          "change": 0.37
+        }
+      ]
+    },
+    "sz": {
+      "latest": {
+        "open": 15480.12,
+        "high": 15823.05,
+        "low": 15432.89,
+        "close": 15597.51,
+        "change_pct": 0.64
+      }
+    },
+    "cy": {
+      "latest": {
+        "open": 4010.82,
+        "high": 4115.63,
+        "low": 3985.36,
+        "close": 4019.93,
+        "change_pct": 0.07
+      }
+    }
+  },
+  "statistics": {
+    "total_stocks": 5261,
+    "limit_up_count": 107,
+    "limit_down_count": 32,
+    "strong_up_count": 527,
+    "strong_down_count": 310,
+    "up_ratio": 67.9,
+    "max_height": 4
+  },
+  "limit_up_stocks": [
+    {
+      "code": "sz301199",
+      "change_pct": 20.02,
+      "amount": 1296416076,
+      "vol": 10328637,
+      "open": 17.99,
+      "close": 21.28,
+      "prev_close": 17.73
+    },
+    {
+      "code": "sz300580",
+      "change_pct": 20.02,
+      "amount": 1317050307,
+      "vol": 43835520,
+      "open": 21.95,
+      "close": 25.96,
+      "prev_close": 21.63
+    },
+    {
+      "code": "sz300985",
+      "change_pct": 20.0,
+      "amount": 1303394439,
+      "vol": 8040684,
+      "open": 43.1,
+      "close": 49.67,
+      "prev_close": 41.39
+    },
+    {
+      "code": "sz300779",
+      "change_pct": 20.0,
+      "amount": 1311549765,
+      "vol": 12957706,
+      "open": 49.39,
+      "close": 59.27,
+      "prev_close": 49.39
+    },
+    {
+      "code": "sz301499",
+      "change_pct": 20.0,
+      "amount": 1300985173,
+      "vol": 8944697,
+      "open": 29.6,
+      "close": 34.74,
+      "prev_close": 28.95
+    },
+    {
+      "code": "sz300912",
+      "change_pct": 20.0,
+      "amount": 1298196833,
+      "vol": 8627621,
+      "open": 25.0,
+      "close": 28.56,
+      "prev_close": 23.8
+    },
+    {
+      "code": "sz301379",
+      "change_pct": 20.0,
+      "amount": 1320806536,
+      "vol": 49524928,
+      "open": 28.49,
+      "close": 32.16,
+      "prev_close": 26.8
+    },
+    {
+      "code": "sz300718",
+      "change_pct": 20.0,
+      "amount": 1325358311,
+      "vol": 29176992,
+      "open": 66.68,
+      "close": 77.23,
+      "prev_close": 64.36
+    },
+    {
+      "code": "sz301596",
+      "change_pct": 20.0,
+      "amount": 1307112802,
+      "vol": 8040207,
+      "open": 53.23,
+      "close": 63.97,
+      "prev_close": 53.31
+    },
+    {
+      "code": "sh688311",
+      "change_pct": 19.99,
+      "amount": 1301528512,
+      "vol": 10698058,
+      "open": 26.01,
+      "close": 31.15,
+      "prev_close": 25.96
+    },
+    {
+      "code": "sz300018",
+      "change_pct": 19.98,
+      "amount": 1318194661,
+      "vol": 85733680,
+      "open": 12.48,
+      "close": 14.65,
+      "prev_close": 12.21
+    },
+    {
+      "code": "sz300129",
+      "change_pct": 19.98,
+      "amount": 1313094529,
+      "vol": 82430632,
+      "open": 8.78,
+      "close": 10.63,
+      "prev_close": 8.86
+    },
+    {
+      "code": "sz000656",
+      "change_pct": 10.17,
+      "amount": 1255008400,
+      "vol": 5190160,
+      "open": 1.3,
+      "close": 1.3,
+      "prev_close": 1.18
+    },
+    {
+      "code": "sh600376",
+      "change_pct": 10.12,
+      "amount": 1292282762,
+      "vol": 37063464,
+      "open": 3.81,
+      "close": 3.81,
+      "prev_close": 3.46
+    },
+    {
+      "code": "sz000908",
+      "change_pct": 10.08,
+      "amount": 1308091086,
+      "vol": 77971296,
+      "open": 6.43,
+      "close": 6.88,
+      "prev_close": 6.25
+    },
+    {
+      "code": "sz002677",
+      "change_pct": 10.07,
+      "amount": 1274614831,
+      "vol": 5330380,
+      "open": 5.71,
+      "close": 6.23,
+      "prev_close": 5.66
+    },
+    {
+      "code": "sz002148",
+      "change_pct": 10.07,
+      "amount": 1278107718,
+      "vol": 6968238,
+      "open": 6.56,
+      "close": 6.56,
+      "prev_close": 5.96
+    },
+    {
+      "code": "sz002434",
+      "change_pct": 10.07,
+      "amount": 1294956622,
+      "vol": 28425726,
+      "open": 6.09,
+      "close": 6.67,
+      "prev_close": 6.06
+    },
+    {
+      "code": "sz002141",
+      "change_pct": 10.06,
+      "amount": 1314377591,
+      "vol": 183677280,
+      "open": 4.62,
+      "close": 5.14,
+      "prev_close": 4.67
+    },
+    {
+      "code": "sh603327",
+      "change_pct": 10.06,
+      "amount": 1292783948,
+      "vol": 16943916,
+      "open": 8.61,
+      "close": 8.86,
+      "prev_close": 8.05
+    },
+    {
+      "code": "sh603717",
+      "change_pct": 10.06,
+      "amount": 1303600709,
+      "vol": 52215812,
+      "open": 6.89,
+      "close": 7.33,
+      "prev_close": 6.66
+    },
+    {
+      "code": "sz000595",
+      "change_pct": 10.05,
+      "amount": 1286932996,
+      "vol": 15211000,
+      "open": 6.24,
+      "close": 6.24,
+      "prev_close": 5.67
+    },
+    {
+      "code": "sz002700",
+      "change_pct": 10.05,
+      "amount": 1284862365,
+      "vol": 12136700,
+      "open": 6.11,
+      "close": 6.68,
+      "prev_close": 6.07
+    },
+    {
+      "code": "sz002072",
+      "change_pct": 10.05,
+      "amount": 1303423880,
+      "vol": 39006200,
+      "open": 8.87,
+      "close": 9.64,
+      "prev_close": 8.76
+    },
+    {
+      "code": "sz002249",
+      "change_pct": 10.04,
+      "amount": 1309013339,
+      "vol": 68868424,
+      "open": 7.68,
+      "close": 8.33,
+      "prev_close": 7.57
+    },
+    {
+      "code": "sh600530",
+      "change_pct": 10.04,
+      "amount": 1282905484,
+      "vol": 11721650,
+      "open": 5.17,
+      "close": 5.7,
+      "prev_close": 5.18
+    },
+    {
+      "code": "sz002377",
+      "change_pct": 10.04,
+      "amount": 1294153784,
+      "vol": 62237016,
+      "open": 2.59,
+      "close": 2.85,
+      "prev_close": 2.59
+    },
+    {
+      "code": "sh603178",
+      "change_pct": 10.04,
+      "amount": 1286211461,
+      "vol": 5849100,
+      "open": 14.21,
+      "close": 15.68,
+      "prev_close": 14.25
+    },
+    {
+      "code": "sh600793",
+      "change_pct": 10.03,
+      "amount": 1281315996,
+      "vol": 3656780,
+      "open": 16.01,
+      "close": 16.01,
+      "prev_close": 14.55
+    },
+    {
+      "code": "sh600592",
+      "change_pct": 10.03,
+      "amount": 1302867769,
+      "vol": 22530396,
+      "open": 14.73,
+      "close": 16.12,
+      "prev_close": 14.65
+    },
+    {
+      "code": "sh603137",
+      "change_pct": 10.03,
+      "amount": 1260328958,
+      "vol": 605480,
+      "open": 17.22,
+      "close": 17.22,
+      "prev_close": 15.65
+    },
+    {
+      "code": "sh603013",
+      "change_pct": 10.03,
+      "amount": 1286421823,
+      "vol": 5339000,
+      "open": 16.26,
+      "close": 17.66,
+      "prev_close": 16.05
+    },
+    {
+      "code": "sh603165",
+      "change_pct": 10.03,
+      "amount": 1292798041,
+      "vol": 10363199,
+      "open": 13.5,
+      "close": 14.7,
+      "prev_close": 13.36
+    },
+    {
+      "code": "sh603466",
+      "change_pct": 10.03,
+      "amount": 1316083794,
+      "vol": 89668512,
+      "open": 10.66,
+      "close": 11.63,
+      "prev_close": 10.57
+    },
+    {
+      "code": "sh600143",
+      "change_pct": 10.03,
+      "amount": 1324313650,
+      "vol": 121331216,
+      "open": 16.02,
+      "close": 17.01,
+      "prev_close": 15.46
+    },
+    {
+      "code": "sh600801",
+      "change_pct": 10.02,
+      "amount": 1301589728,
+      "vol": 17636660,
+      "open": 16.48,
+      "close": 18.11,
+      "prev_close": 16.46
+    },
+    {
+      "code": "sh601069",
+      "change_pct": 10.02,
+      "amount": 1307267235,
+      "vol": 19324242,
+      "open": 24.55,
+      "close": 25.91,
+      "prev_close": 23.55
+    },
+    {
+      "code": "sh603915",
+      "change_pct": 10.02,
+      "amount": 1298238895,
+      "vol": 15371343,
+      "open": 14.87,
+      "close": 16.03,
+      "prev_close": 14.57
+    },
+    {
+      "code": "sh605068",
+      "change_pct": 10.02,
+      "amount": 1274819101,
+      "vol": 1772800,
+      "open": 17.62,
+      "close": 19.11,
+      "prev_close": 17.37
+    },
+    {
+      "code": "sz002664",
+      "change_pct": 10.02,
+      "amount": 1298203210,
+      "vol": 12291559,
+      "open": 17.98,
+      "close": 19.88,
+      "prev_close": 18.07
+    },
+    {
+      "code": "sh600580",
+      "change_pct": 10.01,
+      "amount": 1328419192,
+      "vol": 79888344,
+      "open": 35.3,
+      "close": 37.35,
+      "prev_close": 33.95
+    },
+    {
+      "code": "sz002396",
+      "change_pct": 10.01,
+      "amount": 1294949666,
+      "vol": 7858217,
+      "open": 23.4,
+      "close": 23.4,
+      "prev_close": 21.27
+    },
+    {
+      "code": "sz002765",
+      "change_pct": 10.01,
+      "amount": 1293146265,
+      "vol": 19979908,
+      "open": 7.21,
+      "close": 7.91,
+      "prev_close": 7.19
+    },
+    {
+      "code": "sz003028",
+      "change_pct": 10.01,
+      "amount": 1285274359,
+      "vol": 3398740,
+      "open": 22.81,
+      "close": 24.61,
+      "prev_close": 22.37
+    },
+    {
+      "code": "sz001337",
+      "change_pct": 10.01,
+      "amount": 1304315737,
+      "vol": 9846419,
+      "open": 39.0,
+      "close": 41.21,
+      "prev_close": 37.46
+    },
+    {
+      "code": "sh603211",
+      "change_pct": 10.01,
+      "amount": 1300321550,
+      "vol": 7675200,
+      "open": 33.35,
+      "close": 35.94,
+      "prev_close": 32.67
+    },
+    {
+      "code": "sh601689",
+      "change_pct": 10.01,
+      "amount": 1335602221,
+      "vol": 86424328,
+      "open": 56.3,
+      "close": 62.43,
+      "prev_close": 56.75
+    },
+    {
+      "code": "sz002715",
+      "change_pct": 10.01,
+      "amount": 1291252119,
+      "vol": 9111265,
+      "open": 13.36,
+      "close": 14.73,
+      "prev_close": 13.39
+    },
+    {
+      "code": "sh605189",
+      "change_pct": 10.01,
+      "amount": 1302967649,
+      "vol": 24181816,
+      "open": 14.59,
+      "close": 16.05,
+      "prev_close": 14.59
+    },
+    {
+      "code": "sz002623",
+      "change_pct": 10.01,
+      "amount": 1292945054,
+      "vol": 9308900,
+      "open": 16.02,
+      "close": 17.15,
+      "prev_close": 15.59
+    }
+  ],
+  "limit_down_stocks": [
+    {
+      "code": "sh600160",
+      "change_pct": -9.99
+    },
+    {
+      "code": "sh600184",
+      "change_pct": -10.0
+    },
+    {
+      "code": "sh600397",
+      "change_pct": -10.0
+    },
+    {
+      "code": "sh600630",
+      "change_pct": -10.01
+    },
+    {
+      "code": "sh600707",
+      "change_pct": -10.01
+    },
+    {
+      "code": "sh601678",
+      "change_pct": -10.0
+    },
+    {
+      "code": "sh603001",
+      "change_pct": -9.98
+    },
+    {
+      "code": "sh603097",
+      "change_pct": -28.6
+    },
+    {
+      "code": "sh603281",
+      "change_pct": -36.42
+    },
+    {
+      "code": "sh603379",
+      "change_pct": -10.0
+    },
+    {
+      "code": "sh603733",
+      "change_pct": -9.98
+    },
+    {
+      "code": "sh603738",
+      "change_pct": -9.99
+    },
+    {
+      "code": "sh603778",
+      "change_pct": -9.85
+    },
+    {
+      "code": "sh603978",
+      "change_pct": -10.0
+    },
+    {
+      "code": "sh605358",
+      "change_pct": -10.01
+    },
+    {
+      "code": "sh605580",
+      "change_pct": -10.0
+    },
+    {
+      "code": "sh688096",
+      "change_pct": -19.98
+    },
+    {
+      "code": "sh688216",
+      "change_pct": -20.0
+    },
+    {
+      "code": "sz000592",
+      "change_pct": -10.05
+    },
+    {
+      "code": "sz000890",
+      "change_pct": -9.98
+    },
+    {
+      "code": "sz000892",
+      "change_pct": -10.0
+    },
+    {
+      "code": "sz000920",
+      "change_pct": -9.89
+    },
+    {
+      "code": "sz000955",
+      "change_pct": -9.57
+    },
+    {
+      "code": "sz001301",
+      "change_pct": -30.28
+    },
+    {
+      "code": "sz001335",
+      "change_pct": -9.71
+    },
+    {
+      "code": "sz001399",
+      "change_pct": -10.0
+    },
+    {
+      "code": "sz002106",
+      "change_pct": -9.97
+    },
+    {
+      "code": "sz002407",
+      "change_pct": -10.0
+    },
+    {
+      "code": "sz002549",
+      "change_pct": -9.87
+    },
+    {
+      "code": "sz002584",
+      "change_pct": -9.55
+    }
+  ],
+  "top_amount_stocks": [
+    {
+      "code": "sz399001",
+      "change_pct": 0.64,
+      "amount": 1405607762
+    },
+    {
+      "code": "sz399106",
+      "change_pct": 0.76,
+      "amount": 1405607762
+    },
+    {
+      "code": "sz399002",
+      "change_pct": 0.65,
+      "amount": 1405607000
+    },
+    {
+      "code": "sz399107",
+      "change_pct": 0.76,
+      "amount": 1405607000
+    },
+    {
+      "code": "sz399100",
+      "change_pct": 0.69,
+      "amount": 1405461915
+    },
+    {
+      "code": "sz399300",
+      "change_pct": 0.62,
+      "amount": 1398502795
+    },
+    {
+      "code": "sz399303",
+      "change_pct": -0.03,
+      "amount": 1397905687
+    },
+    {
+      "code": "sz399006",
+      "change_pct": 0.07,
+      "amount": 1396468501
+    },
+    {
+      "code": "sz399102",
+      "change_pct": 0.27,
+      "amount": 1396468501
+    },
+    {
+      "code": "sz399370",
+      "change_pct": 0.86,
+      "amount": 1396103727
+    },
+    {
+      "code": "sz399364",
+      "change_pct": 0.42,
+      "amount": 1394445666
+    },
+    {
+      "code": "sz399852",
+      "change_pct": -0.05,
+      "amount": 1394419924
+    },
+    {
+      "code": "sz399905",
+      "change_pct": 0.59,
+      "amount": 1394208382
+    },
+    {
+      "code": "sz399012",
+      "change_pct": 0.13,
+      "amount": 1391674646
+    },
+    {
+      "code": "sz399903",
+      "change_pct": 0.49,
+      "amount": 1391143965
+    },
+    {
+      "code": "sz399330",
+      "change_pct": 0.77,
+      "amount": 1389592373
+    },
+    {
+      "code": "sz399612",
+      "change_pct": 1.17,
+      "amount": 1389049832
+    },
+    {
+      "code": "sz399608",
+      "change_pct": 0.71,
+      "amount": 1387983002
+    },
+    {
+      "code": "sz399354",
+      "change_pct": 0.95,
+      "amount": 1387966382
+    },
+    {
+      "code": "sz399363",
+      "change_pct": 0.58,
+      "amount": 1387954206
+    },
+    {
+      "code": "sz399346",
+      "change_pct": 0.95,
+      "amount": 1387225855
+    },
+    {
+      "code": "sz399372",
+      "change_pct": 1.04,
+      "amount": 1387106613
+    },
+    {
+      "code": "sz399362",
+      "change_pct": 1.43,
+      "amount": 1387046696
+    },
+    {
+      "code": "sz399262",
+      "change_pct": 0.84,
+      "amount": 1386088787
+    },
+    {
+      "code": "sz399850",
+      "change_pct": 0.63,
+      "amount": 1385211617
+    },
+    {
+      "code": "sz399016",
+      "change_pct": 1.12,
+      "amount": 1385087644
+    },
+    {
+      "code": "sz399974",
+      "change_pct": 0.85,
+      "amount": 1384773254
+    },
+    {
+      "code": "sz399673",
+      "change_pct": 0.05,
+      "amount": 1384256192
+    },
+    {
+      "code": "sz399296",
+      "change_pct": 0.21,
+      "amount": 1383765582
+    },
+    {
+      "code": "sz399018",
+      "change_pct": 0.66,
+      "amount": 1383620427
+    }
+  ],
+  "consecutive_up": [
+    {
+      "code": "sh603137",
+      "market": "sh",
+      "days": 4,
+      "changes": [
+        10.03,
+        9.97,
+        9.98,
+        10.03
+      ],
+      "latest_close": 17.22,
+      "latest_change": 10.03,
+      "amount": 1260328958,
+      "vol": 605480
+    },
+    {
+      "code": "sh600793",
+      "market": "sh",
+      "days": 3,
+      "changes": [
+        9.98,
+        9.98,
+        10.03
+      ],
+      "latest_close": 16.01,
+      "latest_change": 10.03,
+      "amount": 1281315996,
+      "vol": 3656780
+    },
+    {
+      "code": "sh605189",
+      "market": "sh",
+      "days": 3,
+      "changes": [
+        10.04,
+        10.03,
+        10.01
+      ],
+      "latest_close": 16.05,
+      "latest_change": 10.01,
+      "amount": 1302967649,
+      "vol": 24181816
+    },
+    {
+      "code": "sz000656",
+      "market": "sz",
+      "days": 2,
+      "changes": [
+        10.28,
+        10.17
+      ],
+      "latest_close": 1.3,
+      "latest_change": 10.17,
+      "amount": 1255008400,
+      "vol": 5190160
+    },
+    {
+      "code": "sz000908",
+      "market": "sz",
+      "days": 2,
+      "changes": [
+        10.04,
+        10.08
+      ],
+      "latest_close": 6.88,
+      "latest_change": 10.08,
+      "amount": 1308091086,
+      "vol": 77971296
+    },
+    {
+      "code": "sh603717",
+      "market": "sh",
+      "days": 2,
+      "changes": [
+        10.08,
+        10.06
+      ],
+      "latest_close": 7.33,
+      "latest_change": 10.06,
+      "amount": 1303600709,
+      "vol": 52215812
+    },
+    {
+      "code": "sz000595",
+      "market": "sz",
+      "days": 2,
+      "changes": [
+        10.1,
+        10.05
+      ],
+      "latest_close": 6.24,
+      "latest_change": 10.05,
+      "amount": 1286932996,
+      "vol": 15211000
+    },
+    {
+      "code": "sh603338",
+      "market": "sh",
+      "days": 2,
+      "changes": [
+        10.0,
+        10.01
+      ],
+      "latest_close": 51.67,
+      "latest_change": 10.01,
+      "amount": 1315665332,
+      "vol": 19605216
+    },
+    {
+      "code": "sh600988",
+      "market": "sh",
+      "days": 2,
+      "changes": [
+        10.0,
+        10.0
+      ],
+      "latest_close": 31.23,
+      "latest_change": 10.0,
+      "amount": 1317625789,
+      "vol": 37246740
+    },
+    {
+      "code": "sh603286",
+      "market": "sh",
+      "days": 2,
+      "changes": [
+        10.01,
+        10.0
+      ],
+      "latest_close": 56.96,
+      "latest_change": 10.0,
+      "amount": 1304212891,
+      "vol": 7167320
+    },
+    {
+      "code": "sh603580",
+      "market": "sh",
+      "days": 2,
+      "changes": [
+        10.0,
+        10.0
+      ],
+      "latest_close": 30.13,
+      "latest_change": 10.0,
+      "amount": 1296221409,
+      "vol": 6984570
+    },
+    {
+      "code": "sz000576",
+      "market": "sz",
+      "days": 2,
+      "changes": [
+        9.96,
+        10.0
+      ],
+      "latest_close": 8.14,
+      "latest_change": 10.0,
+      "amount": 1295539403,
+      "vol": 24430700
+    },
+    {
+      "code": "sz002979",
+      "market": "sz",
+      "days": 2,
+      "changes": [
+        10.0,
+        10.0
+      ],
+      "latest_close": 69.55,
+      "latest_change": 10.0,
+      "amount": 1303844322,
+      "vol": 5520605
+    },
+    {
+      "code": "sh603559",
+      "market": "sh",
+      "days": 2,
+      "changes": [
+        10.01,
+        9.99
+      ],
+      "latest_close": 9.91,
+      "latest_change": 9.99,
+      "amount": 1292293416,
+      "vol": 14473238
+    },
+    {
+      "code": "sz000506",
+      "market": "sz",
+      "days": 2,
+      "changes": [
+        10.03,
+        9.99
+      ],
+      "latest_close": 13.87,
+      "latest_change": 9.99,
+      "amount": 1303465701,
+      "vol": 27090708
+    },
+    {
+      "code": "sz001317",
+      "market": "sz",
+      "days": 2,
+      "changes": [
+        9.99,
+        9.99
+      ],
+      "latest_close": 48.43,
+      "latest_change": 9.99,
+      "amount": 1295764005,
+      "vol": 4140009
+    },
+    {
+      "code": "sz000004",
+      "market": "sz",
+      "days": 2,
+      "changes": [
+        10.81,
+        9.76
+      ],
+      "latest_close": 0.45,
+      "latest_change": 9.76,
+      "amount": 1243817680,
+      "vol": 6267334
+    }
+  ],
+  "quality_analysis": [
+    {
+      "code": "sh600143",
+      "market": "sh",
+      "change_pct": 10.03,
+      "is_yizi": false,
+      "is_tzi": false,
+      "is_lanban": true,
+      "is_baoliang": true,
+      "is_suoliang": false,
+      "vol_ratio": 2.49,
+      "amplitude": 7.31,
+      "fengban_time": "盘中",
+      "amount": 1324313650,
+      "vol": 121331216
+    },
+    {
+      "code": "sh600376",
+      "market": "sh",
+      "change_pct": 10.12,
+      "is_yizi": true,
+      "is_tzi": false,
+      "is_lanban": false,
+      "is_baoliang": false,
+      "is_suoliang": true,
+      "vol_ratio": 0.44,
+      "amplitude": 0.0,
+      "fengban_time": "开盘",
+      "amount": 1292282762,
+      "vol": 37063464
+    },
+    {
+      "code": "sh600391",
+      "market": "sh",
+      "change_pct": 10.0,
+      "is_yizi": false,
+      "is_tzi": false,
+      "is_lanban": true,
+      "is_baoliang": false,
+      "is_suoliang": false,
+      "vol_ratio": 0.73,
+      "amplitude": 9.88,
+      "fengban_time": "盘中",
+      "amount": 1303868467,
+      "vol": 10985304
+    },
+    {
+      "code": "sh600530",
+      "market": "sh",
+      "change_pct": 10.04,
+      "is_yizi": false,
+      "is_tzi": false,
+      "is_lanban": true,
+      "is_baoliang": false,
+      "is_suoliang": false,
+      "vol_ratio": 0.71,
+      "amplitude": 10.23,
+      "fengban_time": "盘中",
+      "amount": 1282905484,
+      "vol": 11721650
+    },
+    {
+      "code": "sh600580",
+      "market": "sh",
+      "change_pct": 10.01,
+      "is_yizi": false,
+      "is_tzi": false,
+      "is_lanban": true,
+      "is_baoliang": false,
+      "is_suoliang": false,
+      "vol_ratio": 1.78,
+      "amplitude": 6.33,
+      "fengban_time": "盘中",
+      "amount": 1328419192,
+      "vol": 79888344
+    },
+    {
+      "code": "sh600592",
+      "market": "sh",
+      "change_pct": 10.03,
+      "is_yizi": false,
+      "is_tzi": false,
+      "is_lanban": true,
+      "is_baoliang": true,
+      "is_suoliang": false,
+      "vol_ratio": 2.16,
+      "amplitude": 10.03,
+      "fengban_time": "盘中",
+      "amount": 1302867769,
+      "vol": 22530396
+    },
+    {
+      "code": "sh600769",
+      "market": "sh",
+      "change_pct": 10.0,
+      "is_yizi": false,
+      "is_tzi": false,
+      "is_lanban": true,
+      "is_baoliang": false,
+      "is_suoliang": false,
+      "vol_ratio": 1.32,
+      "amplitude": 13.64,
+      "fengban_time": "盘中",
+      "amount": 1309716436,
+      "vol": 29433604
+    },
+    {
+      "code": "sh600793",
+      "market": "sh",
+      "change_pct": 10.03,
+      "is_yizi": true,
+      "is_tzi": true,
+      "is_lanban": false,
+      "is_baoliang": false,
+      "is_suoliang": true,
+      "vol_ratio": 0.67,
+      "amplitude": 0.07,
+      "fengban_time": "开盘",
+      "amount": 1281315996,
+      "vol": 3656780
+    },
+    {
+      "code": "sh600801",
+      "market": "sh",
+      "change_pct": 10.02,
+      "is_yizi": false,
+      "is_tzi": false,
+      "is_lanban": true,
+      "is_baoliang": false,
+      "is_suoliang": false,
+      "vol_ratio": 0.73,
+      "amplitude": 10.39,
+      "fengban_time": "盘中",
+      "amount": 1301589728,
+      "vol": 17636660
+    },
+    {
+      "code": "sh600841",
+      "market": "sh",
+      "change_pct": 10.0,
+      "is_yizi": false,
+      "is_tzi": false,
+      "is_lanban": true,
+      "is_baoliang": false,
+      "is_suoliang": false,
+      "vol_ratio": 1.92,
+      "amplitude": 10.0,
+      "fengban_time": "盘中",
+      "amount": 1292726972,
+      "vol": 22899088
+    },
+    {
+      "code": "sh600988",
+      "market": "sh",
+      "change_pct": 10.0,
+      "is_yizi": false,
+      "is_tzi": false,
+      "is_lanban": false,
+      "is_baoliang": false,
+      "is_suoliang": true,
+      "vol_ratio": 0.64,
+      "amplitude": 4.83,
+      "fengban_time": "盘中",
+      "amount": 1317625789,
+      "vol": 37246740
+    },
+    {
+      "code": "sh600990",
+      "market": "sh",
+      "change_pct": 10.01,
+      "is_yizi": false,
+      "is_tzi": false,
+      "is_lanban": true,
+      "is_baoliang": false,
+      "is_suoliang": false,
+      "vol_ratio": 1.65,
+      "amplitude": 10.18,
+      "fengban_time": "盘中",
+      "amount": 1292551216,
+      "vol": 7914757
+    },
+    {
+      "code": "sh601069",
+      "market": "sh",
+      "change_pct": 10.02,
+      "is_yizi": false,
+      "is_tzi": false,
+      "is_lanban": true,
+      "is_baoliang": false,
+      "is_suoliang": false,
+      "vol_ratio": 1.06,
+      "amplitude": 7.05,
+      "fengban_time": "盘中",
+      "amount": 1307267235,
+      "vol": 19324242
+    },
+    {
+      "code": "sh601100",
+      "market": "sh",
+      "change_pct": 10.0,
+      "is_yizi": false,
+      "is_tzi": false,
+      "is_lanban": true,
+      "is_baoliang": false,
+      "is_suoliang": false,
+      "vol_ratio": 1.76,
+      "amplitude": 10.02,
+      "fengban_time": "盘中",
+      "amount": 1326285439,
+      "vol": 20220304
+    },
+    {
+      "code": "sh601177",
+      "market": "sh",
+      "change_pct": 9.99,
+      "is_yizi": false,
+      "is_tzi": false,
+      "is_lanban": true,
+      "is_baoliang": false,
+      "is_suoliang": false,
+      "vol_ratio": 1.61,
+      "amplitude": 9.68,
+      "fengban_time": "盘中",
+      "amount": 1293572727,
+      "vol": 11561496
+    },
+    {
+      "code": "sh601689",
+      "market": "sh",
+      "change_pct": 10.01,
+      "is_yizi": false,
+      "is_tzi": false,
+      "is_lanban": true,
+      "is_baoliang": false,
+      "is_suoliang": false,
+      "vol_ratio": 1.67,
+      "amplitude": 10.8,
+      "fengban_time": "盘中",
+      "amount": 1335602221,
+      "vol": 86424328
+    },
+    {
+      "code": "sh603012",
+      "market": "sh",
+      "change_pct": 9.98,
+      "is_yizi": false,
+      "is_tzi": false,
+      "is_lanban": true,
+      "is_baoliang": false,
+      "is_suoliang": false,
+      "vol_ratio": 1.79,
+      "amplitude": 10.1,
+      "fengban_time": "盘中",
+      "amount": 1300830765,
+      "vol": 33558236
+    },
+    {
+      "code": "sh603013",
+      "market": "sh",
+      "change_pct": 10.03,
+      "is_yizi": false,
+      "is_tzi": false,
+      "is_lanban": true,
+      "is_baoliang": false,
+      "is_suoliang": false,
+      "vol_ratio": 1.71,
+      "amplitude": 9.47,
+      "fengban_time": "盘中",
+      "amount": 1286421823,
+      "vol": 5339000
+    },
+    {
+      "code": "sh603051",
+      "market": "sh",
+      "change_pct": 9.99,
+      "is_yizi": false,
+      "is_tzi": false,
+      "is_lanban": true,
+      "is_baoliang": false,
+      "is_suoliang": false,
+      "vol_ratio": 1.77,
+      "amplitude": 10.59,
+      "fengban_time": "盘中",
+      "amount": 1295948732,
+      "vol": 9392464
+    },
+    {
+      "code": "sh603137",
+      "market": "sh",
+      "change_pct": 10.03,
+      "is_yizi": true,
+      "is_tzi": false,
+      "is_lanban": false,
+      "is_baoliang": false,
+      "is_suoliang": true,
+      "vol_ratio": 0.46,
+      "amplitude": 0.0,
+      "fengban_time": "开盘",
+      "amount": 1260328958,
+      "vol": 605480
+    },
+    {
+      "code": "sh603165",
+      "market": "sh",
+      "change_pct": 10.03,
+      "is_yizi": false,
+      "is_tzi": false,
+      "is_lanban": true,
+      "is_baoliang": false,
+      "is_suoliang": false,
+      "vol_ratio": 1.79,
+      "amplitude": 9.06,
+      "fengban_time": "盘中",
+      "amount": 1292798041,
+      "vol": 10363199
+    },
+    {
+      "code": "sh603178",
+      "market": "sh",
+      "change_pct": 10.04,
+      "is_yizi": false,
+      "is_tzi": false,
+      "is_lanban": true,
+      "is_baoliang": false,
+      "is_suoliang": false,
+      "vol_ratio": 0.92,
+      "amplitude": 10.32,
+      "fengban_time": "盘中",
+      "amount": 1286211461,
+      "vol": 5849100
+    },
+    {
+      "code": "sh603211",
+      "market": "sh",
+      "change_pct": 10.01,
+      "is_yizi": false,
+      "is_tzi": false,
+      "is_lanban": true,
+      "is_baoliang": false,
+      "is_suoliang": false,
+      "vol_ratio": 0.73,
+      "amplitude": 8.97,
+      "fengban_time": "盘中",
+      "amount": 1300321550,
+      "vol": 7675200
+    },
+    {
+      "code": "sh603278",
+      "market": "sh",
+      "change_pct": 9.99,
+      "is_yizi": false,
+      "is_tzi": false,
+      "is_lanban": true,
+      "is_baoliang": false,
+      "is_suoliang": false,
+      "vol_ratio": 1.6,
+      "amplitude": 9.17,
+      "fengban_time": "盘中",
+      "amount": 1302543916,
+      "vol": 29442480
+    },
+    {
+      "code": "sh603286",
+      "market": "sh",
+      "change_pct": 10.0,
+      "is_yizi": false,
+      "is_tzi": false,
+      "is_lanban": true,
+      "is_baoliang": false,
+      "is_suoliang": false,
+      "vol_ratio": 1.86,
+      "amplitude": 7.01,
+      "fengban_time": "盘中",
+      "amount": 1304212891,
+      "vol": 7167320
+    },
+    {
+      "code": "sh603303",
+      "market": "sh",
+      "change_pct": 10.0,
+      "is_yizi": false,
+      "is_tzi": false,
+      "is_lanban": true,
+      "is_baoliang": false,
+      "is_suoliang": false,
+      "vol_ratio": 1.06,
+      "amplitude": 10.04,
+      "fengban_time": "盘中",
+      "amount": 1303080501,
+      "vol": 14838064
+    },
+    {
+      "code": "sh603327",
+      "market": "sh",
+      "change_pct": 10.06,
+      "is_yizi": false,
+      "is_tzi": false,
+      "is_lanban": false,
+      "is_baoliang": false,
+      "is_suoliang": true,
+      "vol_ratio": 0.44,
+      "amplitude": 3.11,
+      "fengban_time": "盘中",
+      "amount": 1292783948,
+      "vol": 16943916
+    },
+    {
+      "code": "sh603338",
+      "market": "sh",
+      "change_pct": 10.01,
+      "is_yizi": false,
+      "is_tzi": false,
+      "is_lanban": true,
+      "is_baoliang": true,
+      "is_suoliang": false,
+      "vol_ratio": 3.12,
+      "amplitude": 9.05,
+      "fengban_time": "盘中",
+      "amount": 1315665332,
+      "vol": 19605216
+    },
+    {
+      "code": "sh603466",
+      "market": "sh",
+      "change_pct": 10.03,
+      "is_yizi": false,
+      "is_tzi": false,
+      "is_lanban": true,
+      "is_baoliang": true,
+      "is_suoliang": false,
+      "vol_ratio": 2.05,
+      "amplitude": 9.18,
+      "fengban_time": "盘中",
+      "amount": 1316083794,
+      "vol": 89668512
+    },
+    {
+      "code": "sh603559",
+      "market": "sh",
+      "change_pct": 9.99,
+      "is_yizi": false,
+      "is_tzi": false,
+      "is_lanban": true,
+      "is_baoliang": false,
+      "is_suoliang": false,
+      "vol_ratio": 1.98,
+      "amplitude": 9.21,
+      "fengban_time": "盘中",
+      "amount": 1292293416,
+      "vol": 14473238
+    },
+    {
+      "code": "sh603580",
+      "market": "sh",
+      "change_pct": 10.0,
+      "is_yizi": false,
+      "is_tzi": false,
+      "is_lanban": true,
+      "is_baoliang": true,
+      "is_suoliang": false,
+      "vol_ratio": 3.5,
+      "amplitude": 8.87,
+      "fengban_time": "盘中",
+      "amount": 1296221409,
+      "vol": 6984570
+    },
+    {
+      "code": "sh603596",
+      "market": "sh",
+      "change_pct": 9.98,
+      "is_yizi": false,
+      "is_tzi": false,
+      "is_lanban": true,
+      "is_baoliang": false,
+      "is_suoliang": false,
+      "vol_ratio": 1.17,
+      "amplitude": 9.94,
+      "fengban_time": "盘中",
+      "amount": 1309871380,
+      "vol": 22955444
+    },
+    {
+      "code": "sh603713",
+      "market": "sh",
+      "change_pct": 10.0,
+      "is_yizi": false,
+      "is_tzi": false,
+      "is_lanban": true,
+      "is_baoliang": false,
+      "is_suoliang": true,
+      "vol_ratio": 0.5,
+      "amplitude": 9.32,
+      "fengban_time": "盘中",
+      "amount": 1300668535,
+      "vol": 3613427
+    },
+    {
+      "code": "sh603717",
+      "market": "sh",
+      "change_pct": 10.06,
+      "is_yizi": false,
+      "is_tzi": false,
+      "is_lanban": true,
+      "is_baoliang": true,
+      "is_suoliang": false,
+      "vol_ratio": 2.17,
+      "amplitude": 12.76,
+      "fengban_time": "盘中",
+      "amount": 1303600709,
+      "vol": 52215812
+    },
+    {
+      "code": "sh603725",
+      "market": "sh",
+      "change_pct": 9.54,
+      "is_yizi": false,
+      "is_tzi": false,
+      "is_lanban": true,
+      "is_baoliang": true,
+      "is_suoliang": false,
+      "vol_ratio": 2.35,
+      "amplitude": 10.4,
+      "fengban_time": "盘中",
+      "amount": 1310198528,
+      "vol": 47481392
+    },
+    {
+      "code": "sh603726",
+      "market": "sh",
+      "change_pct": 9.99,
+      "is_yizi": false,
+      "is_tzi": false,
+      "is_lanban": true,
+      "is_baoliang": false,
+      "is_suoliang": false,
+      "vol_ratio": 0.88,
+      "amplitude": 11.76,
+      "fengban_time": "盘中",
+      "amount": 1305286338,
+      "vol": 12670995
+    },
+    {
+      "code": "sh603730",
+      "market": "sh",
+      "change_pct": 9.98,
+      "is_yizi": false,
+      "is_tzi": false,
+      "is_lanban": true,
+      "is_baoliang": true,
+      "is_suoliang": false,
+      "vol_ratio": 2.82,
+      "amplitude": 10.58,
+      "fengban_time": "盘中",
+      "amount": 1312333110,
+      "vol": 60550360
+    },
+    {
+      "code": "sh603798",
+      "market": "sh",
+      "change_pct": 9.97,
+      "is_yizi": false,
+      "is_tzi": false,
+      "is_lanban": true,
+      "is_baoliang": false,
+      "is_suoliang": false,
+      "vol_ratio": 0.87,
+      "amplitude": 9.75,
+      "fengban_time": "盘中",
+      "amount": 1280501433,
+      "vol": 3711070
+    },
+    {
+      "code": "sh603915",
+      "market": "sh",
+      "change_pct": 10.02,
+      "is_yizi": false,
+      "is_tzi": false,
+      "is_lanban": true,
+      "is_baoliang": false,
+      "is_suoliang": false,
+      "vol_ratio": 1.55,
+      "amplitude": 9.68,
+      "fengban_time": "盘中",
+      "amount": 1298238895,
+      "vol": 15371343
+    },
+    {
+      "code": "sh605028",
+      "market": "sh",
+      "change_pct": 9.99,
+      "is_yizi": false,
+      "is_tzi": false,
+      "is_lanban": true,
+      "is_baoliang": true,
+      "is_suoliang": false,
+      "vol_ratio": 2.84,
+      "amplitude": 10.59,
+      "fengban_time": "盘中",
+      "amount": 1289036801,
+      "vol": 4777100
+    },
+    {
+      "code": "sh605068",
+      "market": "sh",
+      "change_pct": 10.02,
+      "is_yizi": false,
+      "is_tzi": false,
+      "is_lanban": true,
+      "is_baoliang": false,
+      "is_suoliang": true,
+      "vol_ratio": 0.65,
+      "amplitude": 9.73,
+      "fengban_time": "盘中",
+      "amount": 1274819101,
+      "vol": 1772800
+    },
+    {
+      "code": "sh605189",
+      "market": "sh",
+      "change_pct": 10.01,
+      "is_yizi": false,
+      "is_tzi": false,
+      "is_lanban": true,
+      "is_baoliang": true,
+      "is_suoliang": false,
+      "vol_ratio": 2.49,
+      "amplitude": 14.74,
+      "fengban_time": "盘中",
+      "amount": 1302967649,
+      "vol": 24181816
+    },
+    {
+      "code": "sh605255",
+      "market": "sh",
+      "change_pct": 10.0,
+      "is_yizi": false,
+      "is_tzi": false,
+      "is_lanban": true,
+      "is_baoliang": false,
+      "is_suoliang": false,
+      "vol_ratio": 0.99,
+      "amplitude": 9.14,
+      "fengban_time": "盘中",
+      "amount": 1291891262,
+      "vol": 1857612
+    },
+    {
+      "code": "sh605305",
+      "market": "sh",
+      "change_pct": 10.0,
+      "is_yizi": false,
+      "is_tzi": false,
+      "is_lanban": true,
+      "is_baoliang": true,
+      "is_suoliang": false,
+      "vol_ratio": 2.08,
+      "amplitude": 7.11,
+      "fengban_time": "盘中",
+      "amount": 1306023931,
+      "vol": 10091258
+    },
+    {
+      "code": "sh688311",
+      "market": "sh",
+      "change_pct": 19.99,
+      "is_yizi": false,
+      "is_tzi": false,
+      "is_lanban": true,
+      "is_baoliang": true,
+      "is_suoliang": false,
+      "vol_ratio": 2.23,
+      "amplitude": 19.8,
+      "fengban_time": "盘中",
+      "amount": 1301528512,
+      "vol": 10698058
+    },
+    {
+      "code": "sz000004",
+      "market": "sz",
+      "change_pct": 9.76,
+      "is_yizi": false,
+      "is_tzi": false,
+      "is_lanban": true,
+      "is_baoliang": false,
+      "is_suoliang": false,
+      "vol_ratio": 0.71,
+      "amplitude": 19.51,
+      "fengban_time": "盘中",
+      "amount": 1243817680,
+      "vol": 6267334
+    },
+    {
+      "code": "sz000506",
+      "market": "sz",
+      "change_pct": 9.99,
+      "is_yizi": false,
+      "is_tzi": false,
+      "is_lanban": true,
+      "is_baoliang": false,
+      "is_suoliang": true,
+      "vol_ratio": 0.69,
+      "amplitude": 5.31,
+      "fengban_time": "盘中",
+      "amount": 1303465701,
+      "vol": 27090708
+    },
+    {
+      "code": "sz000576",
+      "market": "sz",
+      "change_pct": 10.0,
+      "is_yizi": false,
+      "is_tzi": false,
+      "is_lanban": true,
+      "is_baoliang": true,
+      "is_suoliang": false,
+      "vol_ratio": 2.77,
+      "amplitude": 9.32,
+      "fengban_time": "盘中",
+      "amount": 1295539403,
+      "vol": 24430700
+    },
+    {
+      "code": "sz000595",
+      "market": "sz",
+      "change_pct": 10.05,
+      "is_yizi": true,
+      "is_tzi": false,
+      "is_lanban": false,
+      "is_baoliang": false,
+      "is_suoliang": false,
+      "vol_ratio": 1.07,
+      "amplitude": 0.0,
+      "fengban_time": "开盘",
+      "amount": 1286932996,
+      "vol": 15211000
+    },
+    {
+      "code": "sz000656",
+      "market": "sz",
+      "change_pct": 10.17,
+      "is_yizi": true,
+      "is_tzi": false,
+      "is_lanban": false,
+      "is_baoliang": false,
+      "is_suoliang": true,
+      "vol_ratio": 0.04,
+      "amplitude": 0.0,
+      "fengban_time": "开盘",
+      "amount": 1255008400,
+      "vol": 5190160
+    }
+  ]
+}

@@ -1,0 +1,302 @@
+#!/bin/bash
+
+# ==============================================================================
+# 🔧 配置区域 - 请在这里设置您的 API 配置
+# ==============================================================================
+
+# 🔑 API 密钥 - 请填入您的 API 密钥
+readonly API_KEY="sk-kimi-xag2aBoZ9bwWRfTh6Izfx7BaDCspErLXA8sqyK9I21H56jNFzTFd2O4sl6kePGZ5"
+
+# 🌐 API 基础地址 - 请填入您的 API 基础地址 (例如: "https://api.yixia.ai/")
+readonly API_BASE_URL="https://api.kimi.com/coding/"
+
+# ==============================================================================
+# 以下内容请勿修改
+# ==============================================================================
+
+# 脚本常量
+readonly CLAUDE_COMMAND="claude"
+readonly NPM_PACKAGE="@anthropic-ai/claude-code"
+readonly CLAUDE_DIR="$HOME/.claude"
+readonly SETTINGS_FILE="$CLAUDE_DIR/settings.json"
+
+# 检测操作系统
+detect_os() {
+case "$(uname -s)" in
+Darwin)
+echo "macos"
+;;
+Linux)
+echo "linux"
+;;
+*)
+echo "unknown"
+;;
+esac
+}
+
+# 检查配置是否完整
+check_config() {
+if [ -z "$API_KEY" ] || [ -z "$API_BASE_URL" ]; then
+echo "❌ 配置不完整！请编辑脚本并填入以下信息："
+echo " - API_KEY: 您的 API 密钥"
+echo " - API_BASE_URL: API 基础地址 (例如: https://api.yixia.ai/)"
+exit 1
+fi
+}
+
+# 安装 Homebrew (仅限 macOS)
+install_homebrew() {
+if ! command -v brew &> /dev/null; then
+echo "正在安装 Homebrew..."
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+
+# 添加 Homebrew 到 PATH
+if [[ -f "/opt/homebrew/bin/brew" ]]; then
+eval "$(/opt/homebrew/bin/brew shellenv)"
+elif [[ -f "/usr/local/bin/brew" ]]; then
+eval "$(/usr/local/bin/brew shellenv)"
+fi
+
+echo "✅ Homebrew 安装完成"
+else
+echo "ℹ️ Homebrew 已安装"
+fi
+}
+
+# 在 macOS 上安装软件包
+install_macos_packages() {
+install_homebrew
+
+# 安装 Node.js (包含 npm)
+if ! command -v node &> /dev/null; then
+echo "正在安装 Node.js..."
+brew install node
+echo "✅ Node.js 安装完成"
+else
+echo "ℹ️ Node.js 已安装"
+fi
+
+# 安装 jq
+if ! command -v jq &> /dev/null; then
+echo "正在安装 jq..."
+brew install jq
+echo "✅ jq 安装完成"
+else
+echo "ℹ️ jq 已安装"
+fi
+
+# 安装 Python3
+if ! command -v python3 &> /dev/null; then
+echo "正在安装 Python3..."
+brew install python3
+echo "✅ Python3 安装完成"
+else
+echo "ℹ️ Python3 已安装"
+fi
+}
+
+# 在 Linux 上安装软件包
+install_linux_packages() {
+# 检测 Linux 发行版
+if command -v apt-get &> /dev/null; then
+# Ubuntu/Debian
+echo "检测到 Ubuntu/Debian 系统"
+
+# 更新包管理器
+echo "正在更新包管理器..."
+sudo apt-get update
+
+# 安装 Node.js
+if ! command -v node &> /dev/null; then
+echo "正在安装 Node.js..."
+# 安装 NodeSource 仓库
+curl -fsSL https://deb.nodesource.com/setup_lts.x | sudo -E bash -
+sudo apt-get install -y nodejs
+echo "✅ Node.js 安装完成"
+else
+echo "ℹ️ Node.js 已安装"
+fi
+
+# 安装 jq
+if ! command -v jq &> /dev/null; then
+echo "正在安装 jq..."
+sudo apt-get install -y jq
+echo "✅ jq 安装完成"
+else
+echo "ℹ️ jq 已安装"
+fi
+
+# 安装 Python3
+if ! command -v python3 &> /dev/null; then
+echo "正在安装 Python3..."
+sudo apt-get install -y python3 python3-pip
+echo "✅ Python3 安装完成"
+else
+echo "ℹ️ Python3 已安装"
+fi
+
+elif command -v yum &> /dev/null; then
+# CentOS/RHEL
+echo "检测到 CentOS/RHEL 系统"
+
+# 安装 Node.js
+if ! command -v node &> /dev/null; then
+echo "正在安装 Node.js..."
+curl -fsSL https://rpm.nodesource.com/setup_lts.x | sudo bash -
+sudo yum install -y nodejs
+echo "✅ Node.js 安装完成"
+else
+echo "ℹ️ Node.js 已安装"
+fi
+
+# 安装 jq
+if ! command -v jq &> /dev/null; then
+echo "正在安装 jq..."
+sudo yum install -y jq
+echo "✅ jq 安装完成"
+else
+echo "ℹ️ jq 已安装"
+fi
+
+# 安装 Python3
+if ! command -v python3 &> /dev/null; then
+echo "正在安装 Python3..."
+sudo yum install -y python3 python3-pip
+echo "✅ Python3 安装完成"
+else
+echo "ℹ️ Python3 已安装"
+fi
+
+elif command -v pacman &> /dev/null; then
+# Arch Linux
+echo "检测到 Arch Linux 系统"
+
+# 安装 Node.js
+if ! command -v node &> /dev/null; then
+echo "正在安装 Node.js..."
+sudo pacman -S --noconfirm nodejs npm
+echo "✅ Node.js 安装完成"
+else
+echo "ℹ️ Node.js 已安装"
+fi
+
+# 安装 jq
+if ! command -v jq &> /dev/null; then
+echo "正在安装 jq..."
+sudo pacman -S --noconfirm jq
+echo "✅ jq 安装完成"
+else
+echo "ℹ️ jq 已安装"
+fi
+
+# 安装 Python3
+if ! command -v python3 &> /dev/null; then
+echo "正在安装 Python3..."
+sudo pacman -S --noconfirm python python-pip
+echo "✅ Python3 安装完成"
+else
+echo "ℹ️ Python3 已安装"
+fi
+
+else
+echo "❌ 不支持的 Linux 发行版，请手动安装以下软件包："
+echo " - Node.js (包含 npm)"
+echo " - jq"
+echo " - python3"
+exit 1
+fi
+}
+
+# 安装 Claude Code
+install_claude_code() {
+if command -v "$CLAUDE_COMMAND" &> /dev/null; then
+echo "ℹ️ Claude Code 已安装"
+else
+echo "正在安装 Claude Code..."
+
+if ! command -v npm &> /dev/null; then
+echo "❌ npm 未安装，无法安装 Claude Code"
+exit 1
+fi
+
+if ! npm install -g "$NPM_PACKAGE"; then
+echo "❌ Claude Code 安装失败"
+exit 1
+fi
+
+echo "✅ Claude Code 安装完成"
+fi
+}
+
+# 配置 Claude Code
+configure_claude_code() {
+echo "正在配置 Claude Code..."
+
+# 创建 .claude 目录
+if [ ! -d "$CLAUDE_DIR" ]; then
+mkdir -p "$CLAUDE_DIR"
+fi
+
+# 备份原配置（如果存在）
+if [ -f "$SETTINGS_FILE" ]; then
+cp "$SETTINGS_FILE" "$SETTINGS_FILE.backup"
+echo "ℹ️ 原配置已备份为 settings.json.backup"
+fi
+
+# 创建新的配置文件
+cat > "$SETTINGS_FILE" << EOF
+{
+"env": {
+"ANTHROPIC_API_KEY": "$API_KEY",
+"ANTHROPIC_BASE_URL": "$API_BASE_URL",
+"CLAUDE_CODE_MAX_OUTPUT_TOKENS": 64000,
+"CLAUDE_CODE_DISABLE_NONESSENTIAL_TRAFFIC": 1
+},
+"permissions": {
+"allow": [],
+"deny": []
+},
+"apiKeyHelper": "echo '$API_KEY'"
+}
+EOF
+
+echo "✅ 配置文件创建完成"
+}
+
+# 主函数
+main() {
+echo "🚀 Claude Code 自动安装配置脚本"
+echo "=================================="
+
+# 检查配置
+check_config
+
+# 检测操作系统
+OS=$(detect_os)
+echo "检测到操作系统: $OS"
+
+# 根据操作系统安装依赖
+case "$OS" in
+"macos")
+install_macos_packages
+;;
+"linux")
+install_linux_packages
+;;
+*)
+echo "❌ 不支持的操作系统: $OS"
+exit 1
+;;
+esac
+
+# 安装 Claude Code
+install_claude_code
+
+# 配置 Claude Code
+configure_claude_code
+
+echo "🎉 所有配置完成！"
+echo "配置文件位置: $SETTINGS_FILE"
+echo "现在您可以使用 'claude' 命令了！"
+}

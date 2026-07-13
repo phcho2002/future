@@ -1,6 +1,6 @@
 # future_vps — 期货量化扫描系统（Linux VPS 部署版）
 
-三个独立策略系统 + 一个共享数据层的自包含目录，可在 Linux VPS 上直接运行。
+四个独立策略系统 + 一个共享数据层的自包含目录，可在 Linux VPS 上直接运行。
 
 ```
 future_vps/
@@ -17,7 +17,11 @@ future_vps/
 │   ├── future_quant/      #   策略核心包
 │   └── scan_top40_*.py    #   扫描脚本
 ├── future_4/              # 双均线缠绕放量突破（30m）
-└── future_6/              # Renko 砖块系统（60m）
+├── future_6/              # Renko 砖块系统（60m）
+└── future_8/              # 假突破反转系统（15m / 60m，akshare 数据源）
+    ├── fakebreak/         #   策略核心包（swing / levels / signal）
+    ├── backtest/          #   回测（runner / backtester）
+    └── scan_top40_*.py    #   扫描脚本
 ```
 
 ## 与原版（Windows 本地）的区别
@@ -49,6 +53,7 @@ nano tq_auth.py
 cd future_1 && python scan_top40_15m.py      # 三推衰竭 15m
 cd future_4 && python run_scan.py            # 双均线缠绕 30m
 cd future_6 && python scanner.py             # Renko 60m
+cd future_8 && python scan_top40_60m.py      # 假突破反转 60m（akshare）
 ```
 
 > Python 版本要求 ≥ 3.10（future_quant 用了 `X | None` 语法）。
@@ -73,6 +78,9 @@ export QUOTE_CACHE_DIR=/mnt/data/quote_cache
 | future_1 | 5m / 15m | `future_1/scan_top40_15m.py`<br>`future_1/scan_top40_5m_batch.py` | 三推衰竭 / 楔形反转 |
 | future_4 | 30m | `future_4/run_scan.py` | 双均线缠绕 + 放量突破 |
 | future_6 | 60m | `future_6/scanner.py` | Renko 砖块 + RSI + 密集区 |
+| future_8 | 15m / 60m | `future_8/scan_top40_60m.py`<br>`future_8/scan_specific_60m.py` | 假突破反转（swing 趋势闸 + 成交量密集区，akshare 数据源） |
+
+> future_8 自带 `futures_top40.json`（位于 `future_8/` 内），数据源默认走 **akshare**（无需 tq 账号）；趋势闸用 swing 波峰波谷结构，关键位用成交量加权密集区，详见 `future_8/README.md` / `PLAN.md`。
 
 ## 切换数据后端
 
@@ -94,6 +102,9 @@ data:
 
 # 每个交易日 10:35 跑 30m 双均线扫描
 35 10 * * 1-5  cd ~/future_vps/future_4 && ~/future_vps/venv/bin/python run_scan.py >> ~/logs/scan_30m.log 2>&1
+
+# 每个交易日 11:05 跑 60m 假突破反转扫描（akshare）
+5 11 * * 1-5  cd ~/future_vps/future_8 && ~/future_vps/venv/bin/python scan_top40_60m.py >> ~/logs/scan_60m_fakebreak.log 2>&1
 ```
 
 ## 常见问题

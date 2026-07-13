@@ -1,7 +1,8 @@
 """TTL parquet 缓存层 —— 全系统统一的分钟 K 线入口。
 
-借鉴 future_3/data_loader.py 的 mtime 判新鲜度模式，但底层换成 tqsdk，缓存目录
-全系统共享（future_vps/quote_cache，环境变量 QUOTE_CACHE_DIR 可覆盖），避免各系统各自缓存导致重复联网。
+底层联网默认 **xtquant**（迅投 token 模式，见 provider.get_backend / FUTURE_DATA_BACKEND），
+也可切 akshare（备份）。缓存目录全系统共享（future_vps/quote_cache，环境变量
+QUOTE_CACHE_DIR 可覆盖），避免各系统各自缓存导致重复联网。
 
 主入口：
     get_klines(symbol, exchange, period, length, ttl_hours, force)

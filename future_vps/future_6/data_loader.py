@@ -101,9 +101,9 @@ def fetch_klines_tq(
     ttl_hours: float = 6,
     force: bool = False,
 ) -> pd.DataFrame:
-    """通过 future_data 统一入口（tqsdk 后端）拉取单品种 K 线。"""
+    """通过 future_data 统一入口（xtquant 后端）拉取单品种 K 线。"""
     if not _HAS_FUTURE_DATA:
-        raise RuntimeError("future_data 不可用，无法走 tqsdk 路径")
+        raise RuntimeError("future_data 不可用，无法走 xtquant 路径")
     if exchange is None:
         exchange = build_exchange_map().get(symbol)
     if exchange is None:
@@ -121,7 +121,8 @@ def load_klines(
     """读取单品种 60m K 线：按 data.backend 路由，TTL 缓存优先。
 
     支持 backend:
-      - "tqsdk"  (默认) 经 future_data 走 tqsdk
+      - "xtquant"   (默认) 经 future_data 走 xtquant（迅投 token 模式）
+        兼容旧值 "tqsdk"（等价于 xtquant）。
       - "akshare" 经 akshare/Sina 拉（无需账号，作回退/备选）
     两条路径共用 future_vps/quote_cache 缓存目录，切换 backend 不需清缓存。
     """
@@ -131,7 +132,7 @@ def load_klines(
     ttl_hours = dc.get("cache_ttl_hours", 6)
     length = dc.get("data_length", 2000)
 
-    backend = dc.get("backend", "tqsdk")
+    backend = dc.get("backend", "xtquant")
     if backend == "akshare":
         if exchange is None:
             exchange = build_exchange_map().get(symbol)
@@ -143,7 +144,7 @@ def load_klines(
             period=period,
             length=length,
         )
-    if backend == "tqsdk" and _HAS_FUTURE_DATA:
+    if backend in ("xtquant", "tqsdk") and _HAS_FUTURE_DATA:
         return fetch_klines_tq(
             symbol,
             exchange=exchange,

@@ -106,7 +106,7 @@ def _cmd_explain(args) -> int:
 def main() -> int:
     p = argparse.ArgumentParser(
         prog="future_data",
-        description="统一期货行情数据入口（tqsdk 后端 + TTL 缓存）",
+        description="统一期货行情数据入口（xtquant 后端 + TTL 缓存）",
     )
     sub = p.add_subparsers(dest="cmd", required=True)
 
@@ -153,7 +153,7 @@ def main() -> int:
     pe.add_argument("exchange")
     pe.set_defaults(func=_cmd_explain)
 
-    pb = sub.add_parser("bench", help="性能基准对比（akshare vs tqsdk vs 缓存）")
+    pb = sub.add_parser("bench", help="性能基准对比（akshare vs xtquant vs 缓存）")
     pb.add_argument("--limit", type=int, default=10, help="品种数（默认 10，跑全量改大）")
     pb.set_defaults(func=lambda a: _cmd_bench(a))
 

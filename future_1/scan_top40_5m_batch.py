@@ -7,9 +7,13 @@ import sys, time, warnings
 warnings.filterwarnings('ignore')
 import pandas as pd
 import numpy as np
+from pathlib import Path
 
-sys.path.insert(0, r'D:\work_ai')
-sys.path.insert(0, r'D:\work_ai\future_1')
+# 兼容 Linux/Windows：从脚本位置向上推导到 work_ai 根目录
+_SCRIPT_DIR = Path(__file__).resolve().parent
+_WORK_AI = _SCRIPT_DIR.parent  # .../work_ai/future_1 -> .../work_ai
+sys.path.insert(0, str(_WORK_AI))
+sys.path.insert(0, str(_SCRIPT_DIR))
 
 from future_data import inject_many
 from future_quant.engine import QuantEngine

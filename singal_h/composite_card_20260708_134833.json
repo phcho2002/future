@@ -1,0 +1,223 @@
+{
+  "timestamp": "2026-07-08 13:48:33",
+  "system_source_time": "2026-07-08T13:47:55.368405",
+  "time_label": "下午盘 15:00",
+  "top3_systems": [
+    {
+      "rank": 1,
+      "symbol": "SC0",
+      "name": "上海原油",
+      "direction": "做多",
+      "score": 90.3,
+      "current_price": 439.2,
+      "entry_price": 439.2,
+      "support": "未识别",
+      "resistance": "未识别",
+      "trigger": "Phase_B — Spring/弹簧效应 — 价格假跌破支撑位437.67后迅速收回，最低探至435.60，第1根K线阳线放量收回，确认主",
+      "rsi": 34.0,
+      "risk": [
+        "暂无显著风险"
+      ],
+      "source_system": "future_2_wyckoff",
+      "hist_pf": 0,
+      "hist_winrate": 0
+    },
+    {
+      "rank": 2,
+      "symbol": "AU0",
+      "name": "黄金",
+      "direction": "做空",
+      "score": 75.4,
+      "current_price": 903.46,
+      "entry_price": 903.8,
+      "support": "898.4",
+      "resistance": "904.1",
+      "trigger": "缠绕突破 4次",
+      "rsi": null,
+      "risk": [
+        "暂无显著风险"
+      ],
+      "source_system": "future_4_dual_ma",
+      "hist_pf": 0,
+      "hist_winrate": 0
+    },
+    {
+      "rank": 3,
+      "symbol": "M0",
+      "name": "豆粕",
+      "direction": "做多",
+      "score": 59.0,
+      "current_price": 3051.0,
+      "entry_price": 3033.0,
+      "support": "未识别",
+      "resistance": "未识别",
+      "trigger": "缠绕突破 2次",
+      "rsi": null,
+      "risk": [
+        "暂无显著风险"
+      ],
+      "source_system": "future_4_dual_ma",
+      "hist_pf": 0,
+      "hist_winrate": 0
+    },
+    {
+      "rank": 4,
+      "symbol": "IH0",
+      "name": "上证50指数期货",
+      "direction": "做空",
+      "score": 61.8,
+      "current_price": 2887.6,
+      "entry_price": 2882.4,
+      "support": "2900.2",
+      "resistance": "2933.2",
+      "trigger": "缠绕突破 2次",
+      "rsi": null,
+      "risk": [
+        "暂无显著风险"
+      ],
+      "source_system": "future_4_dual_ma",
+      "hist_pf": 0,
+      "hist_winrate": 0
+    }
+  ],
+  "hourly_strength_top3": [
+    {
+      "sym": "EB0",
+      "name": "苯乙烯",
+      "score": 79,
+      "dir": "做多",
+      "feature": "★★★★ 强势",
+      "breakout": 15,
+      "pullback": 17,
+      "resonance": 19
+    },
+    {
+      "sym": "Y0",
+      "name": "豆油",
+      "score": 76,
+      "dir": "做多",
+      "feature": "★★★★ 强势",
+      "breakout": 15,
+      "pullback": 17,
+      "resonance": 19
+    },
+    {
+      "sym": "M0",
+      "name": "豆粕",
+      "score": 74,
+      "dir": "做多",
+      "feature": "★★★★ 强势",
+      "breakout": 15,
+      "pullback": 15,
+      "resonance": 19
+    }
+  ],
+  "hourly_strength_bottom3": [
+    {
+      "sym": "LC0",
+      "name": "碳酸锂",
+      "score": 32,
+      "dir": "做空",
+      "feature": "★ 弱势",
+      "breakout": 6,
+      "pullback": 5,
+      "resonance": 8
+    },
+    {
+      "sym": "AU0",
+      "name": "黄金",
+      "score": 34,
+      "dir": "做空",
+      "feature": "★ 弱势",
+      "breakout": 6,
+      "pullback": 5,
+      "resonance": 8
+    },
+    {
+      "sym": "CF0",
+      "name": "棉花",
+      "score": 35,
+      "dir": "做空",
+      "feature": "★ 弱势",
+      "breakout": 4,
+      "pullback": 5,
+      "resonance": 8
+    }
+  ],
+  "composite_ranking": [
+    {
+      "sym": "SC0",
+      "name": "上海原油",
+      "composite": 86.0,
+      "system_score": 90.3,
+      "strength_score": 67.0,
+      "systems": [
+        "future_2_wyckoff"
+      ],
+      "bonus": 5
+    },
+    {
+      "sym": "EB0",
+      "name": "苯乙烯",
+      "composite": 69.5,
+      "system_score": 0,
+      "strength_score": 69.5,
+      "systems": [],
+      "bonus": 0
+    },
+    {
+      "sym": "Y0",
+      "name": "豆油",
+      "composite": 68.0,
+      "system_score": 0,
+      "strength_score": 68.0,
+      "systems": [],
+      "bonus": 0
+    },
+    {
+      "sym": "PP0",
+      "name": "聚丙烯",
+      "composite": 66.0,
+      "system_score": 0,
+      "strength_score": 66.0,
+      "systems": [],
+      "bonus": 0
+    },
+    {
+      "sym": "RB0",
+      "name": "螺纹钢",
+      "composite": 65.0,
+      "system_score": 0,
+      "strength_score": 65.0,
+      "systems": [],
+      "bonus": 0
+    },
+    {
+      "sym": "I0",
+      "name": "铁矿石",
+      "composite": 65.0,
+      "system_score": 0,
+      "strength_score": 65.0,
+      "systems": [],
+      "bonus": 0
+    },
+    {
+      "sym": "AL0",
+      "name": "铝",
+      "composite": 64.5,
+      "system_score": 0,
+      "strength_score": 64.5,
+      "systems": [],
+      "bonus": 0
+    },
+    {
+      "sym": "P0",
+      "name": "棕榈油",
+      "composite": 64.0,
+      "system_score": 0,
+      "strength_score": 64.0,
+      "systems": [],
+      "bonus": 0
+    }
+  ]
+}

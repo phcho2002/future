@@ -1,0 +1,395 @@
+:root {
+  color-scheme: light;
+  --ink: #1f3a4d;
+  --ink-soft: #466276;
+  --muted: #6b8190;
+  --panel: #ffffff;
+  --line: #dce6ee;
+  --sun: #ffb22c;
+  --accent: #ef6a4a;
+  --green: #3f9d6a;
+  --sky-day: #bfe9ff;
+  --night: #1a2c44;
+  --shadow: 0 12px 32px rgba(31, 58, 77, 0.12);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  min-height: 100vh;
+  font-family: "Microsoft YaHei", "PingFang SC", "Hiragino Sans GB", Arial, sans-serif;
+  color: var(--ink);
+  background: radial-gradient(circle at 18% 0%, #fff3df 0%, #eaf6ff 45%, #e3f5ec 100%);
+}
+
+button,
+input {
+  font: inherit;
+  color: inherit;
+}
+
+.app-shell {
+  min-height: 100vh;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 380px;
+  gap: 18px;
+  padding: 18px;
+}
+
+/* ============ 左侧舞台 ============ */
+.stage-panel {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  min-width: 0;
+}
+
+.topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 2px 2px 0;
+}
+
+.eyebrow {
+  margin: 0 0 6px;
+  color: var(--accent);
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 0.4px;
+}
+
+h1 {
+  margin: 0;
+  font-size: clamp(26px, 3.4vw, 40px);
+  line-height: 1.1;
+}
+
+.icon-button {
+  width: 50px;
+  height: 50px;
+  flex: 0 0 50px;
+  border: 0;
+  border-radius: 26px;
+  cursor: pointer;
+  font-size: 22px;
+  color: #fff;
+  background: var(--ink);
+  box-shadow: var(--shadow);
+}
+
+.view-block {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.view-head {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding-left: 2px;
+}
+
+.view-tag {
+  padding: 3px 10px;
+  border-radius: 12px;
+  font-size: 12px;
+  font-weight: 700;
+  color: #fff;
+  background: var(--ink);
+}
+
+.view-tag-2 {
+  background: var(--green);
+}
+
+.view-head h2 {
+  margin: 0;
+  font-size: 18px;
+  color: var(--ink-soft);
+}
+
+.canvas-wrap {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  border: 3px solid #fff;
+  border-radius: 16px;
+  box-shadow: var(--shadow);
+}
+
+.space-wrap {
+  height: clamp(280px, 38vh, 380px);
+  background: linear-gradient(135deg, #0e2340 0%, #1d3d63 100%);
+}
+
+.sky-wrap {
+  height: clamp(220px, 30vh, 300px);
+}
+
+.space-wrap canvas,
+.sky-wrap canvas {
+  width: 100%;
+  height: 100%;
+  display: block;
+  touch-action: none;
+}
+
+.hint-line {
+  position: absolute;
+  left: 12px;
+  bottom: 10px;
+  margin: 0;
+  padding: 6px 12px;
+  border-radius: 14px;
+  font-size: 13px;
+  color: #eaf4ff;
+  background: rgba(13, 35, 64, 0.6);
+  backdrop-filter: blur(4px);
+}
+
+.hint-line strong {
+  color: #ffd27a;
+}
+
+.sky-status {
+  position: absolute;
+  left: 50%;
+  bottom: 12px;
+  transform: translateX(-50%);
+  margin: 0;
+  padding: 8px 18px;
+  border-radius: 18px;
+  font-size: 15px;
+  font-weight: 700;
+  white-space: nowrap;
+  color: #fff;
+  background: rgba(20, 40, 64, 0.78);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
+}
+
+/* ============ 控制条 ============ */
+.control-strip {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 10px;
+  padding: 12px;
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.85);
+}
+
+.tool-button {
+  width: 42px;
+  height: 42px;
+  border: 0;
+  border-radius: 21px;
+  cursor: pointer;
+  font-size: 26px;
+  line-height: 1;
+  color: #fff;
+  background: var(--ink);
+}
+
+.primary-button {
+  min-width: 96px;
+  height: 42px;
+  padding: 0 20px;
+  border: 0;
+  border-radius: 10px;
+  cursor: pointer;
+  font-weight: 700;
+  color: #fff;
+  background: var(--accent);
+}
+
+.speed-control,
+.toggle-control {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 42px;
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--ink-soft);
+  cursor: pointer;
+}
+
+.speed-control input {
+  width: 130px;
+  accent-color: var(--accent);
+}
+
+.toggle-control input {
+  width: 18px;
+  height: 18px;
+  accent-color: var(--green);
+}
+
+/* ============ 右侧讲解 ============ */
+.lesson-panel {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  min-width: 0;
+}
+
+.lesson-card,
+.question-box,
+.mini-notes {
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  background: var(--panel);
+  box-shadow: var(--shadow);
+}
+
+.lesson-card {
+  padding: 22px;
+}
+
+.step-count {
+  margin: 0 0 14px;
+  color: var(--green);
+  font-weight: 800;
+  font-size: 14px;
+}
+
+.phase-row {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 12px;
+  margin-bottom: 16px;
+  border-radius: 12px;
+  background: linear-gradient(135deg, #0e2340, #1d3d63);
+}
+
+#phaseCanvas {
+  width: 90px;
+  height: 90px;
+  flex: 0 0 90px;
+}
+
+.phase-cap {
+  color: #eaf4ff;
+}
+
+.phase-label {
+  margin: 0 0 2px;
+  font-size: 12px;
+  opacity: 0.8;
+}
+
+.phase-name {
+  margin: 0 0 4px;
+  font-size: 22px;
+  font-weight: 800;
+  color: #ffd27a;
+}
+
+.phase-bright {
+  margin: 0;
+  font-size: 13px;
+  opacity: 0.9;
+}
+
+.lesson-card h2 {
+  margin: 0 0 12px;
+  font-size: 26px;
+  line-height: 1.2;
+}
+
+#lessonText {
+  margin: 0;
+  font-size: 20px;
+  line-height: 1.6;
+}
+
+.question-box {
+  padding: 18px;
+  border-color: #ffd79a;
+  background: #fff6e6;
+}
+
+.question-box h3 {
+  margin: 0 0 8px;
+  font-size: 16px;
+  color: var(--accent);
+}
+
+#promptText {
+  margin: 0;
+  font-size: 18px;
+  line-height: 1.5;
+  font-weight: 700;
+}
+
+.mini-notes {
+  padding: 18px;
+}
+
+.mini-notes h3 {
+  margin: 0 0 8px;
+  font-size: 15px;
+  color: var(--ink-soft);
+}
+
+.mini-notes p {
+  margin: 0;
+  font-size: 14px;
+  line-height: 1.6;
+  color: var(--muted);
+}
+
+/* ============ 响应式 ============ */
+@media (max-width: 1000px) {
+  .app-shell {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 560px) {
+  .app-shell {
+    padding: 10px;
+    gap: 12px;
+  }
+
+  .topbar {
+    align-items: flex-start;
+  }
+
+  h1 {
+    font-size: 24px;
+  }
+
+  .space-wrap {
+    height: 300px;
+  }
+
+  .sky-wrap {
+    height: 240px;
+  }
+
+  .lesson-card {
+    padding: 16px;
+  }
+
+  .lesson-card h2 {
+    font-size: 22px;
+  }
+
+  #lessonText {
+    font-size: 18px;
+  }
+}

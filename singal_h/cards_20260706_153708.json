@@ -1,0 +1,89 @@
+{
+  "timestamp": "2026-07-06T15:39:39.784800",
+  "scan_results": {
+    "wyckoff": "OK",
+    "sma_cross": "OK",
+    "dual_ma": "OK",
+    "renko": "OK",
+    "renko_chart": "OK"
+  },
+  "cards": [
+    {
+      "rank": 1,
+      "symbol": "SN0",
+      "name": "锡",
+      "direction": "做多",
+      "score": 84.9,
+      "current_price": 410360.0,
+      "entry_price": 397980.0,
+      "support": "402160.0~412160.0 (触碰17次)",
+      "resistance": "412160.0~422160.0 (触碰17次)",
+      "trigger": "SN0 锡 缠绕突破 6次缠绕 ",
+      "rsi": 59.7,
+      "risk": [
+        "暂无显著风险"
+      ],
+      "source_system": "future_3_sma_cross",
+      "hist_pf": 2.83314648613664,
+      "hist_winrate": 0.3333333333333333
+    },
+    {
+      "rank": 2,
+      "symbol": "JM0",
+      "name": "焦煤",
+      "direction": "做空",
+      "score": 90.7,
+      "current_price": 1283.5,
+      "entry_price": 1339.0,
+      "support": "1271.0~1291.0 (触碰16次)",
+      "resistance": "1291.0~1311.0 (触碰15次)",
+      "trigger": "JM0 焦煤 缠绕突破 3次缠绕 ",
+      "rsi": 58.7,
+      "risk": [
+        "信号已143根K线，时效性下降"
+      ],
+      "source_system": "future_3_sma_cross",
+      "hist_pf": 38.16947318519375,
+      "hist_winrate": 0.75
+    },
+    {
+      "rank": 3,
+      "symbol": "AG0",
+      "name": "白银",
+      "direction": "做多",
+      "score": 76.9,
+      "current_price": 15083.0,
+      "entry_price": 14694.0,
+      "support": "14415.0~14815.0 (触碰3次)",
+      "resistance": "15215.0~15615.0 (触碰4次)",
+      "trigger": "AG0 白银 缠绕突破 3次缠绕 ",
+      "rsi": 66.6,
+      "risk": [
+        "历史PF=0.95 偏低",
+        "信号已55根K线，时效性下降"
+      ],
+      "source_system": "future_3_sma_cross",
+      "hist_pf": 0.948967154142316,
+      "hist_winrate": 0.4
+    },
+    {
+      "rank": 4,
+      "symbol": "SA0",
+      "name": "纯碱",
+      "direction": "做空",
+      "score": 81.1,
+      "current_price": 1101.0,
+      "entry_price": 1151.0,
+      "support": "1097.0~1107.0 (触碰8次)",
+      "resistance": "1107.0~1117.0 (触碰5次)",
+      "trigger": "SA0 纯碱 缠绕突破 5次缠绕 ",
+      "rsi": 48.3,
+      "risk": [
+        "信号已142根K线，时效性下降"
+      ],
+      "source_system": "future_3_sma_cross",
+      "hist_pf": 6.112904944205886,
+      "hist_winrate": 0.6666666666666666
+    }
+  ]
+}

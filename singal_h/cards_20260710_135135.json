@@ -1,0 +1,84 @@
+{
+  "timestamp": "2026-07-10T13:53:16.049139",
+  "data_source": "DB(hourly_5dim) + future_2(120min) + future_4(30min) + future_6(60min) + akshare",
+  "total_scanned": 40,
+  "cards": [
+    {
+      "rank": 1,
+      "symbol": "V0",
+      "name": "PVC",
+      "sector": "化工",
+      "direction": "做多",
+      "score": 317.1,
+      "current_price": 4543.0,
+      "db_judgment": "★★★★ 强势",
+      "db_total": 77,
+      "change_pct": 0.0106785,
+      "sys_count": 1,
+      "sys_details": [
+        "renko_chart:做多"
+      ],
+      "risk": [
+        "无多系统共振确认"
+      ]
+    },
+    {
+      "rank": 2,
+      "symbol": "C0",
+      "name": "玉米",
+      "sector": "农产品",
+      "direction": "做多",
+      "score": 304.0,
+      "current_price": 2693.0,
+      "db_judgment": "★★★★ 强势",
+      "db_total": 74,
+      "change_pct": 0.0003715,
+      "sys_count": 1,
+      "sys_details": [
+        "renko_chart:做多"
+      ],
+      "risk": [
+        "无多系统共振确认"
+      ]
+    },
+    {
+      "rank": 3,
+      "symbol": "AG0",
+      "name": "白银",
+      "sector": "贵金属",
+      "direction": "做多",
+      "score": 290.8,
+      "current_price": 14632.0,
+      "db_judgment": "★★★★ 强势",
+      "db_total": 68,
+      "change_pct": 0.0279612,
+      "sys_count": 2,
+      "sys_details": [
+        "renko_chart:做多",
+        "renko_chart:做多"
+      ],
+      "risk": [
+        "暂无显著风险"
+      ]
+    },
+    {
+      "rank": 4,
+      "symbol": "IF0",
+      "name": "沪深300指数期货",
+      "sector": "股指",
+      "direction": "做多",
+      "score": 288.6,
+      "current_price": 4760.8,
+      "db_judgment": "★★★★ 强势",
+      "db_total": 71,
+      "change_pct": -0.0043917,
+      "sys_count": 1,
+      "sys_details": [
+        "renko_chart:做空"
+      ],
+      "risk": [
+        "无多系统共振确认"
+      ]
+    }
+  ]
+}

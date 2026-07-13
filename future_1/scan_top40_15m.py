@@ -6,9 +6,11 @@ TOP40 期货 15分钟 K线 三推衰竭信号扫描
 import sys, time
 from pathlib import Path
 
-# 确保能导入 future_quant 与 future_data
-sys.path.insert(0, str(Path(r"D:\work_ai\future_1").resolve()))
-sys.path.insert(0, str(Path(r"D:\work_ai").resolve()))
+# 兼容 Linux/Windows：从脚本位置向上推导到 work_ai 根目录
+_SCRIPT_DIR = Path(__file__).resolve().parent
+_WORK_AI = _SCRIPT_DIR.parent  # .../work_ai/future_1 -> .../work_ai
+sys.path.insert(0, str(_SCRIPT_DIR))
+sys.path.insert(0, str(_WORK_AI))
 
 import pandas as pd
 import numpy as np
@@ -47,13 +49,25 @@ def signal_proximity_score(result) -> float:
 
 
 def infer_direction(result) -> str:
-    """根据最后一推方向推断交易方向"""
+    """确定交易方向，必须与 signal.levels（入场/止损/目标）一致。
+
+    signal.side 是引擎按突破/反转模型算出的真实方向，且 levels（entry/stop/
+    target）就是按这个方向构造的——它是唯一权威。三推反转的"最后一推方向"
+    只是当引擎尚未给出方向（side==NONE，例如未突破）时的结构提示，不能覆盖
+    signal.side，否则会出现"做多但止损在上方"的矛盾行。
+    """
+    side = result.signal.side
+    if side == SignalSide.LONG:
+        return "做多"
+    if side == SignalSide.SHORT:
+        return "做空"
+    # 引擎无明确方向时，才用最后一推方向作结构提示（仅供邻近度参考）
     if result.push_set.pushes:
         last_dir = result.push_set.pushes[-1].direction
         if last_dir.value == "bull":
-            return "做空"  # 第三推向上 → 看跌反转
+            return "做空(提示)"  # 第三推向上 → 潜在看跌反转
         elif last_dir.value == "bear":
-            return "做多"  # 第三推向下 → 看涨反转
+            return "做多(提示)"  # 第三推向下 → 潜在看涨反转
     return "待定"
 
 
@@ -70,8 +84,8 @@ def main():
 
     # 注入模式：单连接批量注入 15m 缓存（滚动窗口 300 根）
     symbol_tuples = [(s['symbol'], s['name'], s['exchange']) for s in symbols]
-    print(f"  注入15分钟K线数据 (滚动窗口300根)...")
-    klines = inject_many(symbol_tuples, period="15", length=300)
+    print(f"  注入15分钟K线数据 (滚动窗口100根)...")
+    klines = inject_many(symbol_tuples, period="15", length=100)
     print(f"  成功注入 {len(klines)}/{len(symbols)} 个品种，开始扫描...\n")
 
     engine = QuantEngine()
@@ -160,8 +174,12 @@ def main():
     print(f"  做多信号: {len(results_long)}  做空信号: {len(results_short)}  错误: {len(errors)}")
     
     # 排序输出
-    df_long = pd.DataFrame(results_long).sort_values('评分', ascending=False).reset_index(drop=True)
-    df_short = pd.DataFrame(results_short).sort_values('评分', ascending=False).reset_index(drop=True)
+    df_long = pd.DataFrame(results_long) if results_long else pd.DataFrame(columns=['排名','代码','名称','方向','评分','有效信号','推数','衰竭分','通道类型','市场状态','入场价','止损价','目标价','盈亏比','信号原因'])
+    df_short = pd.DataFrame(results_short) if results_short else pd.DataFrame(columns=['排名','代码','名称','方向','评分','有效信号','推数','衰竭分','通道类型','市场状态','入场价','止损价','目标价','盈亏比','信号原因'])
+    if not df_long.empty:
+        df_long = df_long.sort_values('评分', ascending=False).reset_index(drop=True)
+    if not df_short.empty:
+        df_short = df_short.sort_values('评分', ascending=False).reset_index(drop=True)
     
     # 打印 TOP3 做多
     print(f"\n{'='*75}")

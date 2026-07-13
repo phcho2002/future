@@ -1,0 +1,82 @@
+# =====================================================================
+# Renko Chart 量化系统 (future_5) 配置文件
+# 基于 top40 期货小时线，自适应砖块大小（ATR），以砖块为单位重建 RSI，
+# 识别密集成交区阻力/支撑、趋势回调顺势信号、RSI 超买超卖风险。
+# =====================================================================
+
+# ---------- 数据来源 ----------
+data:
+  db_path: "D:/work_ai/futures_data.db"   # 品种表所在 SQLite 库
+  symbol_table: "futures_top40"           # 读取的品种表 (futures_top40 / futures_all)
+  symbol_col: "symbol"
+  name_col: "name"
+  exchange_col: "exchange"
+  period: "60"                            # K线周期：小时线（Renko 的源数据）
+  cache_dir: "cache"                      # akshare 回退路径的本地 parquet 缓存
+  cache_ttl_hours: 2                      # 缓存超时(小时)
+  fetch_retries: 2
+  data_length: 3000                       # xtquant 拉取小时线根数（约 4-5 个月）
+  backend: "xtquant"                      # 数据后端: xtquant(默认) / akshare(备份)
+
+# ---------- ATR 砖块大小自适应 ----------
+# 每个品种的"砖"价格梯度 brick_size 由其小时线 ATR 动态决定。
+# 思路：让单块砖代表"约 1 倍小时 ATR"的价格运动，既不过细（噪声）也不过粗（漏信号）。
+# 最终值会按品种最小变动价位 round 到合规整数，并夹在 [min_size, max_size] 区间。
+brick:
+  atr_period: 60                          # 计算 ATR 的回看窗口（小时，约 1 周交易时）
+  atr_mult: 1.0                           # brick_size = atr_mult * ATR
+  min_size_ratio: 0.0015                  # 砖块下限 = close * 0.15%（防极端低波动品种）
+  max_size_ratio: 0.015                   # 砖块上限 = close * 1.5%（防极端高波动品种）
+  per_symbol_override:                    # 可选：手工指定品种的砖块（覆盖自动计算）
+    # "AU0": 3.0
+  use_close_round: true                   # 按品种最小变动价位 round（无 tick 表时退化为 close round）
+
+# ---------- Renko RSI ----------
+renko_rsi:
+  period: 14                              # 以"砖块数"为单位的 RSI 周期（非时间）
+  overbought: 70                          # 超买阈值
+  oversold: 30                            # 超卖阈值
+  extreme_overbought: 80                  # 严重超买（风险提示）
+  extreme_oversold: 20                    # 严重超卖（风险提示）
+
+# ---------- 信号：密集成交区（水平价位）阻力/支撑 ----------
+# 在砖块序列上识别：同一价位附近反复出现"上沿/下沿/反转"的水平密集带。
+zones:
+  price_bin_ratio: 1.0                    # 价位桶宽 = brick_size * price_bin_ratio（聚合同价位）
+  zone_touch_min: 3                       # 至少 N 次触及/反转才构成密集成交区
+  zone_lookback_bricks: 300               # 仅在最近 N 块砖内统计（自适应滚动）
+  reversal_confirm_bricks: 2              # 触及后连续 N 块反向砖确认"遇阻回落/回升"
+  breakout_confirm_bricks: 2              # 突破后连续 N 块同向砖确认"有效突破"
+  reentry_within_bricks: 1                # 价位桶归类容忍（±N 块砖范围合并）
+
+# ---------- 信号：趋势回调顺势 ----------
+# 确认趋势（连续 N 块同向砖构成段），回调不超过前期涨幅 1/2，
+# 之后出现 2 块同向砖 → 顺势信号（反之亦然）。
+trend:
+  trend_run_min: 6                        # 至少 N 块连续同向砖确认"趋势段"
+  pullback_max_ratio: 0.5                 # 回调幅度 <= 前期涨幅的 1/2
+  pullback_min_bricks: 1                  # 回调至少 N 块反向砖（避免没回调）
+  resume_confirm_bricks: 2                # 回调后连续 N 块同向砖确认"趋势恢复"
+  trend_lookback_bricks: 120              # 趋势识别窗口（砖）
+
+# ---------- 信号：M头 / W底（双顶/双底）突破 ----------
+# 在 Renko 运行段(run)端点上识别双顶/双底，颈线突破后发信号。
+patterns:
+  peak_tolerance: 0.010                  # 双顶高度容差：两顶价差 <= peak_tolerance * 平均价
+  valley_tolerance: 0.010                # 双底深度容差
+  neck_max_gap_bricks: 60                # 两顶(底)间隔：相距砖数 <= 此值才视为同一形态
+  neck_min_gap_bricks: 4                 # 两顶(底)间隔下限：太近(<=3砖)不算独立双顶底
+  min_peak_run: 3                        # 顶/底所在 run 段的最小砖数（防毛刺伪顶）
+  breakout_confirm_bricks: 2             # 突破颈线后连续 N 块同向砖确认
+  lookback_bricks: 400                   # 仅在最近 N 块砖内寻找形态（滚动窗口）
+
+# ---------- 输出 ----------
+output:
+  dir: "output"
+  brick_size_csv: "brick_sizes.csv"       # 各品种自适应砖块大小表
+  signals_csv: "signals_latest.csv"       # 最新有效信号汇总
+  zones_csv: "zones_latest.csv"           # 各品种密集成交区
+  rsi_extremes_csv: "rsi_extremes.csv"    # RSI 超买超卖风险名单
+  charts_dir: "charts"                    # Renko 图 + 信号标注
+  plot_top_symbols: 12                    # 为前 N 个品种画图
+  show_recent_signals: 30                 # 报告展示最近信号条数

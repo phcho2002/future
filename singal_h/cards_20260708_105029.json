@@ -1,0 +1,86 @@
+{
+  "timestamp": "2026-07-08T10:54:06.926420",
+  "scan_results": {
+    "wyckoff": "OK",
+    "dual_ma": "OK",
+    "renko_chart": "OK"
+  },
+  "cards": [
+    {
+      "rank": 1,
+      "symbol": "SC0",
+      "name": "上海原油",
+      "direction": "做多",
+      "score": 90.3,
+      "current_price": 439.2,
+      "entry_price": 439.2,
+      "support": "未识别",
+      "resistance": "未识别",
+      "trigger": "Phase_B — Spring/弹簧效应 — 价格假跌破支撑位437.67后迅速收回，最低探至435.60，第1根K线阳线放量收回，确认主",
+      "rsi": 34.0,
+      "risk": [
+        "暂无显著风险"
+      ],
+      "source_system": "future_2_wyckoff",
+      "hist_pf": 0,
+      "hist_winrate": 0
+    },
+    {
+      "rank": 2,
+      "symbol": "AU0",
+      "name": "黄金",
+      "direction": "做空",
+      "score": 72.6,
+      "current_price": 900.52,
+      "entry_price": 906.7,
+      "support": "890.2",
+      "resistance": "902.2",
+      "trigger": "缠绕突破 5次",
+      "rsi": null,
+      "risk": [
+        "暂无显著风险"
+      ],
+      "source_system": "future_4_dual_ma",
+      "hist_pf": 0,
+      "hist_winrate": 0
+    },
+    {
+      "rank": 3,
+      "symbol": "M0",
+      "name": "豆粕",
+      "direction": "做多",
+      "score": 62.0,
+      "current_price": 3051.0,
+      "entry_price": 3033.0,
+      "support": "未识别",
+      "resistance": "未识别",
+      "trigger": "缠绕突破 2次",
+      "rsi": null,
+      "risk": [
+        "暂无显著风险"
+      ],
+      "source_system": "future_4_dual_ma",
+      "hist_pf": 0,
+      "hist_winrate": 0
+    },
+    {
+      "rank": 4,
+      "symbol": "IH0",
+      "name": "上证50指数期货",
+      "direction": "做空",
+      "score": 66.3,
+      "current_price": 2882.4,
+      "entry_price": 2882.4,
+      "support": "nan",
+      "resistance": "2893.2",
+      "trigger": "缠绕突破 2次",
+      "rsi": null,
+      "risk": [
+        "暂无显著风险"
+      ],
+      "source_system": "future_4_dual_ma",
+      "hist_pf": 0,
+      "hist_winrate": 0
+    }
+  ]
+}

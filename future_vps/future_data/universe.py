@@ -62,7 +62,7 @@ def read_symbols(
 def build_exchange_map(json_path: Path | str | None = None) -> dict[str, str]:
     """返回 {symbol: exchange}，给那些只有 symbol 没有 exchange 的脚本用。
 
-    迁移到 tqsdk 后端需要 exchange 才能解析合约，本函数从 JSON 一次性取出映射。
+    迁移到 xtquant 后端需要 exchange 才能解析合约，本函数从 JSON 一次性取出映射。
 
     例：{'IM0': 'cffex', 'RB0': 'shfe', 'AU0': 'shfe', ...}
     """

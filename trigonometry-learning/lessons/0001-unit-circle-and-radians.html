@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>第 1 课：单位圆与弧度制 | 三角函数</title>
+  <link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+  <div class="container">
+    <h1>第 1 课：单位圆与弧度制</h1>
+
+    <div class="mission">
+      <strong>本课目标：</strong> 能从单位圆上直接读出 sin θ 和 cos θ，并在角度制与弧度制之间自由转换。
+    </div>
+
+    <h2>1. 为什么从单位圆开始？</h2>
+
+    <p>很多教材先讲直角三角形中的 sin、cos、tan，这没有错。但如果你将来要学微积分，真正重要的是<strong>单位圆</strong>视角：把角度看作旋转，把三角函数看作旋转后点在坐标轴上的投影。</p>
+
+    <p>单位圆只有一条规则：</p>
+
+    <div class="definition">
+      <p>画一个半径为 1 的圆，圆心在原点。从正 x 轴出发，逆时针旋转角度 θ，终边与圆的交点为 P。</p>
+      <ul>
+        <li>P 的 <strong>横坐标</strong>就是 <strong>cos θ</strong></li>
+        <li>P 的 <strong>纵坐标</strong>就是 <strong>sin θ</strong></li>
+      </ul>
+    </div>
+
+    <figure>
+      <svg viewBox="-130 -130 260 260" width="360" height="360">
+        <line x1="-120" y1="0" x2="120" y2="0" stroke="#999" stroke-width="1"/>
+        <line x1="0" y1="-120" x2="0" y2="120" stroke="#999" stroke-width="1"/>
+        <circle cx="0" cy="0" r="100" fill="none" stroke="#b03a2e" stroke-width="2"/>
+
+        <!-- Angle arc -->
+        <path d="M 40 0 A 40 40 0 0 0 27.4 -29.4" fill="none" stroke="#1f77b4" stroke-width="2"/>
+        <text x="32" y="-18" font-size="12" fill="#1f77b4">θ</text>
+
+        <!-- Radius and projection -->
+        <line x1="0" y1="0" x2="70.7" y2="-70.7" stroke="#1f77b4" stroke-width="2"/>
+        <line x1="70.7" y1="0" x2="70.7" y2="-70.7" stroke="#555" stroke-width="1" stroke-dasharray="4 2"/>
+        <line x1="0" y1="-70.7" x2="70.7" y2="-70.7" stroke="#555" stroke-width="1" stroke-dasharray="4 2"/>
+
+        <circle cx="70.7" cy="-70.7" r="4" fill="#b03a2e"/>
+
+        <text x="75" y="-42" font-size="12" fill="#333">P(cos θ, sin θ)</text>
+        <text x="75" y="-8" font-size="12" fill="#1f77b4">x = cos θ</text>
+        <text x="-8" y="-80" font-size="12" fill="#1f77b4">y = sin θ</text>
+      </svg>
+      <figcaption>单位圆定义：cos θ 是横坐标，sin θ 是纵坐标。</figcaption>
+    </figure>
+
+    <div class="tip">
+      <strong>记忆技巧：</strong> 在中文里“余弦”对应“横坐标（x）”，“正弦”对应“纵坐标（y）”。也有人记 <strong>cos ↔ x</strong>，<strong>sin ↔ y</strong>。
+    </div>
+
+    <h2>2. 角度与弧度</h2>
+
+    <p>角度制我们很熟悉：一圈 360°。弧度制则用半径来度量角度，定义是：</p>
+
+    <div class="definition">
+      <p><strong>弧度 = 弧长 / 半径</strong></p>
+      <p>在单位圆中，半径 r = 1，所以<strong>弧度就是弧长</strong>。</p>
+    </div>
+
+    <p>换算公式：</p>
+    <ul>
+      <li>弧度 = 角度 × π/180</li>
+      <li>角度 = 弧度 × 180/π</li>
+    </ul>
+
+    <p>几个必须记住的对应：</p>
+    <table style="width:100%; border-collapse:collapse; margin:1rem 0;">
+      <tr style="background:#f4f4f4;">
+        <th style="border:1px solid #ddd; padding:0.5rem;">角度</th>
+        <th style="border:1px solid #ddd; padding:0.5rem;">0°</th>
+        <th style="border:1px solid #ddd; padding:0.5rem;">30°</th>
+        <th style="border:1px solid #ddd; padding:0.5rem;">45°</th>
+        <th style="border:1px solid #ddd; padding:0.5rem;">60°</th>
+        <th style="border:1px solid #ddd; padding:0.5rem;">90°</th>
+        <th style="border:1px solid #ddd; padding:0.5rem;">180°</th>
+        <th style="border:1px solid #ddd; padding:0.5rem;">360°</th>
+      </tr>
+      <tr>
+        <td style="border:1px solid #ddd; padding:0.5rem; text-align:center;">弧度</td>
+        <td style="border:1px solid #ddd; padding:0.5rem; text-align:center;">0</td>
+        <td style="border:1px solid #ddd; padding:0.5rem; text-align:center;">π/6</td>
+        <td style="border:1px solid #ddd; padding:0.5rem; text-align:center;">π/4</td>
+        <td style="border:1px solid #ddd; padding:0.5rem; text-align:center;">π/3</td>
+        <td style="border:1px solid #ddd; padding:0.5rem; text-align:center;">π/2</td>
+        <td style="border:1px solid #ddd; padding:0.5rem; text-align:center;">π</td>
+        <td style="border:1px solid #ddd; padding:0.5rem; text-align:center;">2π</td>
+      </tr>
+    </table>
+
+    <div class="warning">
+      <strong>常见错误：</strong> 把 sin 30° 和 sin(30 弧度) 搞混。微积分里如果没有 ° 符号，默认就是弧度。30 弧度约等于 1718°，和 30° 完全不同。
+    </div>
+
+    <h2>3. 动手练一练</h2>
+
+    <div class="quiz" data-answer="B">
+      <div class="quiz-question">1. 根据单位圆，cos 0° 等于多少？</div>
+      <div class="quiz-options">
+        <label><input type="radio" name="q1" value="A"> A. 0</label>
+        <label><input type="radio" name="q1" value="B"> B. 1</label>
+        <label><input type="radio" name="q1" value="C"> C. −1</label>
+        <label><input type="radio" name="q1" value="D"> D. 不存在</label>
+      </div>
+      <button onclick="checkAnswer(this)">提交</button>
+      <div class="quiz-feedback"></div>
+    </div>
+
+    <div class="quiz" data-answer="B">
+      <div class="quiz-question">2. 180° 等于多少弧度？</div>
+      <div class="quiz-options">
+        <label><input type="radio" name="q2" value="A"> A. π/4</label>
+        <label><input type="radio" name="q2" value="B"> B. π</label>
+        <label><input type="radio" name="q2" value="C"> C. 2π</label>
+        <label><input type="radio" name="q2" value="D"> D. π/2</label>
+      </div>
+      <button onclick="checkAnswer(this)">提交</button>
+      <div class="quiz-feedback"></div>
+    </div>
+
+    <div class="quiz" data-answer="C">
+      <div class="quiz-question">3. 哪个象限中 sin θ 为正、cos θ 为负？</div>
+      <div class="quiz-options">
+        <label><input type="radio" name="q3" value="A"> A. 第一象限</label>
+        <label><input type="radio" name="q3" value="B"> B. 第二象限</label>
+        <label><input type="radio" name="q3" value="C"> C. 第三象限</label>
+        <label><input type="radio" name="q3" value="D"> D. 第四象限</label>
+      </div>
+      <button onclick="checkAnswer(this)">提交</button>
+      <div class="quiz-feedback"></div>
+    </div>
+
+    <div class="quiz" data-answer="B">
+      <div class="quiz-question">4. sin(π/2) 等于多少？</div>
+      <div class="quiz-options">
+        <label><input type="radio" name="q4" value="A"> A. 0</label>
+        <label><input type="radio" name="q4" value="B"> B. 1</label>
+        <label><input type="radio" name="q4" value="C"> C. −1</label>
+        <label><input type="radio" name="q4" value="D"> D. 1/2</label>
+      </div>
+      <button onclick="checkAnswer(this)">提交</button>
+      <div class="quiz-feedback"></div>
+    </div>
+
+    <h2>4. 本课小结</h2>
+
+    <ul>
+      <li>单位圆上，点的横坐标是 cos θ，纵坐标是 sin θ。</li>
+      <li>弧度是“弧长除以半径”；在单位圆中，弧度就是弧长。</li>
+      <li>180° = π 弧度，这是角度与弧度之间最重要的桥梁。</li>
+      <li>没有 ° 符号时，角度默认是弧度。</li>
+    </ul>
+
+    <h2>5. 推荐阅读/观看</h2>
+
+    <ul>
+      <li><a href="https://www.khanacademy.org/math/trigonometry/unit-circle-trig-func" target="_blank">Khan Academy: Unit Circle Definition of Trig Functions</a>（系统、可视化）</li>
+      <li><a href="https://search.bilibili.com/all?keyword=%E4%B8%80%E6%95%B0%20%E4%B8%89%E8%A7%92%E5%87%BD%E6%95%B0" target="_blank">B站搜索：一数 三角函数</a>（中文讲解）</li>
+      <li><a href="https://csca.app/zh/math/visualize/trigonometric-functions" target="_blank">CSCA.app：三角函数与单位圆交互演示</a>（动手拖动）</li>
+    </ul>
+
+    <div class="tip">
+      <strong>有问题随时问：</strong> 如果你不确定某个概念、某道题，或者想知道它和微积分的联系，直接问我。我会根据你的回答调整下一课内容。
+    </div>
+
+    <div class="nav">
+      <a href="../reference/unit-circle-cheat-sheet.html">← 单位圆速查卡</a>
+      <span></span>
+    </div>
+
+    <footer>
+      三角函数学习资料 · 第 1 课
+    </footer>
+  </div>
+
+  <script>
+    const explanations = {
+      q1: {
+        B: "正确。θ = 0° 时，点 P 在 (1, 0)，所以 cos 0° = 1。",
+        A: "不对。0 是 sin 0° 的值，不是 cos 0°。",
+        C: "不对。−1 是 cos 180° 的值。",
+        D: "不对。cos 0° 有定义且等于 1。"
+      },
+      q2: {
+        B: "正确。180° × π/180 = π。",
+        A: "不对。π/4 对应 45°。",
+        C: "不对。2π 对应 360°。",
+        D: "不对。π/2 对应 90°。"
+      },
+      q3: {
+        B: "正确。第二象限中 x < 0、y > 0，所以 cos 为负、sin 为正。",
+        A: "不对。第一象限 sin 和 cos 都为正。",
+        C: "不对。第三象限 sin 和 cos 都为负。",
+        D: "不对。第四象限 sin 为负、cos 为正。"
+      },
+      q4: {
+        B: "正确。π/2 = 90°，此时点 P 在 (0, 1)，所以 sin = 1。",
+        A: "不对。sin 0 = 0。",
+        C: "不对。sin(3π/2) = −1。",
+        D: "不对。sin(π/6) = 1/2。"
+      }
+    };
+
+    function checkAnswer(button) {
+      const quiz = button.closest('.quiz');
+      const name = quiz.querySelector('input[type="radio"]').name;
+      const selected = quiz.querySelector('input[type="radio"]:checked');
+      const feedback = quiz.querySelector('.quiz-feedback');
+      const correct = quiz.dataset.answer;
+
+      if (!selected) {
+        feedback.textContent = '请先选择一个答案。';
+        feedback.className = 'quiz-feedback wrong';
+        return;
+      }
+
+      if (selected.value === correct) {
+        feedback.textContent = explanations[name][correct];
+        feedback.className = 'quiz-feedback correct';
+      } else {
+        feedback.textContent = explanations[name][selected.value] || '再想想，可以从单位圆上直接读出答案。';
+        feedback.className = 'quiz-feedback wrong';
+      }
+    }
+  </script>
+</body>
+</html>

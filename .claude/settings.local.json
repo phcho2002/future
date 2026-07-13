@@ -1,0 +1,27 @@
+{
+  "permissions": {
+    "allow": [
+      "PowerShell($env:HT_APIKEY = \"ht_5vvCWlZaJGpHIyWf5ZXJvbnV2W1BaOafDOi8USrAS\"; $installRoot = \"$env:USERPROFILE\\\\.openclaw\\\\skills\"; python \"$installRoot\\\\query-indicator\\\\query_indicator.py\" queryIndicator --query \"ETF 159385 科芯ETF 日线技术分析：均线排列、MACD、KDJ、近20日高低点、K线形态特征\" 2>&1)",
+      "PowerShell($env:HT_APIKEY = \"ht_5vvCWlZaJGpHIyWf5ZXJvbnV2W1BaOafDOi8USrAS\"; $installRoot = \"$env:USERPROFILE\\\\.openclaw\\\\skills\"; python \"$installRoot\\\\financial-analysis\\\\financial_analysis.py\" marketInsight --query \"2026年6月10日收盘后A股大盘表现，ETF市场涨幅排名前15的品种，热点板块和资金流向\" 2>&1)",
+      "PowerShell($env:HT_APIKEY = \"ht_5vvCWlZaJGpHIyWf5ZXJvbnV2W1BaOafDOi8USrAS\"; $installRoot = \"$env:USERPROFILE\\\\.openclaw\\\\skills\"; $etfs = @\\(\"510650\", \"159516\", \"159327\", \"560780\", \"159858\", \"512730\", \"510230\", \"513310\"\\); foreach \\($e in $etfs\\) { Write-Output \"=== $e WEEKLY ===\"; python -X utf8 \"$installRoot\\\\query-indicator\\\\query_indicator.py\" queryIndicator --query \"ETF $e 周线技术分析：周线趋势、均线排列、MACD状态、近4周K线组合形态、周线阻力支撑位\" 2>&1; Write-Output \"=== $e VOL ===\"; python -X utf8 \"$installRoot\\\\query-indicator\\\\query_indicator.py\" queryIndicator --query \"ETF $e 6月10日成交量资金面：成交量、量比、换手率、主力资金净流入流出、大单动向、近5日资金趋势\" 2>&1; Write-Output \"\" })",
+      "PowerShell($env:HT_APIKEY = \"ht_5vvCWlZaJGpHIyWf5ZXJvbnV2W1BaOafDOi8USrAS\"; $installRoot = \"$env:USERPROFILE\\\\.openclaw\\\\skills\"; python -X utf8 \"$installRoot\\\\financial-analysis\\\\financial_analysis.py\" marketInsight --query \"2026年6月11日收盘A股大盘表现，ETF市场涨幅排名前15的品种，热点板块和资金流向\" 2>&1)",
+      "PowerShell($env:HT_APIKEY = \"ht_5vvCWlZaJGpHIyWf5ZXJvbnV2W1BaOafDOi8USrAS\"; $installRoot = \"$env:USERPROFILE\\\\.openclaw\\\\skills\"; python -X utf8 \"$installRoot\\\\query-indicator\\\\query_indicator.py\" queryIndicator --query \"2026年6月11日A股收盘ETF涨幅榜前15名，包含代码、名称、收盘涨跌幅、成交额\" 2>&1)",
+      "PowerShell($env:HT_APIKEY = \"ht_5vvCWlZaJGpHIyWf5ZXJvbnV2W1BaOafDOi8USrAS\"; $installRoot = \"$env:USERPROFILE\\\\.openclaw\\\\skills\"; $etfs = @\\(\"510650\", \"159516\", \"159327\", \"560780\", \"562590\", \"159558\", \"159858\", \"512730\", \"510230\", \"516080\"\\); foreach \\($e in $etfs\\) { Write-Output \"=== $e ===\"; python -X utf8 \"$installRoot\\\\query-indicator\\\\query_indicator.py\" queryIndicator --query \"ETF $e 6月11日收盘数据：收盘价、涨跌幅、成交量、量比、均线、MACD、KDJ\" 2>&1 })",
+      "PowerShell(if \\(-not \\(Test-Path \"D:\\\\work_ai\\\\future\"\\)\\) { New-Item -ItemType Directory -Path \"D:\\\\work_ai\\\\future\" -Force })",
+      "Bash(python3 *)",
+      "Bash(python *)",
+      "PowerShell(cd D:\\\\work_ai\\\\future; $env:PYTHONIOENCODING='utf-8'; python backtest_albrooks.py)",
+      "PowerShell($env:HT_APIKEY = \"ht_5vvCWlZaJGpHIyWf5ZXJvbnV2W1BaOafDOi8USrAS\"; $installRoot = \"$env:USERPROFILE\\\\.openclaw\\\\skills\"; python -X utf8 \"$installRoot\\\\financial-analysis\\\\financial_analysis.py\" marketInsight --query \"2026年6月12日A股ETF市场实时表现，ETF涨幅排名前20的品种，热点ETF板块和资金流向，今天最强的ETF有哪些\" 2>&1)",
+      "PowerShell($env:HT_APIKEY = \"ht_5vvCWlZaJGpHIyWf5ZXJvbnV2W1BaOafDOi8USrAS\"; $installRoot = \"$env:USERPROFILE\\\\.openclaw\\\\skills\"; python -X utf8 \"$installRoot\\\\query-indicator\\\\query_indicator.py\" queryIndicator --query \"2026年6月12日A股ETF涨幅榜前15名，包含代码、名称、最新价、涨跌幅、成交额、量比、换手率\" 2>&1)",
+      "PowerShell($env:HT_APIKEY = \"ht_5vvCWlZaJGpHIyWf5ZXJvbnV2W1BaOafDOi8USrAS\"; $installRoot = \"$env:USERPROFILE\\\\.openclaw\\\\skills\"; $etfs = @\\(\"513310\", \"560860\", \"159157\", \"517520\", \"159322\", \"517400\", \"159315\", \"560970\"\\); foreach \\($e in $etfs\\) { Write-Output \"=== $e ===\"; python -X utf8 \"$installRoot\\\\query-indicator\\\\query_indicator.py\" queryIndicator --query \"ETF $e 6月12日盘中数据：最新价、涨跌幅、成交额、量比、MACD状态、均线排列情况、近5日涨幅\" 2>&1 })",
+      "Bash(ls /c/Python*/python.exe)",
+      "Read(//c/Users/Administrator/AppData/Local/Programs/Python/**)",
+      "Bash(/c/Users/Administrator/AppData/Local/Programs/Python/Python312/python.exe *)",
+      "Bash(PYTHONIOENCODING=utf-8 timeout 290 python future_8/backtest.py)",
+      "Bash(echo \"EXIT=$?\")",
+      "Read(//tmp/**)",
+      "Bash(PYTHONPATH=D:/work_ai PYTHONIOENCODING=utf-8 timeout 290 python /tmp/diag.py)",
+      "Bash(PYTHONIOENCODING=utf-8 timeout 400 python future_8/backtest.py)"
+    ]
+  }
+}

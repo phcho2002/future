@@ -7,7 +7,7 @@
 
     future_vps/
     ├── futures_top40.json   ← 品种表（FUTURES_TOP40_JSON 可覆盖）
-    ├── tq_auth.py           ← TqAuth 凭证（TQ_AUTH_PATH 可覆盖）
+    ├── xt_token.py          ← 迅投 token（XT_TOKEN_PATH 可覆盖）
     └── quote_cache/         ← 缓存目录（QUOTE_CACHE_DIR 可覆盖）
 
 环境变量优先级最高，方便 VPS 上把缓存/凭证放到任意位置（如挂载的数据盘）。
@@ -39,10 +39,22 @@ def cache_dir() -> Path:
     return Path(env).expanduser().resolve() if env else _VPS_ROOT / "quote_cache"
 
 
-def auth_path() -> Path:
-    """TqAuth 凭证文件路径。
+def token_path() -> Path:
+    """迅投 token 文件路径。
 
-    默认 ``<future_vps>/tq_auth.py``；环境变量 ``TQ_AUTH_PATH`` 可覆盖。
+    默认 ``<future_vps>/xt_token.py``；环境变量 ``XT_TOKEN_PATH`` 可覆盖。
+    文件内容形如 ``XT_TOKEN = "your_token"``。
+    """
+    env = os.environ.get("XT_TOKEN_PATH")
+    return Path(env).expanduser().resolve() if env else _VPS_ROOT / "xt_token.py"
+
+
+def auth_path() -> Path:
+    """[已废弃] 旧 tqsdk TqAuth 凭证路径的兼容别名。
+
+    原指向 ``<future_vps>/tq_auth.py``（环境变量 ``TQ_AUTH_PATH`` 可覆盖）。
+    数据层已切换到 xtquant，新代码请用 :func:`token_path`。保留本函数仅为
+    避免旧引用直接报错。
     """
     env = os.environ.get("TQ_AUTH_PATH")
     return Path(env).expanduser().resolve() if env else _VPS_ROOT / "tq_auth.py"

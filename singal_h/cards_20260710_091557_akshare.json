@@ -1,0 +1,70 @@
+{
+  "timestamp": "2026-07-10T09:16:09.143093",
+  "data_source": "akshare realtime + system signals",
+  "cards": [
+    {
+      "rank": 1,
+      "symbol": "IC0",
+      "name": "中证500指数期",
+      "sector": "股指",
+      "direction": "做多",
+      "score": 57.9,
+      "current_price": 8502.4,
+      "change_pct": 0.0277039,
+      "intraday_pos": 0.98,
+      "sys_count": 1,
+      "decision": "中性偏强",
+      "risk": [
+        "无系统共振确认"
+      ]
+    },
+    {
+      "rank": 2,
+      "symbol": "NI0",
+      "name": "镍连续",
+      "sector": "有色",
+      "direction": "做多",
+      "score": 55.9,
+      "current_price": 128230.0,
+      "change_pct": 0.0099236,
+      "intraday_pos": 0.77,
+      "sys_count": 2,
+      "decision": "中性偏强",
+      "risk": [
+        "暂无显著风险"
+      ]
+    },
+    {
+      "rank": 3,
+      "symbol": "IM0",
+      "name": "中证连续指数期货",
+      "sector": "股指",
+      "direction": "做多",
+      "score": 50.5,
+      "current_price": 8127.4,
+      "change_pct": 0.0164586,
+      "intraday_pos": 0.95,
+      "sys_count": 0,
+      "decision": "中性偏强",
+      "risk": [
+        "无系统共振确认"
+      ]
+    },
+    {
+      "rank": 4,
+      "symbol": "IF0",
+      "name": "沪深300指数期",
+      "sector": "股指",
+      "direction": "做多",
+      "score": 49.7,
+      "current_price": 4780.8,
+      "change_pct": 0.0191865,
+      "intraday_pos": 0.83,
+      "sys_count": 1,
+      "decision": "中性偏强",
+      "risk": [
+        "无系统共振确认"
+      ]
+    }
+  ]
+}

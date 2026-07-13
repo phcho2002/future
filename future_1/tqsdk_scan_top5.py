@@ -1,14 +1,14 @@
 """
-TqSdk 15-min scan: rank top 5 signal proximity scores, output long/short bias.
+15-min scan: rank top 5 signal proximity scores, output long/short bias.
 Designed for cron every 15 min during trading hours.
 
-Uses the unified TqSdkProvider for symbol construction and batched fetch.
+Uses the unified DataProvider (xtquant backend) for symbol construction and batched fetch.
 """
 import os
 from datetime import datetime, time as dtime
 
 from future_quant.core.types import ChannelType, SignalSide, TrendDirection
-from future_quant.data.tqsdk_provider import TqSdkProvider
+from future_quant.data.tqsdk_provider import DataProvider
 from future_quant.data.universe import load_top40_tuples
 from future_quant.engine import QuantEngine
 
@@ -99,7 +99,7 @@ def analyze_klines(engine: QuantEngine, klines: dict) -> list[dict]:
 def format_feishu(top5: list[dict], now_str: str) -> str:
     lines = [
         f"📊 期货楔形反转信号 TOP5",
-        f"🕐 {now_str}  |  15分钟K线  |  TqSdk",
+        f"🕐 {now_str}  |  15分钟K线  |  xtquant",
         "",
     ]
     for i, s in enumerate(top5, 1):
@@ -171,13 +171,13 @@ def run():
 
     symbols = get_symbols()
     engine = QuantEngine()
-    provider = TqSdkProvider(period=PERIOD, data_length=DATA_LENGTH, wait_timeout=25.0)
+    provider = DataProvider(period=PERIOD, data_length=DATA_LENGTH)
 
     try:
         klines = provider.fetch_many(symbols, period=PERIOD, length=DATA_LENGTH)
     except Exception as e:  # noqa: BLE001
         if not cron_mode:
-            print(f"[{now_str}] TqSdk 获取失败: {e}")
+            print(f"[{now_str}] xtquant 获取失败: {e}")
         return
 
     if not klines:

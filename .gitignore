@@ -1,5 +1,7 @@
-# 排除 tqsdk 认证文件（含账号密码，禁止入库）
+# 排除认证/凭证文件（含明文 token / 账号密码，禁止入库）
 tq_auth.py
+xt_token.py
+future_vps/xt_token.py
 
 # 排除临时 clone 目录（git push 用的中转）
 _gh_up/
@@ -18,3 +20,4 @@ future_vps/quote_cache/
 **/cache/*.parquet
 **/cache/*.pkl
 **/output/
+stock_new/

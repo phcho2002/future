@@ -1,0 +1,2 @@
+﻿symbol,name,exchange,side,entry,stop,target,rsi,phase,stage,phase_desc,reason
+SC0,上海原油,ine,long,439.2,435.6,447.67,34.0,Phase_B,distribution,Phase B 派发建设期 — 价格重心下移，可能处于派发阶段,Spring/弹簧效应 — 价格假跌破支撑位437.67后迅速收回，最低探至435.60，第1根K线阳线放量收回，确认主力吸筹意图，符合威科夫Phase C末期做多条件

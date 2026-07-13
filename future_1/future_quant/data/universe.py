@@ -1,7 +1,7 @@
 """TOP40 期货品种集合加载器。
 
-历史上从 ``D:/work_ai/futures_data.db`` 的 ``futures_top40`` 表读取，
-现统一改为从 ``D:/work_ai/futures_top40.json``（仓库快照）读取，避免
+历史上从 ``futures_data.db`` 的 ``futures_top40`` 表读取，
+现统一改为从 ``futures_top40.json``（仓库快照）读取，避免
 依赖 sqlite，部署更简单。JSON 与原表字段一致（``排名``/``symbol``/
 ``name``/``exchange`` 等），因此下游调用方无需改动字段名。
 """
@@ -11,20 +11,43 @@ from __future__ import annotations
 import json
 from pathlib import Path
 
-DEFAULT_JSON_PATH = Path("D:/work_ai/futures_top40.json")
+# 默认从仓库根目录下的 futures_top40.json 读取；通过 path 参数可覆盖。
+_REPO_ROOT = Path(__file__).resolve().parents[2]  # future_quant/data -> future_1
+DEFAULT_JSON_PATH = _REPO_ROOT.parent / "futures_top40.json"
 
 
 def load_top40(path: str | Path | None = None) -> list[dict]:
     """读取 TOP40 品种，返回按 ``排名`` 升序的字典列表。
 
-    每个元素包含 ``排名`` / ``symbol`` / ``name`` / ``exchange`` 等字段，
-    与原 ``pd.read_sql("SELECT ... FROM futures_top40 ORDER BY 排名").to_dict('records')``
-    的输出完全等价。
+    兼容两种 JSON 格式：
+      - list[dict]: [{"排名":1, "symbol":"IM0", ...}, ...]
+      - {"symbols": [[symbol, name, exchange], ...]}
+    每个元素包含 ``排名`` / ``symbol`` / ``name`` / ``exchange`` 等字段。
     """
     p = Path(path) if path else DEFAULT_JSON_PATH
     with open(p, encoding="utf-8") as f:
         data = json.load(f)
-    rows = sorted(data, key=lambda r: r.get("排名", 0))
+
+    # 兼容 {"symbols": [...]} 包装
+    if isinstance(data, dict):
+        data = data.get("symbols", [])
+
+    # 兼容 [[symbol, name, exchange], ...] -> dict
+    rows: list[dict] = []
+    for i, r in enumerate(data, 1):
+        if isinstance(r, dict):
+            rows.append(r)
+        elif isinstance(r, (list, tuple)) and len(r) >= 3:
+            rows.append({
+                "排名": i,
+                "symbol": r[0],
+                "name": r[1],
+                "exchange": r[2],
+            })
+        else:
+            raise ValueError(f"不支持的品种表格式: {r!r}")
+
+    rows = sorted(rows, key=lambda r: r.get("排名", 0))
     return rows
 
 

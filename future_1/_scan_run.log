@@ -1,0 +1,93 @@
+在使用天勤量化之前，默认您已经知晓并同意以下免责条款，如果不同意请立即停止使用：https://www.shinnytech.com/blog/disclaimer/
+===========================================================================
+  TOP40 期货 15分钟 K线 三推衰竭信号扫描（分批版）
+  2026-07-07 08:57:11
+===========================================================================
+  加载 40 个品种
+
+  批次 1/8: IM0, IC0, IF0, TF0, TS0 拉取 15m 100根...
+2026-07-07 08:57:13 -     INFO - 通知 : 与 wss://free-api.shinnytech.com/t/nfmd/front/mobile 的网络连接已建立
+  成功 5/5 个品种
+  [IM0   ] 中证1000指数期货   ... ✅ ⬆️做多 衰竭=0.00 入场=8265.0
+  [IC0   ] 中证500指数期货    ... 推=1 衰竭=0.00 通道=parallel_channel 邻近度=33
+  [IF0   ] 沪深300指数期货    ... 推=0 衰竭=0.00 通道=parallel_channel 邻近度=23
+  [TF0   ] 5年期国债期货      ... 推=0 衰竭=0.00 通道=parallel_channel 邻近度=23
+  [TS0   ] 2年期国债期货      ... 推=0 衰竭=0.00 通道=parallel_channel 邻近度=23
+
+  批次 2/8: AU0, CU0, LC0, IH0, RB0 拉取 15m 100根...
+2026-07-07 08:57:36 -     INFO - 通知 : 与 wss://free-api.shinnytech.com/t/nfmd/front/mobile 的网络连接已建立
+  成功 5/5 个品种
+  [AU0   ] 黄金           ... 推=2 衰竭=0.00 通道=parallel_channel 邻近度=43
+  [CU0   ] 铜            ... 推=1 衰竭=0.00 通道=parallel_channel 邻近度=33
+  [LC0   ] 碳酸锂          ... 推=0 衰竭=0.00 通道=parallel_channel 邻近度=23
+  [IH0   ] 上证50指数期货     ... 推=0 衰竭=0.00 通道=parallel_channel 邻近度=23
+  [RB0   ] 螺纹钢          ... 推=1 衰竭=0.00 通道=parallel_channel 邻近度=33
+
+  批次 3/8: M0, HC0, AG0, Y0, P0 拉取 15m 100根...
+2026-07-07 08:57:59 -     INFO - 通知 : 与 wss://free-api.shinnytech.com/t/nfmd/front/mobile 的网络连接已建立
+  成功 5/5 个品种
+  [M0    ] 豆粕           ... 推=0 衰竭=0.00 通道=parallel_channel 邻近度=23
+  [HC0   ] 热轧卷板         ... 推=1 衰竭=0.00 通道=parallel_channel 邻近度=33
+  [AG0   ] 白银           ... 推=0 衰竭=0.00 通道=parallel_channel 邻近度=23
+  [Y0    ] 豆油           ... 推=2 衰竭=0.00 通道=parallel_channel 邻近度=43
+  [P0    ] 棕榈油          ... 推=1 衰竭=0.00 通道=parallel_channel 邻近度=33
+
+  批次 4/8: CF0, I0, LH0, SR0, FG0 拉取 15m 100根...
+2026-07-07 08:58:22 -     INFO - 通知 : 与 wss://free-api.shinnytech.com/t/nfmd/front/mobile 的网络连接已建立
+  成功 5/5 个品种
+  [CF0   ] 棉花           ... 推=1 衰竭=0.00 通道=parallel_channel 邻近度=33
+  [I0    ] 铁矿石          ... 推=0 衰竭=0.00 通道=parallel_channel 邻近度=23
+  [LH0   ] 生猪           ... 推=0 衰竭=0.00 通道=parallel_channel 邻近度=23
+  [SR0   ] 白糖           ... 推=1 衰竭=0.00 通道=parallel_channel 邻近度=33
+  [FG0   ] 玻璃           ... 推=1 衰竭=0.00 通道=parallel_channel 邻近度=33
+
+  批次 5/8: JM0, SA0, AL0, V0, TA0 拉取 15m 100根...
+2026-07-07 08:58:45 -     INFO - 通知 : 与 wss://free-api.shinnytech.com/t/nfmd/front/mobile 的网络连接已建立
+  成功 5/5 个品种
+  [JM0   ] 焦煤           ... 推=0 衰竭=0.00 通道=parallel_channel 邻近度=23
+  [SA0   ] 纯碱           ... 推=0 衰竭=0.00 通道=parallel_channel 邻近度=23
+  [AL0   ] 铝            ... ✅ ⬇️做空 衰竭=0.00 入场=22900.0
+  [V0    ] PVC          ... 推=1 衰竭=0.00 通道=parallel_channel 邻近度=33
+  [TA0   ] PTA          ... 推=0 衰竭=0.00 通道=parallel_channel 邻近度=23
+
+  批次 6/8: OI0, C0, RU0, NI0, SC0 拉取 15m 100根...
+2026-07-07 08:59:08 -     INFO - 通知 : 与 wss://free-api.shinnytech.com/t/nfmd/front/mobile 的网络连接已建立
+  成功 5/5 个品种
+  [OI0   ] 菜油           ... 推=1 衰竭=0.00 通道=parallel_channel 邻近度=33
+  [C0    ] 玉米           ... 推=1 衰竭=0.00 通道=parallel_channel 邻近度=33
+  [RU0   ] 天然橡胶         ... 推=1 衰竭=0.00 通道=parallel_channel 邻近度=33
+  [NI0   ] 镍            ... 推=0 衰竭=0.00 通道=parallel_channel 邻近度=23
+  [SC0   ] 上海原油         ... 推=1 衰竭=0.00 通道=parallel_channel 邻近度=33
+
+  批次 7/8: SP0, RM0, PP0, MA0, EB0 拉取 15m 100根...
+2026-07-07 08:59:31 -     INFO - 通知 : 与 wss://free-api.shinnytech.com/t/nfmd/front/mobile 的网络连接已建立
+  成功 3/5 个品种
+  [SP0   ] 纸浆           ... 推=1 衰竭=0.00 通道=parallel_channel 邻近度=33
+  [RM0   ] 菜粕           ... 推=1 衰竭=0.00 通道=parallel_channel 邻近度=33
+  [PP0   ] 聚丙烯          ... 推=2 衰竭=0.00 通道=parallel_channel 邻近度=43
+  [MA0   ] 甲醇           ... 无数据(0)
+  [EB0   ] 苯乙烯          ... 无数据(0)
+
+  批次 8/8: SM0, AO0, SN0, L0, ZN0 拉取 15m 100根...
+2026-07-07 09:01:18 -     INFO - 通知 : 与 wss://free-api.shinnytech.com/t/nfmd/front/mobile 的网络连接已建立
+  成功 5/5 个品种
+  [SM0   ] 锰硅           ... 推=2 衰竭=0.00 通道=parallel_channel 邻近度=43
+  [AO0   ] 氧化铝          ... 推=0 衰竭=0.00 通道=parallel_channel 邻近度=23
+  [SN0   ] 锡            ... 推=1 衰竭=0.00 通道=parallel_channel 邻近度=33
+  [L0    ] 塑料           ... 推=0 衰竭=0.00 通道=parallel_channel 邻近度=23
+  [ZN0   ] 沪锌           ... 推=0 衰竭=0.00 通道=parallel_channel 邻近度=23
+
+===========================================================================
+  扫描完成 | 总样本: 38 | 错误: 0
+===========================================================================
+
+  ✅ 有效信号（按衰竭分排序）：
+    IM0    中证1000指数期货   做多   衰竭=0.00 入场=8265.0 止损=8211.885714285714 目标=8371.228571428572 R/R=2.0
+    AL0    铝            做空   衰竭=0.00 入场=22900.0 止损=22934.285714285714 目标=22831.428571428572 R/R=2.0
+
+  📌 邻近有效前3（结构接近突破）：
+    SM0    锰硅           做空(提示) 邻近度=43 推=2 衰竭=0.00 通道=parallel_channel
+    AU0    黄金           做多(提示) 邻近度=43 推=2 衰竭=0.00 通道=parallel_channel
+    PP0    聚丙烯          做空(提示) 邻近度=43 推=2 衰竭=0.00 通道=parallel_channel
+
+  CSV 已输出: D:\work_ai\future_1\scan_top40_15m_results.csv

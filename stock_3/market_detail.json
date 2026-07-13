@@ -1,0 +1,1217 @@
+{
+  "top_amount_real": [
+    {
+      "code": "sz000725",
+      "change_pct": 3.76,
+      "amount_wan": 4934241,
+      "close": 9.1
+    },
+    {
+      "code": "sz300308",
+      "change_pct": -6.55,
+      "amount_wan": 3672129,
+      "close": 1143.0
+    },
+    {
+      "code": "sz300502",
+      "change_pct": -11.56,
+      "amount_wan": 3657381,
+      "close": 509.0
+    },
+    {
+      "code": "sh603986",
+      "change_pct": -10.0,
+      "amount_wan": 3212068,
+      "close": 694.81
+    },
+    {
+      "code": "sh688008",
+      "change_pct": -14.8,
+      "amount_wan": 2564271,
+      "close": 269.15
+    },
+    {
+      "code": "sz002407",
+      "change_pct": -0.78,
+      "amount_wan": 2067991,
+      "close": 54.82
+    },
+    {
+      "code": "sh688256",
+      "change_pct": -7.63,
+      "amount_wan": 1961535,
+      "close": 1372.0
+    },
+    {
+      "code": "sz002384",
+      "change_pct": -10.0,
+      "amount_wan": 1884958,
+      "close": 221.68
+    },
+    {
+      "code": "sh600584",
+      "change_pct": -10.0,
+      "amount_wan": 1868696,
+      "close": 95.98
+    },
+    {
+      "code": "sh688012",
+      "change_pct": -11.49,
+      "amount_wan": 1848649,
+      "close": 408.9
+    },
+    {
+      "code": "sz001248",
+      "change_pct": 10.88,
+      "amount_wan": 1769230,
+      "close": 23.95
+    },
+    {
+      "code": "sh688525",
+      "change_pct": -9.56,
+      "amount_wan": 1477868,
+      "close": 418.8
+    },
+    {
+      "code": "sh600522",
+      "change_pct": -6.93,
+      "amount_wan": 1467726,
+      "close": 51.58
+    },
+    {
+      "code": "sh600487",
+      "change_pct": -7.94,
+      "amount_wan": 1466007,
+      "close": 93.84
+    },
+    {
+      "code": "sz000100",
+      "change_pct": -3.27,
+      "amount_wan": 1441856,
+      "close": 5.92
+    },
+    {
+      "code": "sh688981",
+      "change_pct": -6.72,
+      "amount_wan": 1394269,
+      "close": 144.1
+    },
+    {
+      "code": "sz300394",
+      "change_pct": -12.01,
+      "amount_wan": 1374326,
+      "close": 250.77
+    },
+    {
+      "code": "sz300408",
+      "change_pct": -13.06,
+      "amount_wan": 1365352,
+      "close": 148.2
+    },
+    {
+      "code": "sz001309",
+      "change_pct": -9.2,
+      "amount_wan": 1336029,
+      "close": 811.0
+    },
+    {
+      "code": "sh601899",
+      "change_pct": 4.74,
+      "amount_wan": 1330165,
+      "close": 26.3
+    },
+    {
+      "code": "sh688041",
+      "change_pct": -7.89,
+      "amount_wan": 1328595,
+      "close": 322.29
+    },
+    {
+      "code": "sz002475",
+      "change_pct": -8.06,
+      "amount_wan": 1317388,
+      "close": 60.9
+    },
+    {
+      "code": "sz300750",
+      "change_pct": -0.39,
+      "amount_wan": 1313977,
+      "close": 382.35
+    },
+    {
+      "code": "sz000988",
+      "change_pct": -10.0,
+      "amount_wan": 1298937,
+      "close": 156.2
+    },
+    {
+      "code": "sz301308",
+      "change_pct": -10.27,
+      "amount_wan": 1277233,
+      "close": 599.22
+    },
+    {
+      "code": "sh601138",
+      "change_pct": -8.54,
+      "amount_wan": 1265669,
+      "close": 64.02
+    },
+    {
+      "code": "sh600176",
+      "change_pct": -3.49,
+      "amount_wan": 1264994,
+      "close": 67.82
+    },
+    {
+      "code": "sz300475",
+      "change_pct": -13.38,
+      "amount_wan": 1241091,
+      "close": 262.04
+    },
+    {
+      "code": "sz300604",
+      "change_pct": -9.65,
+      "amount_wan": 1237275,
+      "close": 301.46
+    },
+    {
+      "code": "sz300476",
+      "change_pct": -6.35,
+      "amount_wan": 1214267,
+      "close": 306.09
+    }
+  ],
+  "limit_up_real": [
+    {
+      "code": "sz001248",
+      "change_pct": 10.88,
+      "amount_wan": 1769230,
+      "vol_ratio": 1,
+      "open": 21.6,
+      "close": 23.95,
+      "prev_close": 21.6
+    },
+    {
+      "code": "sh600172",
+      "change_pct": 10.01,
+      "amount_wan": 405453,
+      "vol_ratio": 0.92,
+      "open": 15.48,
+      "close": 18.03,
+      "prev_close": 16.39
+    },
+    {
+      "code": "sh600641",
+      "change_pct": 10.01,
+      "amount_wan": 328231,
+      "vol_ratio": 0.7,
+      "open": 48.24,
+      "close": 48.24,
+      "prev_close": 43.85
+    },
+    {
+      "code": "sh605020",
+      "change_pct": 10.0,
+      "amount_wan": 293417,
+      "vol_ratio": 1.28,
+      "open": 42.69,
+      "close": 48.39,
+      "prev_close": 43.99
+    },
+    {
+      "code": "sz002842",
+      "change_pct": 10.0,
+      "amount_wan": 280059,
+      "vol_ratio": 1.03,
+      "open": 44.2,
+      "close": 50.17,
+      "prev_close": 45.61
+    },
+    {
+      "code": "sh603505",
+      "change_pct": 10.01,
+      "amount_wan": 251493,
+      "vol_ratio": 3.08,
+      "open": 23.0,
+      "close": 24.39,
+      "prev_close": 22.17
+    },
+    {
+      "code": "sz000700",
+      "change_pct": 9.97,
+      "amount_wan": 187723,
+      "vol_ratio": 1.3,
+      "open": 15.78,
+      "close": 16.87,
+      "prev_close": 15.34
+    },
+    {
+      "code": "sh600988",
+      "change_pct": 10.0,
+      "amount_wan": 184257,
+      "vol_ratio": 1.15,
+      "open": 26.64,
+      "close": 28.39,
+      "prev_close": 25.81
+    },
+    {
+      "code": "sz002971",
+      "change_pct": 10.0,
+      "amount_wan": 171741,
+      "vol_ratio": 0.8,
+      "open": 68.0,
+      "close": 75.02,
+      "prev_close": 68.2
+    },
+    {
+      "code": "sh601678",
+      "change_pct": 10.0,
+      "amount_wan": 171215,
+      "vol_ratio": 0.95,
+      "open": 6.81,
+      "close": 7.7,
+      "prev_close": 7.0
+    },
+    {
+      "code": "sz002580",
+      "change_pct": 10.02,
+      "amount_wan": 154816,
+      "vol_ratio": 0.76,
+      "open": 20.0,
+      "close": 22.18,
+      "prev_close": 20.16
+    },
+    {
+      "code": "sz002559",
+      "change_pct": 10.01,
+      "amount_wan": 142365,
+      "vol_ratio": 0.95,
+      "open": 15.2,
+      "close": 15.38,
+      "prev_close": 13.98
+    },
+    {
+      "code": "sz002584",
+      "change_pct": 10.0,
+      "amount_wan": 114824,
+      "vol_ratio": 0.78,
+      "open": 9.7,
+      "close": 11.0,
+      "prev_close": 10.0
+    },
+    {
+      "code": "sz002674",
+      "change_pct": 10.01,
+      "amount_wan": 111341,
+      "vol_ratio": 1.81,
+      "open": 24.1,
+      "close": 28.25,
+      "prev_close": 25.68
+    },
+    {
+      "code": "sz002354",
+      "change_pct": 10.0,
+      "amount_wan": 105714,
+      "vol_ratio": 0.19,
+      "open": 10.0,
+      "close": 10.34,
+      "prev_close": 9.4
+    },
+    {
+      "code": "sh688216",
+      "change_pct": 20.0,
+      "amount_wan": 102400,
+      "vol_ratio": 1.91,
+      "open": 42.22,
+      "close": 51.3,
+      "prev_close": 42.75
+    },
+    {
+      "code": "sz002931",
+      "change_pct": 10.0,
+      "amount_wan": 99211,
+      "vol_ratio": 1.03,
+      "open": 65.76,
+      "close": 71.28,
+      "prev_close": 64.8
+    },
+    {
+      "code": "sz002458",
+      "change_pct": 10.06,
+      "amount_wan": 97627,
+      "vol_ratio": 3.14,
+      "open": 9.21,
+      "close": 9.41,
+      "prev_close": 8.55
+    },
+    {
+      "code": "sh603928",
+      "change_pct": 10.0,
+      "amount_wan": 79634,
+      "vol_ratio": 2.1,
+      "open": 13.42,
+      "close": 15.84,
+      "prev_close": 14.4
+    },
+    {
+      "code": "sh603608",
+      "change_pct": 10.01,
+      "amount_wan": 76431,
+      "vol_ratio": 1.39,
+      "open": 23.05,
+      "close": 25.16,
+      "prev_close": 22.87
+    },
+    {
+      "code": "sz000566",
+      "change_pct": 10.02,
+      "amount_wan": 74545,
+      "vol_ratio": 0.81,
+      "open": 5.99,
+      "close": 6.04,
+      "prev_close": 5.49
+    },
+    {
+      "code": "sz300740",
+      "change_pct": 19.99,
+      "amount_wan": 74359,
+      "vol_ratio": 1.86,
+      "open": 18.55,
+      "close": 22.27,
+      "prev_close": 18.56
+    },
+    {
+      "code": "sz300071",
+      "change_pct": 19.89,
+      "amount_wan": 70806,
+      "vol_ratio": 4.6,
+      "open": 3.72,
+      "close": 4.4,
+      "prev_close": 3.67
+    },
+    {
+      "code": "sh605488",
+      "change_pct": 10.0,
+      "amount_wan": 70084,
+      "vol_ratio": 2.16,
+      "open": 31.63,
+      "close": 34.32,
+      "prev_close": 31.2
+    },
+    {
+      "code": "sz000592",
+      "change_pct": 10.07,
+      "amount_wan": 64201,
+      "vol_ratio": 0.86,
+      "open": 7.01,
+      "close": 7.76,
+      "prev_close": 7.05
+    },
+    {
+      "code": "sz000506",
+      "change_pct": 10.03,
+      "amount_wan": 63453,
+      "vol_ratio": 1.44,
+      "open": 11.81,
+      "close": 12.61,
+      "prev_close": 11.46
+    },
+    {
+      "code": "sz000536",
+      "change_pct": 10.03,
+      "amount_wan": 63192,
+      "vol_ratio": 1.98,
+      "open": 3.65,
+      "close": 4.06,
+      "prev_close": 3.69
+    },
+    {
+      "code": "sz002392",
+      "change_pct": 10.03,
+      "amount_wan": 60128,
+      "vol_ratio": 1.42,
+      "open": 7.8,
+      "close": 8.78,
+      "prev_close": 7.98
+    },
+    {
+      "code": "sz301092",
+      "change_pct": 20.0,
+      "amount_wan": 54018,
+      "vol_ratio": 1.98,
+      "open": 51.09,
+      "close": 58.91,
+      "prev_close": 49.09
+    },
+    {
+      "code": "sh600630",
+      "change_pct": 9.98,
+      "amount_wan": 53338,
+      "vol_ratio": 1.22,
+      "open": 9.91,
+      "close": 10.69,
+      "prev_close": 9.72
+    },
+    {
+      "code": "sz301008",
+      "change_pct": 19.99,
+      "amount_wan": 52788,
+      "vol_ratio": 2.55,
+      "open": 26.1,
+      "close": 31.93,
+      "prev_close": 26.61
+    },
+    {
+      "code": "sh603778",
+      "change_pct": 9.98,
+      "amount_wan": 51114,
+      "vol_ratio": 0.65,
+      "open": 11.77,
+      "close": 12.89,
+      "prev_close": 11.72
+    },
+    {
+      "code": "sz000601",
+      "change_pct": 9.94,
+      "amount_wan": 50700,
+      "vol_ratio": 1.67,
+      "open": 6.92,
+      "close": 7.08,
+      "prev_close": 6.44
+    },
+    {
+      "code": "sh600490",
+      "change_pct": 10.09,
+      "amount_wan": 50382,
+      "vol_ratio": 1.69,
+      "open": 5.97,
+      "close": 6.44,
+      "prev_close": 5.85
+    },
+    {
+      "code": "sh603638",
+      "change_pct": 9.99,
+      "amount_wan": 49352,
+      "vol_ratio": 1.48,
+      "open": 23.52,
+      "close": 25.87,
+      "prev_close": 23.52
+    },
+    {
+      "code": "sh603338",
+      "change_pct": 10.0,
+      "amount_wan": 47526,
+      "vol_ratio": 2.13,
+      "open": 42.72,
+      "close": 46.97,
+      "prev_close": 42.7
+    },
+    {
+      "code": "sz000951",
+      "change_pct": 10.03,
+      "amount_wan": 43023,
+      "vol_ratio": 1.43,
+      "open": 19.86,
+      "close": 21.84,
+      "prev_close": 19.85
+    },
+    {
+      "code": "sz002258",
+      "change_pct": 10.02,
+      "amount_wan": 42994,
+      "vol_ratio": 1.62,
+      "open": 12.77,
+      "close": 13.83,
+      "prev_close": 12.57
+    },
+    {
+      "code": "sh603538",
+      "change_pct": 10.0,
+      "amount_wan": 38697,
+      "vol_ratio": 0.47,
+      "open": 38.25,
+      "close": 39.39,
+      "prev_close": 35.81
+    },
+    {
+      "code": "sz002693",
+      "change_pct": 10.0,
+      "amount_wan": 36998,
+      "vol_ratio": 1.63,
+      "open": 9.5,
+      "close": 10.67,
+      "prev_close": 9.7
+    },
+    {
+      "code": "sh605189",
+      "change_pct": 10.03,
+      "amount_wan": 35704,
+      "vol_ratio": 4.23,
+      "open": 13.48,
+      "close": 14.59,
+      "prev_close": 13.26
+    },
+    {
+      "code": "sh600480",
+      "change_pct": 10.0,
+      "amount_wan": 32862,
+      "vol_ratio": 1.73,
+      "open": 8.36,
+      "close": 9.24,
+      "prev_close": 8.4
+    },
+    {
+      "code": "sh603135",
+      "change_pct": 10.02,
+      "amount_wan": 32464,
+      "vol_ratio": 1.37,
+      "open": 12.4,
+      "close": 13.73,
+      "prev_close": 12.48
+    },
+    {
+      "code": "sh603416",
+      "change_pct": 9.99,
+      "amount_wan": 30677,
+      "vol_ratio": 1.73,
+      "open": 55.65,
+      "close": 59.87,
+      "prev_close": 54.43
+    },
+    {
+      "code": "sz002250",
+      "change_pct": 10.0,
+      "amount_wan": 28273,
+      "vol_ratio": 0.83,
+      "open": 14.25,
+      "close": 15.51,
+      "prev_close": 14.1
+    },
+    {
+      "code": "sz001313",
+      "change_pct": 10.0,
+      "amount_wan": 27517,
+      "vol_ratio": 2.02,
+      "open": 7.99,
+      "close": 8.58,
+      "prev_close": 7.8
+    },
+    {
+      "code": "sh603818",
+      "change_pct": 10.03,
+      "amount_wan": 26555,
+      "vol_ratio": 2.99,
+      "open": 3.08,
+      "close": 3.4,
+      "prev_close": 3.09
+    },
+    {
+      "code": "sh603261",
+      "change_pct": 10.01,
+      "amount_wan": 25876,
+      "vol_ratio": 1.19,
+      "open": 44.3,
+      "close": 49.56,
+      "prev_close": 45.05
+    },
+    {
+      "code": "sz002029",
+      "change_pct": 9.99,
+      "amount_wan": 25730,
+      "vol_ratio": 1.83,
+      "open": 7.8,
+      "close": 8.59,
+      "prev_close": 7.81
+    },
+    {
+      "code": "sz001317",
+      "change_pct": 9.99,
+      "amount_wan": 23307,
+      "vol_ratio": 1.46,
+      "open": 39.79,
+      "close": 44.03,
+      "prev_close": 40.03
+    },
+    {
+      "code": "sz002979",
+      "change_pct": 10.0,
+      "amount_wan": 22457,
+      "vol_ratio": 0.24,
+      "open": 63.23,
+      "close": 63.23,
+      "prev_close": 57.48
+    },
+    {
+      "code": "sh603897",
+      "change_pct": 10.0,
+      "amount_wan": 21889,
+      "vol_ratio": 0.75,
+      "open": 34.51,
+      "close": 37.41,
+      "prev_close": 34.01
+    },
+    {
+      "code": "sh603337",
+      "change_pct": 10.01,
+      "amount_wan": 21756,
+      "vol_ratio": 1.23,
+      "open": 35.99,
+      "close": 39.55,
+      "prev_close": 35.95
+    },
+    {
+      "code": "sz300163",
+      "change_pct": 20.04,
+      "amount_wan": 21343,
+      "vol_ratio": 1.61,
+      "open": 5.41,
+      "close": 6.47,
+      "prev_close": 5.39
+    },
+    {
+      "code": "sz300695",
+      "change_pct": 20.0,
+      "amount_wan": 20982,
+      "vol_ratio": 3.3,
+      "open": 50.5,
+      "close": 60.37,
+      "prev_close": 50.31
+    },
+    {
+      "code": "sz002427",
+      "change_pct": 9.96,
+      "amount_wan": 19408,
+      "vol_ratio": 0.75,
+      "open": 4.75,
+      "close": 5.3,
+      "prev_close": 4.82
+    },
+    {
+      "code": "sz002696",
+      "change_pct": 9.94,
+      "amount_wan": 18446,
+      "vol_ratio": 3.99,
+      "open": 5.14,
+      "close": 5.64,
+      "prev_close": 5.13
+    },
+    {
+      "code": "sz000572",
+      "change_pct": 10.08,
+      "amount_wan": 18026,
+      "vol_ratio": 1.14,
+      "open": 3.79,
+      "close": 4.15,
+      "prev_close": 3.77
+    },
+    {
+      "code": "sz000520",
+      "change_pct": 10.0,
+      "amount_wan": 16846,
+      "vol_ratio": 0.89,
+      "open": 4.31,
+      "close": 4.51,
+      "prev_close": 4.1
+    },
+    {
+      "code": "sh603286",
+      "change_pct": 10.01,
+      "amount_wan": 14666,
+      "vol_ratio": 0.7,
+      "open": 49.4,
+      "close": 51.78,
+      "prev_close": 47.07
+    },
+    {
+      "code": "sh600156",
+      "change_pct": 10.05,
+      "amount_wan": 14493,
+      "vol_ratio": 0.95,
+      "open": 8.52,
+      "close": 9.53,
+      "prev_close": 8.66
+    },
+    {
+      "code": "sz002020",
+      "change_pct": 9.98,
+      "amount_wan": 14491,
+      "vol_ratio": 0.47,
+      "open": 14.66,
+      "close": 14.66,
+      "prev_close": 13.33
+    },
+    {
+      "code": "sh603559",
+      "change_pct": 10.01,
+      "amount_wan": 14284,
+      "vol_ratio": 3.36,
+      "open": 8.92,
+      "close": 9.01,
+      "prev_close": 8.19
+    },
+    {
+      "code": "sz000890",
+      "change_pct": 10.0,
+      "amount_wan": 13080,
+      "vol_ratio": 0.72,
+      "open": 8.16,
+      "close": 9.02,
+      "prev_close": 8.2
+    },
+    {
+      "code": "sz002826",
+      "change_pct": 9.98,
+      "amount_wan": 12726,
+      "vol_ratio": 1.37,
+      "open": 16.5,
+      "close": 18.18,
+      "prev_close": 16.53
+    },
+    {
+      "code": "sz002995",
+      "change_pct": 10.01,
+      "amount_wan": 12559,
+      "vol_ratio": 0.88,
+      "open": 18.5,
+      "close": 19.68,
+      "prev_close": 17.89
+    },
+    {
+      "code": "sh600449",
+      "change_pct": 10.04,
+      "amount_wan": 12083,
+      "vol_ratio": 1.44,
+      "open": 11.22,
+      "close": 12.39,
+      "prev_close": 11.26
+    },
+    {
+      "code": "sh600815",
+      "change_pct": 9.89,
+      "amount_wan": 11484,
+      "vol_ratio": 0.87,
+      "open": 2.62,
+      "close": 2.89,
+      "prev_close": 2.63
+    },
+    {
+      "code": "sz001378",
+      "change_pct": 10.01,
+      "amount_wan": 11044,
+      "vol_ratio": 1.3,
+      "open": 18.48,
+      "close": 20.33,
+      "prev_close": 18.48
+    },
+    {
+      "code": "sz301019",
+      "change_pct": 20.01,
+      "amount_wan": 10527,
+      "vol_ratio": 2.9,
+      "open": 18.08,
+      "close": 21.53,
+      "prev_close": 17.94
+    },
+    {
+      "code": "sh603717",
+      "change_pct": 10.08,
+      "amount_wan": 9665,
+      "vol_ratio": 0.56,
+      "open": 6.13,
+      "close": 6.66,
+      "prev_close": 6.05
+    },
+    {
+      "code": "sz001319",
+      "change_pct": 10.01,
+      "amount_wan": 8845,
+      "vol_ratio": 1.75,
+      "open": 20.2,
+      "close": 22.09,
+      "prev_close": 20.08
+    },
+    {
+      "code": "sz000576",
+      "change_pct": 9.96,
+      "amount_wan": 8734,
+      "vol_ratio": 1.57,
+      "open": 6.68,
+      "close": 7.4,
+      "prev_close": 6.73
+    },
+    {
+      "code": "sz002652",
+      "change_pct": 10.02,
+      "amount_wan": 8214,
+      "vol_ratio": 0.82,
+      "open": 4.17,
+      "close": 4.61,
+      "prev_close": 4.19
+    },
+    {
+      "code": "sh603580",
+      "change_pct": 10.0,
+      "amount_wan": 8193,
+      "vol_ratio": 2.01,
+      "open": 24.8,
+      "close": 27.39,
+      "prev_close": 24.9
+    },
+    {
+      "code": "sz000908",
+      "change_pct": 10.04,
+      "amount_wan": 7877,
+      "vol_ratio": 0.38,
+      "open": 6.05,
+      "close": 6.25,
+      "prev_close": 5.68
+    },
+    {
+      "code": "sz002596",
+      "change_pct": 9.86,
+      "amount_wan": 7813,
+      "vol_ratio": 1.03,
+      "open": 2.92,
+      "close": 3.23,
+      "prev_close": 2.94
+    },
+    {
+      "code": "sh605055",
+      "change_pct": 9.97,
+      "amount_wan": 7657,
+      "vol_ratio": 1.08,
+      "open": 10.02,
+      "close": 11.14,
+      "prev_close": 10.13
+    },
+    {
+      "code": "sz002998",
+      "change_pct": 10.07,
+      "amount_wan": 7408,
+      "vol_ratio": 0.69,
+      "open": 7.65,
+      "close": 7.65,
+      "prev_close": 6.95
+    },
+    {
+      "code": "sz000892",
+      "change_pct": 10.14,
+      "amount_wan": 7381,
+      "vol_ratio": 0.64,
+      "open": 3.41,
+      "close": 3.8,
+      "prev_close": 3.45
+    },
+    {
+      "code": "sz002798",
+      "change_pct": 10.1,
+      "amount_wan": 7239,
+      "vol_ratio": 1.03,
+      "open": 5.06,
+      "close": 5.56,
+      "prev_close": 5.05
+    },
+    {
+      "code": "sh603790",
+      "change_pct": 9.99,
+      "amount_wan": 7152,
+      "vol_ratio": 0.47,
+      "open": 22.63,
+      "close": 24.89,
+      "prev_close": 22.63
+    },
+    {
+      "code": "sh603926",
+      "change_pct": 9.99,
+      "amount_wan": 7138,
+      "vol_ratio": 0.84,
+      "open": 17.5,
+      "close": 19.26,
+      "prev_close": 17.51
+    },
+    {
+      "code": "sh605286",
+      "change_pct": 10.02,
+      "amount_wan": 6878,
+      "vol_ratio": 1.06,
+      "open": 25.95,
+      "close": 28.0,
+      "prev_close": 25.45
+    },
+    {
+      "code": "sh600793",
+      "change_pct": 9.98,
+      "amount_wan": 6353,
+      "vol_ratio": 0.73,
+      "open": 13.3,
+      "close": 14.55,
+      "prev_close": 13.23
+    },
+    {
+      "code": "sz000955",
+      "change_pct": 10.09,
+      "amount_wan": 5671,
+      "vol_ratio": 0.64,
+      "open": 4.47,
+      "close": 4.91,
+      "prev_close": 4.46
+    },
+    {
+      "code": "sz000972",
+      "change_pct": 10.15,
+      "amount_wan": 4957,
+      "vol_ratio": 1.11,
+      "open": 3.35,
+      "close": 3.69,
+      "prev_close": 3.35
+    },
+    {
+      "code": "sh603273",
+      "change_pct": 10.04,
+      "amount_wan": 4794,
+      "vol_ratio": 1.12,
+      "open": 13.7,
+      "close": 14.47,
+      "prev_close": 13.15
+    },
+    {
+      "code": "sz003030",
+      "change_pct": 10.0,
+      "amount_wan": 3099,
+      "vol_ratio": 0.51,
+      "open": 20.2,
+      "close": 22.44,
+      "prev_close": 20.4
+    },
+    {
+      "code": "sz000595",
+      "change_pct": 10.1,
+      "amount_wan": 817,
+      "vol_ratio": 0.08,
+      "open": 5.67,
+      "close": 5.67,
+      "prev_close": 5.15
+    },
+    {
+      "code": "sz000656",
+      "change_pct": 10.28,
+      "amount_wan": 743,
+      "vol_ratio": 0.04,
+      "open": 1.18,
+      "close": 1.18,
+      "prev_close": 1.07
+    },
+    {
+      "code": "sh603137",
+      "change_pct": 9.98,
+      "amount_wan": 568,
+      "vol_ratio": 0.24,
+      "open": 15.65,
+      "close": 15.65,
+      "prev_close": 14.23
+    },
+    {
+      "code": "sz000004",
+      "change_pct": 10.81,
+      "amount_wan": 382,
+      "vol_ratio": 1.0,
+      "open": 0.36,
+      "close": 0.41,
+      "prev_close": 0.37
+    }
+  ],
+  "limit_down_real": [
+    {
+      "code": "sh600105",
+      "change_pct": -10.01
+    },
+    {
+      "code": "sh600184",
+      "change_pct": -10.0
+    },
+    {
+      "code": "sh600228",
+      "change_pct": -10.04
+    },
+    {
+      "code": "sh600237",
+      "change_pct": -10.01
+    },
+    {
+      "code": "sh600396",
+      "change_pct": -10.03
+    },
+    {
+      "code": "sh600545",
+      "change_pct": -9.93
+    },
+    {
+      "code": "sh600552",
+      "change_pct": -9.78
+    },
+    {
+      "code": "sh600563",
+      "change_pct": -10.0
+    },
+    {
+      "code": "sh600584",
+      "change_pct": -10.0
+    },
+    {
+      "code": "sh600667",
+      "change_pct": -10.0
+    },
+    {
+      "code": "sh600726",
+      "change_pct": -9.96
+    },
+    {
+      "code": "sh603001",
+      "change_pct": -9.97
+    },
+    {
+      "code": "sh603005",
+      "change_pct": -9.99
+    },
+    {
+      "code": "sh603061",
+      "change_pct": -10.0
+    },
+    {
+      "code": "sh603083",
+      "change_pct": -10.0
+    },
+    {
+      "code": "sh603163",
+      "change_pct": -10.0
+    },
+    {
+      "code": "sh603203",
+      "change_pct": -9.97
+    },
+    {
+      "code": "sh603283",
+      "change_pct": -10.0
+    },
+    {
+      "code": "sh603290",
+      "change_pct": -9.88
+    },
+    {
+      "code": "sh603324",
+      "change_pct": -10.0
+    },
+    {
+      "code": "sh603458",
+      "change_pct": -9.99
+    },
+    {
+      "code": "sh603629",
+      "change_pct": -10.0
+    },
+    {
+      "code": "sh603738",
+      "change_pct": -10.01
+    },
+    {
+      "code": "sh603986",
+      "change_pct": -10.0
+    },
+    {
+      "code": "sh605006",
+      "change_pct": -10.02
+    },
+    {
+      "code": "sh605060",
+      "change_pct": -10.01
+    },
+    {
+      "code": "sh605289",
+      "change_pct": -10.0
+    },
+    {
+      "code": "sh605358",
+      "change_pct": -9.99
+    },
+    {
+      "code": "sh605376",
+      "change_pct": -10.0
+    },
+    {
+      "code": "sh688286",
+      "change_pct": -35.67
+    },
+    {
+      "code": "sh688592",
+      "change_pct": -30.17
+    },
+    {
+      "code": "sz000021",
+      "change_pct": -10.01
+    },
+    {
+      "code": "sz000636",
+      "change_pct": -10.0
+    },
+    {
+      "code": "sz000823",
+      "change_pct": -10.0
+    },
+    {
+      "code": "sz000988",
+      "change_pct": -10.0
+    },
+    {
+      "code": "sz001223",
+      "change_pct": -9.99
+    },
+    {
+      "code": "sz001896",
+      "change_pct": -9.87
+    },
+    {
+      "code": "sz002106",
+      "change_pct": -9.97
+    },
+    {
+      "code": "sz002281",
+      "change_pct": -10.0
+    },
+    {
+      "code": "sz002371",
+      "change_pct": -10.0
+    },
+    {
+      "code": "sz002384",
+      "change_pct": -10.0
+    },
+    {
+      "code": "sz002409",
+      "change_pct": -10.0
+    },
+    {
+      "code": "sz002463",
+      "change_pct": -10.0
+    },
+    {
+      "code": "sz002491",
+      "change_pct": -10.0
+    },
+    {
+      "code": "sz002522",
+      "change_pct": -10.04
+    },
+    {
+      "code": "sz002735",
+      "change_pct": -9.99
+    },
+    {
+      "code": "sz002859",
+      "change_pct": -10.0
+    },
+    {
+      "code": "sz003026",
+      "change_pct": -10.0
+    }
+  ]
+}

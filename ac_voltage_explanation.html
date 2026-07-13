@@ -1,0 +1,799 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>为什么家用电是220V，工业用电是380V？</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Microsoft YaHei', 'PingFang SC', sans-serif;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+            color: #fff;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        header {
+            text-align: center;
+            padding: 40px 20px;
+            background: rgba(255,255,255,0.05);
+            border-radius: 20px;
+            margin-bottom: 30px;
+            backdrop-filter: blur(10px);
+        }
+
+        h1 {
+            font-size: 2.2em;
+            margin-bottom: 15px;
+            background: linear-gradient(90deg, #f39c12, #e74c3c, #9b59b6);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .subtitle {
+            font-size: 1.1em;
+            color: #bdc3c7;
+        }
+
+        .section {
+            background: rgba(255,255,255,0.07);
+            border-radius: 20px;
+            padding: 30px;
+            margin-bottom: 30px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+
+        h2 {
+            color: #f39c12;
+            margin-bottom: 20px;
+            font-size: 1.6em;
+        }
+
+        .highlight {
+            color: #f39c12;
+            font-weight: bold;
+        }
+
+        .voltage-box {
+            display: inline-block;
+            padding: 5px 12px;
+            border-radius: 8px;
+            font-weight: bold;
+            margin: 0 3px;
+        }
+
+        .home-v {
+            background: #27ae60;
+        }
+
+        .industry-v {
+            background: #e74c3c;
+        }
+
+        canvas {
+            width: 100%;
+            max-width: 800px;
+            height: auto;
+            display: block;
+            margin: 20px auto;
+            background: rgba(0,0,0,0.3);
+            border-radius: 15px;
+        }
+
+        .controls {
+            background: rgba(0,0,0,0.2);
+            border-radius: 15px;
+            padding: 20px;
+            margin: 20px 0;
+        }
+
+        .slider-container {
+            margin: 15px 0;
+        }
+
+        .slider-label {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 8px;
+            font-size: 0.95em;
+        }
+
+        input[type="range"] {
+            width: 100%;
+            height: 8px;
+            border-radius: 4px;
+            background: #34495e;
+            outline: none;
+            -webkit-appearance: none;
+        }
+
+        input[type="range"]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            background: #f39c12;
+            cursor: pointer;
+            box-shadow: 0 0 10px rgba(243,156,18,0.5);
+        }
+
+        input[type="range"]::-moz-range-thumb {
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            background: #f39c12;
+            cursor: pointer;
+            border: none;
+        }
+
+        .meter {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin: 20px 0;
+        }
+
+        .meter-card {
+            background: rgba(0,0,0,0.3);
+            border-radius: 15px;
+            padding: 15px 25px;
+            text-align: center;
+            min-width: 140px;
+        }
+
+        .meter-value {
+            font-size: 2em;
+            font-weight: bold;
+            font-family: 'Courier New', monospace;
+        }
+
+        .meter-label {
+            font-size: 0.9em;
+            color: #bdc3c7;
+            margin-top: 5px;
+        }
+
+        .legend {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+            margin: 15px 0;
+        }
+
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .legend-color {
+            width: 20px;
+            height: 4px;
+            border-radius: 2px;
+        }
+
+        .formula {
+            background: rgba(243,156,18,0.15);
+            border-left: 4px solid #f39c12;
+            padding: 15px 20px;
+            border-radius: 0 10px 10px 0;
+            margin: 20px 0;
+            font-size: 1.1em;
+        }
+
+        .quiz-container {
+            margin-top: 20px;
+        }
+
+        .quiz-question {
+            font-size: 1.1em;
+            margin-bottom: 15px;
+            color: #f39c12;
+        }
+
+        .quiz-options {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .quiz-option {
+            background: rgba(255,255,255,0.1);
+            border: 2px solid transparent;
+            border-radius: 12px;
+            padding: 15px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .quiz-option:hover {
+            background: rgba(255,255,255,0.15);
+            border-color: #f39c12;
+        }
+
+        .quiz-option.correct {
+            background: rgba(39,174,96,0.3);
+            border-color: #27ae60;
+        }
+
+        .quiz-option.wrong {
+            background: rgba(231,76,60,0.3);
+            border-color: #e74c3c;
+        }
+
+        .quiz-feedback {
+            margin-top: 15px;
+            padding: 15px;
+            border-radius: 12px;
+            display: none;
+        }
+
+        .quiz-feedback.show {
+            display: block;
+        }
+
+        .interactive-hint {
+            background: rgba(52,152,219,0.15);
+            border: 1px dashed #3498db;
+            border-radius: 12px;
+            padding: 15px;
+            margin: 15px 0;
+            text-align: center;
+            color: #aed6f1;
+        }
+
+        .scenario-card {
+            background: rgba(0,0,0,0.2);
+            border-radius: 15px;
+            padding: 20px;
+            margin: 15px 0;
+        }
+
+        .scenario-title {
+            font-size: 1.2em;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .icon {
+            font-size: 1.5em;
+        }
+
+        .note {
+            font-size: 0.9em;
+            color: #95a5a6;
+            margin-top: 10px;
+            padding: 10px;
+            background: rgba(0,0,0,0.2);
+            border-radius: 8px;
+        }
+
+        button {
+            background: #f39c12;
+            color: #1a1a2e;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 25px;
+            font-size: 1em;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+            margin: 10px 5px;
+        }
+
+        button:hover {
+            background: #e67e22;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(243,156,18,0.3);
+        }
+
+        .btn-secondary {
+            background: #3498db;
+            color: white;
+        }
+
+        .btn-secondary:hover {
+            background: #2980b9;
+        }
+
+        @media (max-width: 600px) {
+            h1 { font-size: 1.6em; }
+            .section { padding: 20px; }
+            .meter-value { font-size: 1.5em; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>⚡ 为什么家用电是220V，工业用电是380V？</h1>
+            <p class="subtitle">用动画和互动，带你搞懂三相交流电的秘密</p>
+        </header>
+
+        <div class="section">
+            <h2>🔌 先记住两个关键词</h2>
+            <p>发电厂发出的电，其实是<strong class="highlight">三相交流电</strong>。你可以想象成有三条"火线"，分别叫 A相、B相、C相。它们就像三个同学在同一根跳绳上跑，但是彼此之间始终差着<strong class="highlight">120度</strong>的角度。</p>
+            <div class="formula">
+                <strong>家用220V</strong> = 一根火线到零线的电压（相电压）<br>
+                <strong>工业380V</strong> = 两根火线之间的电压（线电压）<br><br>
+                神奇的关系：<span class="highlight">线电压 = 相电压 × √3</span><br>
+                220V × 1.732 ≈ <span class="highlight">380V</span>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>📈 看看三相电的"波浪"</h2>
+            <p>下面三条波浪线分别代表 A、B、C 三相电压。注意到没有？它们此起彼伏，永远保持着 120° 的距离。点击按钮可以暂停/继续动画。</p>
+            <canvas id="waveCanvas" width="800" height="300"></canvas>
+            <div class="legend">
+                <div class="legend-item"><div class="legend-color" style="background:#e74c3c"></div><span>A相（火线）</span></div>
+                <div class="legend-item"><div class="legend-color" style="background:#3498db"></div><span>B相（火线）</span></div>
+                <div class="legend-item"><div class="legend-color" style="background:#2ecc71"></div><span>C相（火线）</span></div>
+                <div class="legend-item"><div class="legend-color" style="background:#95a5a6"></div><span>零线（中性线）</span></div>
+            </div>
+            <div style="text-align:center">
+                <button onclick="toggleAnimation()" id="playBtn">⏸ 暂停动画</button>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>🎯 互动：拖动滑块，看电压怎么变</h2>
+            <p>中间那个小圆点是<strong>零线/中性点</strong>。从圆心到 A、B、C 三个箭头的距离就是相电压（220V）。两个箭头之间的距离就是线电压（380V）。</p>
+            <div class="interactive-hint">
+                💡 试着拖动滑块，观察右下角的电压表。你会发现：<br>
+                任意时刻，<strong>两根火线之间的电压总是相电压的 √3 倍</strong>！
+            </div>
+            <canvas id="vectorCanvas" width="800" height="450"></canvas>
+            <div class="controls">
+                <div class="slider-container">
+                    <div class="slider-label">
+                        <span>旋转角度（时间）</span>
+                        <span id="angleValue">0°</span>
+                    </div>
+                    <input type="range" id="angleSlider" min="0" max="360" value="0" step="1">
+                </div>
+                <div style="text-align:center; margin-top:10px">
+                    <button onclick="setAngle(0)">A相在顶端</button>
+                    <button class="btn-secondary" onclick="setAngle(30)">线电压最大</button>
+                    <button onclick="setAngle(90)">A相过零点</button>
+                </div>
+            </div>
+            <div class="meter">
+                <div class="meter-card">
+                    <div class="meter-value" id="phaseVoltage" style="color:#f39c12">220V</div>
+                    <div class="meter-label">相电压（火线↔零线）</div>
+                </div>
+                <div class="meter-card">
+                    <div class="meter-value" id="lineVoltage" style="color:#e74c3c">381V</div>
+                    <div class="meter-label">线电压（火线↔火线）</div>
+                </div>
+                <div class="meter-card">
+                    <div class="meter-value" id="multiplier" style="color:#2ecc71">1.732</div>
+                    <div class="meter-label">倍数（√3）</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>🏠 家用 vs 🏭 工业：接线方式不同</h2>
+
+            <div class="scenario-card">
+                <div class="scenario-title"><span class="icon">🏠</span><span>家用：一火一零</span></div>
+                <p>到你家的电线通常只有一根火线和一根零线。电工从三相电里取出一相（比如A相），配上零线。电压就是：</p>
+                <p style="text-align:center; font-size:1.3em; margin:15px 0">
+                    <span class="voltage-box home-v">火线 220V</span> − <span class="voltage-box" style="background:#7f8c8d">零线 0V</span> = <span class="voltage-box home-v">220V</span>
+                </p>
+                <p>所以空调、冰箱、电视用的都是 <span class="highlight">220V</span>。</p>
+            </div>
+
+            <div class="scenario-card">
+                <div class="scenario-title"><span class="icon">🏭</span><span>工业：两火之间</span></div>
+                <p>工厂里的大电机需要很大功率。电工直接把两根火线（比如A相和B相）接到电机上。因为两相之间存在 120° 相位差，电压会叠加得更大：</p>
+                <p style="text-align:center; font-size:1.3em; margin:15px 0">
+                    <span class="voltage-box industry-v">火线A</span> − <span class="voltage-box industry-v">火线B</span> = <span class="voltage-box industry-v">380V</span>
+                </p>
+                <p>大功率电机用 <span class="highlight">380V</span>，可以用更小的电流获得同样的功率，线路损耗也更小。</p>
+            </div>
+
+            <div class="note">
+                📌 小提示：380V 不是某一根火线比另一根"更猛"，而是两根火线在任意时刻的电压差，因为相位错开了120°，所以差值被放大了 √3 倍。
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>🧠 互动小测验</h2>
+            <div class="quiz-container">
+                <div class="quiz-question" id="quizQuestion">1. 家用220V指的是哪两者之间的电压？</div>
+                <div class="quiz-options" id="quizOptions">
+                    <div class="quiz-option" onclick="checkAnswer(this, false)">A. 两根火线之间</div>
+                    <div class="quiz-option" onclick="checkAnswer(this, true)">B. 一根火线与零线之间</div>
+                    <div class="quiz-option" onclick="checkAnswer(this, false)">C. 三相电的总电压</div>
+                </div>
+                <div class="quiz-feedback" id="quizFeedback"></div>
+            </div>
+            <div style="text-align:center; margin-top:20px">
+                <button class="btn-secondary" onclick="nextQuestion()">下一题</button>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>🎮 挑战：找到380V</h2>
+            <p>下面有个隐藏挑战：拖动上面的滑块，让 A、B 两相之间的线电压尽可能接近 381V（即 220×√3）。当你接近目标时，电压表会变绿！</p>
+            <div class="interactive-hint" id="challengeHint">
+                当前状态：拖动滑块开始挑战吧！
+            </div>
+        </div>
+
+        <div class="section" style="text-align:center">
+            <h2>📝 总结</h2>
+            <p style="font-size:1.1em">
+                发电厂发的是<strong>三相交流电</strong>，三相之间差 120°。<br>
+                取一相+零线 = <span class="voltage-box home-v">220V</span>（家用）。<br>
+                取两相之间 = <span class="voltage-box industry-v">380V</span>（工业）。<br><br>
+                两者本质上是同一套电力系统，只是<strong>取法不同</strong>！
+            </p>
+        </div>
+    </div>
+
+    <script>
+        // 三相电参数
+        const V_PHASE = 220;
+        const V_LINE = V_PHASE * Math.sqrt(3);
+        const COLORS = {
+            A: '#e74c3c',
+            B: '#3498db',
+            C: '#2ecc71',
+            neutral: '#95a5a6',
+            lineAB: '#f39c12'
+        };
+
+        let animationRunning = true;
+        let globalAngle = 0;
+        let waveCanvas, waveCtx, vectorCanvas, vectorCtx;
+        let animationId;
+
+        function init() {
+            waveCanvas = document.getElementById('waveCanvas');
+            waveCtx = waveCanvas.getContext('2d');
+            vectorCanvas = document.getElementById('vectorCanvas');
+            vectorCtx = vectorCanvas.getContext('2d');
+
+            document.getElementById('angleSlider').addEventListener('input', function(e) {
+                globalAngle = parseFloat(e.target.value);
+                updateDisplays();
+            });
+
+            animate();
+        }
+
+        function getPhaseVoltage(angle, phaseOffset) {
+            return V_PHASE * Math.sin((angle + phaseOffset) * Math.PI / 180);
+        }
+
+        function drawWave() {
+            const w = waveCanvas.width;
+            const h = waveCanvas.height;
+            const ctx = waveCtx;
+
+            ctx.clearRect(0, 0, w, h);
+
+            // 网格
+            ctx.strokeStyle = 'rgba(255,255,255,0.1)';
+            ctx.lineWidth = 1;
+            for (let i = 0; i <= 10; i++) {
+                const x = i * w / 10;
+                ctx.beginPath();
+                ctx.moveTo(x, 0);
+                ctx.lineTo(x, h);
+                ctx.stroke();
+            }
+            for (let i = 0; i <= 4; i++) {
+                const y = i * h / 4;
+                ctx.beginPath();
+                ctx.moveTo(0, y);
+                ctx.lineTo(w, y);
+                ctx.stroke();
+            }
+
+            // 零线
+            ctx.strokeStyle = COLORS.neutral;
+            ctx.lineWidth = 2;
+            ctx.setLineDash([5, 5]);
+            ctx.beginPath();
+            ctx.moveTo(0, h/2);
+            ctx.lineTo(w, h/2);
+            ctx.stroke();
+            ctx.setLineDash([]);
+
+            // 画三相波形
+            const phases = [
+                { offset: 0, color: COLORS.A, label: 'A相' },
+                { offset: 120, color: COLORS.B, label: 'B相' },
+                { offset: 240, color: COLORS.C, label: 'C相' }
+            ];
+
+            phases.forEach(p => {
+                ctx.strokeStyle = p.color;
+                ctx.lineWidth = 3;
+                ctx.beginPath();
+                for (let x = 0; x <= w; x++) {
+                    const angle = (x / w) * 720 + globalAngle; // 两个周期
+                    const v = getPhaseVoltage(angle, p.offset);
+                    const y = h/2 - (v / V_PHASE) * (h/2 - 20);
+                    if (x === 0) ctx.moveTo(x, y);
+                    else ctx.lineTo(x, y);
+                }
+                ctx.stroke();
+            });
+
+            // 当前时间线
+            const timeX = w / 2;
+            ctx.strokeStyle = '#fff';
+            ctx.lineWidth = 2;
+            ctx.setLineDash([8, 4]);
+            ctx.beginPath();
+            ctx.moveTo(timeX, 0);
+            ctx.lineTo(timeX, h);
+            ctx.stroke();
+            ctx.setLineDash([]);
+
+            // 标注
+            ctx.fillStyle = '#fff';
+            ctx.font = '14px Microsoft YaHei';
+            ctx.fillText('时间 →', w - 60, h - 10);
+            ctx.fillText('电压 ↑', 10, 20);
+        }
+
+        function drawVector() {
+            const w = vectorCanvas.width;
+            const h = vectorCanvas.height;
+            const ctx = vectorCtx;
+            const cx = w / 2;
+            const cy = h / 2;
+            const scale = 1.2; // 像素/伏特
+
+            ctx.clearRect(0, 0, w, h);
+
+            // 画圆（参考圆）
+            ctx.strokeStyle = 'rgba(255,255,255,0.1)';
+            ctx.lineWidth = 2;
+            ctx.beginPath();
+            ctx.arc(cx, cy, V_PHASE * scale, 0, Math.PI * 2);
+            ctx.stroke();
+
+            // 坐标轴
+            ctx.strokeStyle = 'rgba(255,255,255,0.2)';
+            ctx.lineWidth = 1;
+            ctx.beginPath();
+            ctx.moveTo(cx, 20);
+            ctx.lineTo(cx, h - 20);
+            ctx.moveTo(20, cy);
+            ctx.lineTo(w - 20, cy);
+            ctx.stroke();
+
+            // 计算三相矢量端点
+            const phases = [
+                { offset: 0, color: COLORS.A, name: 'A' },
+                { offset: 120, color: COLORS.B, name: 'B' },
+                { offset: 240, color: COLORS.C, name: 'C' }
+            ];
+
+            const points = phases.map(p => {
+                const angle = (globalAngle + p.offset) * Math.PI / 180;
+                return {
+                    x: cx + V_PHASE * scale * Math.cos(angle - Math.PI/2),
+                    y: cy + V_PHASE * scale * Math.sin(angle - Math.PI/2),
+                    ...p
+                };
+            });
+
+            // 画零线/中性点
+            ctx.fillStyle = COLORS.neutral;
+            ctx.beginPath();
+            ctx.arc(cx, cy, 6, 0, Math.PI * 2);
+            ctx.fill();
+            ctx.fillStyle = '#95a5a6';
+            ctx.font = '14px Microsoft YaHei';
+            ctx.fillText('中性点/零线', cx + 12, cy - 12);
+
+            // 画相电压矢量
+            points.forEach(p => {
+                ctx.strokeStyle = p.color;
+                ctx.lineWidth = 3;
+                ctx.beginPath();
+                ctx.moveTo(cx, cy);
+                ctx.lineTo(p.x, p.y);
+                ctx.stroke();
+
+                // 箭头
+                drawArrow(ctx, cx, cy, p.x, p.y, p.color);
+
+                // 标签
+                ctx.fillStyle = p.color;
+                ctx.font = 'bold 16px Microsoft YaHei';
+                ctx.fillText(p.name + '相', p.x + 10, p.y - 10);
+            });
+
+            // 画 A-B 线电压
+            const A = points[0];
+            const B = points[1];
+            ctx.strokeStyle = COLORS.lineAB;
+            ctx.lineWidth = 4;
+            ctx.beginPath();
+            ctx.moveTo(A.x, A.y);
+            ctx.lineTo(B.x, B.y);
+            ctx.stroke();
+
+            // 线电压箭头
+            drawArrow(ctx, B.x, B.y, A.x, A.y, COLORS.lineAB);
+
+            // 线电压标签
+            const midX = (A.x + B.x) / 2;
+            const midY = (A.y + B.y) / 2;
+            ctx.fillStyle = COLORS.lineAB;
+            ctx.font = 'bold 14px Microsoft YaHei';
+            ctx.fillText('A-B 线电压', midX + 10, midY - 10);
+
+            // 角度标注
+            ctx.strokeStyle = 'rgba(255,255,255,0.3)';
+            ctx.lineWidth = 1;
+            ctx.beginPath();
+            ctx.arc(cx, cy, 40, -Math.PI/2, -Math.PI/2 + (globalAngle * Math.PI / 180));
+            ctx.stroke();
+            ctx.fillStyle = '#fff';
+            ctx.font = '12px Microsoft YaHei';
+            ctx.fillText('旋转角', cx + 45, cy - 25);
+        }
+
+        function drawArrow(ctx, x1, y1, x2, y2, color) {
+            const headlen = 12;
+            const angle = Math.atan2(y2 - y1, x2 - x1);
+            ctx.fillStyle = color;
+            ctx.beginPath();
+            ctx.moveTo(x2, y2);
+            ctx.lineTo(x2 - headlen * Math.cos(angle - Math.PI/6), y2 - headlen * Math.sin(angle - Math.PI/6));
+            ctx.lineTo(x2 - headlen * Math.cos(angle + Math.PI/6), y2 - headlen * Math.sin(angle + Math.PI/6));
+            ctx.closePath();
+            ctx.fill();
+        }
+
+        function updateDisplays() {
+            const angle = globalAngle;
+            const vA = getPhaseVoltage(angle, 0);
+            const vB = getPhaseVoltage(angle, 120);
+            const vLine = vA - vB;
+
+            document.getElementById('angleValue').textContent = angle.toFixed(0) + '°';
+            document.getElementById('angleSlider').value = angle;
+            document.getElementById('phaseVoltage').textContent = Math.abs(vA).toFixed(0) + 'V';
+            document.getElementById('lineVoltage').textContent = Math.abs(vLine).toFixed(0) + 'V';
+            document.getElementById('multiplier').textContent = (Math.abs(vLine) / Math.abs(vA)).toFixed(3);
+
+            // 挑战提示
+            const target = V_LINE;
+            const diff = Math.abs(Math.abs(vLine) - target);
+            const hint = document.getElementById('challengeHint');
+            if (diff < 5) {
+                hint.style.background = 'rgba(39,174,96,0.3)';
+                hint.style.borderColor = '#27ae60';
+                hint.innerHTML = '🎉 太棒了！你已经找到了接近 380V 的位置！此时 A-B 线电压 ≈ ' + Math.abs(vLine).toFixed(0) + 'V';
+            } else if (diff < 30) {
+                hint.style.background = 'rgba(243,156,18,0.2)';
+                hint.style.borderColor = '#f39c12';
+                hint.innerHTML = '🔥 很接近了！再调一调，目标约 381V';
+            } else {
+                hint.style.background = 'rgba(52,152,219,0.15)';
+                hint.style.borderColor = '#3498db';
+                hint.innerHTML = '💡 提示：把角度调到 30° 或 210° 附近试试';
+            }
+        }
+
+        function animate() {
+            if (animationRunning) {
+                globalAngle = (globalAngle + 0.5) % 360;
+            }
+            drawWave();
+            drawVector();
+            updateDisplays();
+            animationId = requestAnimationFrame(animate);
+        }
+
+        function toggleAnimation() {
+            animationRunning = !animationRunning;
+            document.getElementById('playBtn').textContent = animationRunning ? '⏸ 暂停动画' : '▶ 继续动画';
+        }
+
+        function setAngle(angle) {
+            globalAngle = angle;
+            animationRunning = false;
+            document.getElementById('playBtn').textContent = '▶ 继续动画';
+        }
+
+        // 小测验
+        const questions = [
+            {
+                q: '1. 家用220V指的是哪两者之间的电压？',
+                options: ['A. 两根火线之间', 'B. 一根火线与零线之间', 'C. 三相电的总电压'],
+                correct: 1,
+                explain: '正确！家用220V是相电压，即一根火线与零线之间的电压。'
+            },
+            {
+                q: '2. 工业380V是怎么来的？',
+                options: ['A. 把电压升高了两倍', 'B. 两根火线之间的电压差', 'C. 单独的一根更粗的火线'],
+                correct: 1,
+                explain: '正确！380V是线电压，因为两相火线有120°相位差，电压差被放大了√3倍。'
+            },
+            {
+                q: '3. 三相电中任意两相之间的相位差是多少？',
+                options: ['A. 60°', 'B. 90°', 'C. 120°'],
+                correct: 2,
+                explain: '正确！三相交流电的三个相位彼此相差120°。'
+            },
+            {
+                q: '4. 220V × √3 约等于多少？',
+                options: ['A. 311V', 'B. 380V', 'C. 440V'],
+                correct: 1,
+                explain: '正确！√3 ≈ 1.732，220 × 1.732 ≈ 381V，通常说380V。'
+            }
+        ];
+
+        let currentQuestion = 0;
+
+        function checkAnswer(element, isCorrect) {
+            const options = document.querySelectorAll('.quiz-option');
+            options.forEach(opt => {
+                opt.style.pointerEvents = 'none';
+            });
+
+            if (isCorrect) {
+                element.classList.add('correct');
+                document.getElementById('quizFeedback').className = 'quiz-feedback show';
+                document.getElementById('quizFeedback').style.background = 'rgba(39,174,96,0.2)';
+                document.getElementById('quizFeedback').innerHTML = '✅ ' + questions[currentQuestion].explain;
+            } else {
+                element.classList.add('wrong');
+                options[questions[currentQuestion].correct].classList.add('correct');
+                document.getElementById('quizFeedback').className = 'quiz-feedback show';
+                document.getElementById('quizFeedback').style.background = 'rgba(231,76,60,0.2)';
+                document.getElementById('quizFeedback').innerHTML = '❌ 不对哦。' + questions[currentQuestion].explain;
+            }
+        }
+
+        function nextQuestion() {
+            currentQuestion = (currentQuestion + 1) % questions.length;
+            const q = questions[currentQuestion];
+            document.getElementById('quizQuestion').textContent = q.q;
+            const container = document.getElementById('quizOptions');
+            container.innerHTML = '';
+            q.options.forEach((opt, idx) => {
+                const div = document.createElement('div');
+                div.className = 'quiz-option';
+                div.textContent = opt;
+                div.onclick = function() { checkAnswer(this, idx === q.correct); };
+                container.appendChild(div);
+            });
+            document.getElementById('quizFeedback').className = 'quiz-feedback';
+        }
+
+        window.onload = init;
+    </script>
+</body>
+</html>

@@ -1,0 +1,88 @@
+{
+  "timestamp": "2026-07-07T09:15:25.873931",
+  "scan_results": {
+    "wyckoff": "OK",
+    "sma_cross": "OK",
+    "dual_ma": "FAIL",
+    "renko": "FAIL",
+    "renko_chart": "OK"
+  },
+  "cards": [
+    {
+      "rank": 1,
+      "symbol": "TF0",
+      "name": "5年期国债期货",
+      "direction": "做多",
+      "score": 49.5,
+      "current_price": 106.43,
+      "entry_price": 105.605,
+      "support": "105.4~105.8 (触碰6次)",
+      "resistance": "未识别",
+      "trigger": "Renko rsi_oversold_risk 3星",
+      "rsi": 45.0,
+      "risk": [
+        "暂无显著风险"
+      ],
+      "source_system": "future_5_renko",
+      "hist_pf": 0,
+      "hist_winrate": 0
+    },
+    {
+      "rank": 2,
+      "symbol": "AU0",
+      "name": "黄金",
+      "direction": "做空",
+      "score": 50.0,
+      "current_price": 906.2,
+      "entry_price": 906.2,
+      "support": "899.8~909.8 (触碰7次)",
+      "resistance": "909.8~919.8 (触碰6次)",
+      "trigger": "下跌趋势确认后回撤 50.0%，近 2 块下跌砖重启",
+      "rsi": 56.5,
+      "risk": [
+        "暂无显著风险"
+      ],
+      "source_system": "future_6_renko_chart",
+      "hist_pf": 0,
+      "hist_winrate": 0
+    },
+    {
+      "rank": 3,
+      "symbol": "RM0",
+      "name": "菜粕",
+      "direction": "做多",
+      "score": 46.2,
+      "current_price": 2309.0,
+      "entry_price": 2292.0,
+      "support": "2282.0~2302.0 (触碰17次)",
+      "resistance": "2302.0~2322.0 (触碰15次)",
+      "trigger": "RM0 菜粕 缠绕突破 3次缠绕 ",
+      "rsi": 61.0,
+      "risk": [
+        "暂无显著风险"
+      ],
+      "source_system": "future_3_sma_cross",
+      "hist_pf": 2.498667609731297,
+      "hist_winrate": 0.6
+    },
+    {
+      "rank": 4,
+      "symbol": "FG0",
+      "name": "玻璃",
+      "direction": "做空",
+      "score": 44.5,
+      "current_price": 958.32,
+      "entry_price": 958.32,
+      "support": "963.0~973.0 (触碰9次)",
+      "resistance": "973.0~983.0 (触碰6次)",
+      "trigger": "向下突破密集区 968.1600-973.0800，连续 2 块下跌确认",
+      "rsi": 33.6,
+      "risk": [
+        "暂无显著风险"
+      ],
+      "source_system": "future_6_renko_chart",
+      "hist_pf": 0,
+      "hist_winrate": 0
+    }
+  ]
+}

@@ -49,6 +49,17 @@ class FakeBreakConfig:
     # ── 出场 ──
     target_atr: float = 2.0
 
+    # ── 多周期（MTF）：60m 定关键位 + 15m 找形态 ──
+    htf_freq: str = "60m"           # 高周期
+    ltf_freq: str = "15m"           # 低周期
+    proximity_atr: float = 1.0      # 15m价接近关键位的阈值(ATR倍)
+    use_swing_zones: bool = True    # 是否启用 swing 点构造的关键位
+    swing_zone_n: int = 5           # swing zone 取最近几个高/低点
+    ltf_confirm_mode: str = "fakebreak"  # 15m确认模式："fakebreak"(假突破,推荐) / "pattern"(吞没+合并K)
+    # ── 15m 形态参数（pattern 模式用）──
+    engulf_min_body_atr: float = 0.3  # 吞没形态最小实体(ATR倍)
+    merge_bars_n: int = 5             # 合并K根数
+
     # ── 指标周期（固定，一般不调）──
     atr_period: int = 14
     volume_ma_period: int = 20

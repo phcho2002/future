@@ -3,6 +3,4 @@ pandas>=2.0.0
 pyarrow>=14.0
 pyyaml>=6.0
 matplotlib>=3.7.0
-# 数据后端二选一（由 config.yaml 的 data.backend 决定）：
-tqsdk>=3.10.1          # backend=tqsdk 时需要
-bigquant               # backend=bigquant 时需要：pip install bigquant -i https://pypi.bigquant.com/simple/
+# 数据后端：统一走 future_data（xtquant 后端），无需单独安装 tqsdk / bigquant

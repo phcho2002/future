@@ -30,6 +30,18 @@ except Exception:  # noqa: BLE001
     _HAS_FUTURE_DATA = False
 
 
+def fetch_klines_akshare(
+    symbol: str,
+    exchange: Optional[str] = None,
+    period: str = "60",
+    length: int = 2000,
+) -> pd.DataFrame:
+    """通过 akshare/Sina 拉取单品种 K 线。"""
+    from akshare_provider import fetch_klines_akshare as _ak_fetch
+
+    return _ak_fetch(symbol, exchange=exchange, period=period, length=length)
+
+
 def load_config(path: str = "config.yaml") -> dict:
     with open(path, "r", encoding="utf-8") as f:
         return yaml.safe_load(f)
@@ -77,9 +89,9 @@ def fetch_klines_tq(
     ttl_hours: float = 6,
     force: bool = False,
 ) -> pd.DataFrame:
-    """通过 future_data 统一入口拉取单品种 K 线。"""
+    """通过 future_data 统一入口拉取单品种 K 线（xtquant 后端）。"""
     if not _HAS_FUTURE_DATA:
-        raise RuntimeError("future_data 不可用，无法走 tqsdk 路径")
+        raise RuntimeError("future_data 不可用，无法走 xtquant 路径")
     if exchange is None:
         exchange = build_exchange_map().get(symbol)
     if exchange is None:
@@ -122,8 +134,8 @@ def load_klines(
     """读取单品种 60m K 线：按 data.backend 路由，TTL 缓存优先。
 
     支持 backend:
-      - "tqsdk"   (默认) 经 future_data 走 tqsdk
-      - "bigquant" 经 BigQuant DAI 拉 1m → 60m（账号 bq5wec8s）
+      - "xtquant"   (默认) 经 future_data 走 xtquant（迅投 token 模式）
+      - "akshare"   经 akshare/Sina 拉 K 线（备份）
     两条路径共用 D:/work_ai/quote_cache 缓存目录，切换 backend 不需清缓存。
     """
     cfg = cfg or load_config()
@@ -132,17 +144,19 @@ def load_klines(
     ttl_hours = dc.get("cache_ttl_hours", 6)
     length = dc.get("data_length", 2000)
 
-    backend = dc.get("backend", "tqsdk")
-    if backend == "bigquant":
-        return fetch_klines_bq(
+    backend = dc.get("backend", "xtquant")
+    if backend == "akshare":
+        if exchange is None:
+            exchange = build_exchange_map().get(symbol)
+        if exchange is None:
+            raise ValueError(f"无法为 {symbol} 解析 exchange，请显式传入")
+        return fetch_klines_akshare(
             symbol,
             exchange=exchange,
             period=period,
             length=length,
-            ttl_hours=ttl_hours,
-            force=force_refresh,
         )
-    if backend == "tqsdk" and _HAS_FUTURE_DATA:
+    if backend in ("xtquant", "tqsdk") and _HAS_FUTURE_DATA:
         return fetch_klines_tq(
             symbol,
             exchange=exchange,

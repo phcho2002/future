@@ -62,6 +62,18 @@ strategy:
   # ── 出场 ──
   target_atr: 2.0         # 目标位ATR倍数
 
+  # ── 多周期(MTF)：60m 定关键位 + 15m 找形态 ──
+  # 60m 趋势闸+密集区+swing点 → 价格接近关键位 → 15m 吞没/合并K确认入场
+  htf_freq: "60m"           # 高周期
+  ltf_freq: "15m"           # 低周期
+  proximity_atr: 1.0        # 15m价接近关键位的阈值(ATR倍)
+  use_swing_zones: true     # 是否启用 swing 点构造的关键位
+  swing_zone_n: 5           # swing zone 取最近几个高/低点
+  ltf_confirm_mode: "fakebreak"  # 15m确认：fakebreak(假突破,推荐) / pattern(吞没+合并K)
+  # ── 15m 形态参数 ──
+  engulf_min_body_atr: 0.3  # 吞没形态最小实体(ATR倍)
+  merge_bars_n: 5           # 合并K根数
+
 backtest:
   signal_valid_bars: 5    # 触发后N根内有效（宽松定位）
   commission_rate: 0.00005  # 单边手续费率

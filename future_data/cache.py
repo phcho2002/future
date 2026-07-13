@@ -1,18 +1,13 @@
 """TTL parquet 缓存层 —— 全系统统一的分钟 K 线入口。
 
-借鉴 future_3/data_loader.py 的 mtime 判新鲜度模式，但底层换成 tqsdk，缓存目录
-全系统共享（D:/work_ai/quote_cache），避免各系统各自缓存导致重复联网。
+底层联网默认 **xtquant**（迅投 token 模式，见 provider.get_backend / FUTURE_DATA_BACKEND），
+也可切 akshare（备份）。缓存目录全系统共享（D:/work_ai/quote_cache）。
 
 主入口：
     get_klines(symbol, exchange, period, length, ttl_hours, force)
         -> DataFrame[datetime, open, high, low, close, volume]
 
-语义：缓存命中且未过期 → 直接读盘（~毫秒级）；否则联网刷新并写盘。
-这是相对 akshare 逐品种拉取（sleep 0.3s × 40）的核心提速点。
-
-除 TTL 全量缓存外，本模块另提供「注入模式」（rolling merge），供短周期
-实盘扫描使用：每次只增量拉少量新数据注入缓存、删最老的，滚动窗口恒定。
-两种模式写不同文件（TTL 全量 → 根目录，注入 → inject/ 子目录），互不干扰。
+语义：缓存命中且未过期 → 直接读盘；否则联网刷新并写盘。
 """
 
 from __future__ import annotations

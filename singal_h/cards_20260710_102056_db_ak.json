@@ -1,0 +1,70 @@
+{
+  "timestamp": "2026-07-10T10:20:56.448452",
+  "data_source": "futures_data.db(hourly_analysis_all) + akshare realtime",
+  "cards": [
+    {
+      "rank": 1,
+      "symbol": "M0",
+      "name": "豆粕",
+      "sector": "农产品",
+      "direction": "做多",
+      "score": 159.0,
+      "current_price": 3050.0,
+      "db_judgment": "★★★★★ 强势",
+      "db_total": 77,
+      "change_pct": 0.000328,
+      "sys_count": 1,
+      "risk": [
+        "无系统共振确认"
+      ]
+    },
+    {
+      "rank": 2,
+      "symbol": "RM0",
+      "name": "菜粕",
+      "sector": "农产品",
+      "direction": "做多",
+      "score": 157.0,
+      "current_price": 2322.0,
+      "db_judgment": "★★★★★ 强势",
+      "db_total": 76,
+      "change_pct": -0.0030056,
+      "sys_count": 1,
+      "risk": [
+        "无系统共振确认"
+      ]
+    },
+    {
+      "rank": 3,
+      "symbol": "NI0",
+      "name": "镍",
+      "sector": "有色",
+      "direction": "做多",
+      "score": 155.0,
+      "current_price": 128430.0,
+      "db_judgment": "★★★★ 偏强",
+      "db_total": 70,
+      "change_pct": 0.0114988,
+      "sys_count": 2,
+      "risk": [
+        "暂无显著风险"
+      ]
+    },
+    {
+      "rank": 4,
+      "symbol": "TS0",
+      "name": "2年期国债期货",
+      "sector": "国债",
+      "direction": "做多",
+      "score": 153.0,
+      "current_price": 0,
+      "db_judgment": "★★★★ 偏强",
+      "db_total": 74,
+      "change_pct": 0,
+      "sys_count": 1,
+      "risk": [
+        "无系统共振确认"
+      ]
+    }
+  ]
+}

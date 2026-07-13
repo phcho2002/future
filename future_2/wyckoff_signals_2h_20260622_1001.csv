@@ -1,0 +1,2 @@
+﻿symbol,name,exchange,side,entry,stop,target,rsi,phase,stage,phase_desc,reason
+EB0,苯乙烯,dce,long,7862.0,7740.0,8053.57,30.8,Phase_B,accumulation,Phase B 吸筹建设期 — 二次测试完成，主力区间吸筹中,Spring/弹簧效应(弱) — 价格假跌破支撑位7830.70后收回，但收回时成交量未明显放大，信号强度一般

@@ -1,0 +1,70 @@
+{
+  "timestamp": "2026-07-10T09:12:35.450389",
+  "data_source": "akshare realtime + system signals",
+  "cards": [
+    {
+      "rank": 1,
+      "symbol": "IC",
+      "name": "中证500指数期",
+      "sector": "股指",
+      "direction": "做多",
+      "score": 158.9,
+      "current_price": 8502.4,
+      "change_pct": 0.0277039,
+      "intraday_pos": 0.98,
+      "sys_count": 0,
+      "decision": "强烈看多",
+      "risk": [
+        "无系统共振确认"
+      ]
+    },
+    {
+      "rank": 2,
+      "symbol": "AG",
+      "name": "白银连续",
+      "sector": "贵金属",
+      "direction": "做多",
+      "score": 154.4,
+      "current_price": 14676.0,
+      "change_pct": 0.0310524,
+      "intraday_pos": 0.63,
+      "sys_count": 0,
+      "decision": "强烈看多",
+      "risk": [
+        "无系统共振确认"
+      ]
+    },
+    {
+      "rank": 3,
+      "symbol": "SP",
+      "name": "纸浆连续",
+      "sector": "软商品",
+      "direction": "做多",
+      "score": 123.4,
+      "current_price": 4786.0,
+      "change_pct": 0.0226496,
+      "intraday_pos": 0.66,
+      "sys_count": 0,
+      "decision": "强烈看多",
+      "risk": [
+        "无系统共振确认"
+      ]
+    },
+    {
+      "rank": 4,
+      "symbol": "IF",
+      "name": "沪深300指数期",
+      "sector": "股指",
+      "direction": "做多",
+      "score": 118.7,
+      "current_price": 4780.8,
+      "change_pct": 0.0191865,
+      "intraday_pos": 0.83,
+      "sys_count": 0,
+      "decision": "强烈看多",
+      "risk": [
+        "无系统共振确认"
+      ]
+    }
+  ]
+}

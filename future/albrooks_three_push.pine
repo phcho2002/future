@@ -1,0 +1,429 @@
+//@version=5
+// ╔══════════════════════════════════════════════════════════════════════════╗
+// ║     Al Brooks Three Push Reversal System — Pine Script V5              ║
+// ╠══════════════════════════════════════════════════════════════════════════╣
+// ║  Detects three-push reversal patterns with multi-factor confirmation.  ║
+// ║  Outputs reversal probability (0-100%), expected move, drawdown,       ║
+// ║  and risk/reward ratio.                                                ║
+// ╚══════════════════════════════════════════════════════════════════════════╝
+//
+// Methodology: Al Brooks — Three Push Reversal Pattern
+//   • Three pushes in one direction → exhaustion → reversal
+//   • Confirmed by RSI/MACD divergence + candlestick patterns
+//   • Contextualized by EMA alignment (20/50/200)
+//
+// Usage:
+//   1. Paste into TradingView Pine Editor
+//   2. Add to chart
+//   3. Alerts fire when probability exceeds threshold
+
+indicator(
+    title  = 'Al Brooks Three Push Reversal [Quant]',
+    shorttitle = 'AB-3Push',
+    overlay = true,
+    max_labels_count = 500,
+    max_lines_count = 500,
+    max_bars_back = 500,
+    precision = 4
+)
+
+// ═══════════════════════════════════════════════════════════════════
+// Inputs
+// ═══════════════════════════════════════════════════════════════════
+
+// Swing Detection
+swing_window      = input.int(5,   'Swing Window',        minval=2,  maxval=20)
+swing_min_str_pct = input.float(0.3, 'Min Swing Strength %',  minval=0.1, maxval=2.0, step=0.1) / 100
+
+// Three Push
+min_pushes        = input.int(2,   'Min Pushes',          minval=2,  maxval=5)
+momentum_thresh   = input.float(0.15, 'Momentum Decay Threshold', minval=0.0, maxval=0.5, step=0.01)
+
+// Exhaustion
+rsi_len           = input.int(14,  'RSI Period')
+macd_fast         = input.int(12,  'MACD Fast')
+macd_slow         = input.int(26,  'MACD Slow')
+macd_sig          = input.int(9,   'MACD Signal')
+atr_len           = input.int(14,  'ATR Period')
+div_lookback      = input.int(20,  'Divergence Lookback')
+
+// Candlestick
+pin_bar_ratio     = input.float(2.0, 'Pin Bar Wick/Body Ratio', minval=1.0, maxval=5.0, step=0.5)
+
+// Trend Context
+show_emas         = input.bool(true, 'Show EMAs')
+
+// Signal Filters
+min_probability   = input.float(60,  'Min Probability %',   minval=0, maxval=100, step=5)
+min_rr_ratio      = input.float(1.5, 'Min R/R Ratio',       minval=0.5, maxval=5.0, step=0.1)
+show_labels       = input.bool(true, 'Show Signal Labels')
+show_risk_lines   = input.bool(true, 'Show Risk Lines')
+alert_on_signal   = input.bool(true, 'Alert on Signal')
+
+// ═══════════════════════════════════════════════════════════════════
+// EMA Calculation
+// ═══════════════════════════════════════════════════════════════════
+
+ema20  = ta.ema(close, 20)
+ema50  = ta.ema(close, 50)
+ema200 = ta.ema(close, 200)
+
+plot(show_emas ? ema20  : na, 'EMA20',  color.blue,   1)
+plot(show_emas ? ema50  : na, 'EMA50',  color.orange, 1)
+plot(show_emas ? ema200 : na, 'EMA200', color.red,    2)
+
+// ═══════════════════════════════════════════════════════════════════
+// 1. Swing Point Detection
+// ═══════════════════════════════════════════════════════════════════
+
+// Directional change detection for swing highs/lows
+is_swing_high(win) =>
+    high[win] == ta.highest(high, win * 2 + 1) and high[win] > high[win - 1] and high[win] > high[win + 1]
+
+is_swing_low(win) =>
+    low[win] == ta.lowest(low, win * 2 + 1) and low[win] < low[win - 1] and low[win] < low[win + 1]
+
+// ═══════════════════════════════════════════════════════════════════
+// 2. Three Push Pattern Detection
+// ═══════════════════════════════════════════════════════════════════
+
+type Push
+    float start_price
+    float end_price
+    float distance
+    float distance_pct
+    float slope
+    int   duration
+
+type PushPattern
+    string direction
+    int    push_count
+    float  momentum_decay
+    float  overlap_score
+    float  symmetry_score
+    int    completion_bar
+
+// Track recent swing points for pattern detection
+var float[] swing_high_prices = array.new_float(20)
+var int[]   swing_high_bars   = array.new_int(20)
+var float[] swing_low_prices  = array.new_float(20)
+var int[]   swing_low_bars    = array.new_int(20)
+
+// Detect and store swing points (rolling)
+if is_swing_high(swing_window)
+    atr_val = ta.atr(atr_len)
+    if atr_val > 0
+        strength = (high[swing_window] - low[swing_window]) / (atr_val * 2)
+        if strength >= swing_min_str_pct
+            array.unshift(swing_high_prices, high[swing_window])
+            array.unshift(swing_high_bars,   bar_index - swing_window)
+            if array.size(swing_high_prices) > 20
+                array.pop(swing_high_prices)
+                array.pop(swing_high_bars)
+
+if is_swing_low(swing_window)
+    atr_val = ta.atr(atr_len)
+    if atr_val > 0
+        strength = (high[swing_window] - low[swing_window]) / (atr_val * 2)
+        if strength >= swing_min_str_pct
+            array.unshift(swing_low_prices, low[swing_window])
+            array.unshift(swing_low_bars,   bar_index - swing_window)
+            if array.size(swing_low_prices) > 20
+                array.pop(swing_low_prices)
+                array.pop(swing_low_bars)
+
+// Pattern detection: 3+ higher highs → bearish reversal
+detect_bearish_pattern() =>
+    pattern = na
+    count = array.size(swing_high_prices)
+    if count >= min_pushes + 1
+        // Check for consecutive higher highs
+        push_count = 0
+        confirmed = true
+        for i = 0 to math.min(count - 2, max_pushes - 1)
+            if array.get(swing_high_prices, i) > array.get(swing_high_prices, i + 1)
+                push_count += 1
+            else
+                confirmed := false
+                break
+        if confirmed and push_count >= min_pushes
+            pattern = 'bearish'
+    pattern
+
+// Pattern detection: 3+ lower lows → bullish reversal
+detect_bullish_pattern() =>
+    pattern = na
+    count = array.size(swing_low_prices)
+    if count >= min_pushes + 1
+        push_count = 0
+        confirmed = true
+        for i = 0 to math.min(count - 2, max_pushes - 1)
+            if array.get(swing_low_prices, i) < array.get(swing_low_prices, i + 1)
+                push_count += 1
+            else
+                confirmed := false
+                break
+        if confirmed and push_count >= min_pushes
+            pattern = 'bullish'
+    pattern
+
+// ═══════════════════════════════════════════════════════════════════
+// 3. Exhaustion Analysis
+// ═══════════════════════════════════════════════════════════════════
+
+rsi_val  = ta.rsi(close, rsi_len)
+[macd_line, macd_signal_line, macd_hist] = ta.macd(close, macd_fast, macd_slow, macd_sig)
+atr_val  = ta.atr(atr_len)
+
+// RSI Divergence: price higher high, RSI lower high (bearish)
+rsi_bearish_div() =>
+    lookback = div_lookback
+    recent_high1 = ta.highest(high, lookback)
+    rsi_at_high1  = rsi_val[ta.highestbars(high, lookback)]
+
+    // Check for divergence on the most recent push
+    rsi_rising = ta.rising(rsi_val, 5)
+    price_rising = ta.rising(high, 5)
+    price_rising and not rsi_rising ? 1.0 : 0.0
+
+// RSI Divergence: price lower low, RSI higher low (bullish)
+rsi_bullish_div() =>
+    lookback = div_lookback
+    recent_low1 = ta.lowest(low, lookback)
+    rsi_at_low1  = rsi_val[ta.lowestbars(low, lookback)]
+
+    rsi_rising2 = ta.rising(rsi_val, 5)
+    price_falling = ta.falling(low, 5)
+    price_falling and rsi_rising2 ? 1.0 : 0.0
+
+rsi_div_strength_bearish = rsi_bearish_div()
+rsi_div_strength_bullish = rsi_bullish_div()
+
+// MACD Divergence (using histogram)
+macd_bearish_div() =>
+    ta.rising(high, 5) and ta.falling(macd_hist, 5) ? 1.0 : 0.0
+
+macd_bullish_div() =>
+    ta.falling(low, 5) and ta.rising(macd_hist, 5) ? 1.0 : 0.0
+
+macd_div_strength_bearish = macd_bearish_div()
+macd_div_strength_bullish = macd_bullish_div()
+
+// ATR Contraction
+atr_short = ta.sma(atr_val, 5)
+atr_long  = ta.sma(atr_val, 20)
+atr_contraction = atr_short < atr_long ? math.min(1.0, (atr_long - atr_short) / atr_long * 10) : 0.0
+
+// ═══════════════════════════════════════════════════════════════════
+// 4. Candlestick Patterns
+// ═══════════════════════════════════════════════════════════════════
+
+body       = math.abs(close - open)
+upper_wick = high - math.max(open, close)
+lower_wick = math.min(open, close) - low
+
+// Pin Bar (Hammer)
+is_hammer() =>
+    lower_wick >= pin_bar_ratio * body and upper_wick <= 0.3 * body and body > 0
+    ? math.min(1.0, lower_wick / (body * pin_bar_ratio * 3)) : 0.0
+
+// Pin Bar (Shooting Star)
+is_shooting_star() =>
+    upper_wick >= pin_bar_ratio * body and lower_wick <= 0.3 * body and body > 0
+    ? math.min(1.0, upper_wick / (body * pin_bar_ratio * 3)) : 0.0
+
+// Engulfing (Bullish)
+is_bullish_engulfing() =>
+    close[1] < open[1] and close > open and open <= close[1] and close >= open[1] ? 1.0 : 0.0
+
+// Engulfing (Bearish)
+is_bearish_engulfing() =>
+    close[1] > open[1] and close < open and open >= close[1] and close <= open[1] ? 1.0 : 0.0
+
+// Outside Bar
+is_outside_bar() =>
+    high - low > high[1] - low[1] and high > high[1] and low < low[1] ? 1.0 : 0.0
+
+// ═══════════════════════════════════════════════════════════════════
+// 5. Trend Context
+// ═══════════════════════════════════════════════════════════════════
+
+// EMA Alignment Score
+ema_alignment_score() =>
+    if ema20 > ema50 and ema50 > ema200
+        math.min(1.0, ((ema20 - ema50) / ema50 + (ema50 - ema200) / ema200) * 20)
+    else if ema20 < ema50 and ema50 < ema200
+        math.min(1.0, ((ema50 - ema20) / ema50 + (ema200 - ema50) / ema200) * 20)
+    else
+        0.1
+
+// ═══════════════════════════════════════════════════════════════════
+// 6. Reversal Probability Model
+// ═══════════════════════════════════════════════════════════════════
+
+// Aggregation weights
+w_structure  = 0.35
+w_exhaustion = 0.30
+w_candle     = 0.20
+w_trend      = 0.15
+
+calc_reversal_probability(direction, has_pattern, rsi_div_s, macd_div_s, candle_s, trend_s) =>
+    structure_score  = has_pattern ? 0.65 : 0.05
+    exhaustion_score = (0.40 * rsi_div_s + 0.35 * macd_div_s + 0.25 * atr_contraction)
+    candle_score     = candle_s
+    trend_score      = trend_s
+
+    // Weighted sum
+    logit = -1.8 + 4.5 * (
+        w_structure  * structure_score +
+        w_exhaustion * exhaustion_score +
+        w_candle     * candle_score +
+        w_trend      * trend_score
+    )
+
+    // Sigmoid
+    prob = 100.0 / (1.0 + math.exp(-math.max(-50.0, math.min(50.0, logit))))
+    prob
+
+// ═══════════════════════════════════════════════════════════════════
+// 7. Risk Metrics
+// ═══════════════════════════════════════════════════════════════════
+
+calc_risk_metrics(entry, direction, prob, atr) =>
+    expected_move   = atr * 2.0
+    expected_dd     = atr * (1.5 - prob / 100.0 * 0.8)
+    rr_ratio        = (expected_move * prob / 100.0) / (expected_dd * (1.0 - prob / 100.0))
+    rr_ratio        := math.max(0.2, math.min(10.0, rr_ratio))
+
+    if direction == 'bullish'
+        [entry + expected_move, entry - expected_dd, expected_move, expected_dd, rr_ratio]
+    else if direction == 'bearish'
+        [entry - expected_move, entry + expected_dd, expected_move, expected_dd, rr_ratio]
+    else
+        [entry, entry, 0.0, 0.0, 0.0]
+
+// ═══════════════════════════════════════════════════════════════════
+// 8. Main Signal Logic
+// ═══════════════════════════════════════════════════════════════════
+
+bearish_pattern = detect_bearish_pattern()
+bullish_pattern = detect_bullish_pattern()
+
+has_bearish = not na(bearish_pattern)
+has_bullish = not na(bullish_pattern)
+
+// Candle scores
+candle_score_bullish = math.max(is_hammer(), math.max(is_bullish_engulfing(), is_outside_bar() * 0.5))
+candle_score_bearish = math.max(is_shooting_star(), math.max(is_bearish_engulfing(), is_outside_bar() * 0.5))
+
+// Trend context
+trend_align = ema_alignment_score()
+
+// Probability calculations
+prob_bullish = has_bullish ? calc_reversal_probability('bullish', true, rsi_div_strength_bullish, macd_div_strength_bullish, candle_score_bullish, trend_align) : 0.0
+prob_bearish = has_bearish ? calc_reversal_probability('bearish', true, rsi_div_strength_bearish, macd_div_strength_bearish, candle_score_bearish, trend_align) : 0.0
+
+// Select the stronger signal
+signal_direction = prob_bullish > prob_bearish ? 'bullish' : 'bearish'
+signal_prob      = math.max(prob_bullish, prob_bearish)
+
+// Risk metrics
+[target, stop, exp_move, exp_dd, rr_ratio] = calc_risk_metrics(close, signal_direction, signal_prob, atr_val)
+
+// ═══════════════════════════════════════════════════════════════════
+// 9. Output & Visualization
+// ═══════════════════════════════════════════════════════════════════
+
+// Color coding
+color signal_color = signal_prob >= 75 ? color.green : signal_prob >= 60 ? color.blue : signal_prob >= 45 ? color.yellow : color.gray
+color bull_color   = color.new(color.green, 20)
+color bear_color   = color.new(color.red, 20)
+
+// Background highlight
+bgcolor(
+    signal_prob >= min_probability ?
+        (signal_direction == 'bullish' ? bull_color : bear_color) : na,
+    title = 'Signal Background'
+)
+
+// Plot probability as a histogram in a separate pane (use scale.none for overlay)
+// We display via labels since we're using overlay=true
+
+// Signal markers
+if show_labels and signal_prob >= min_probability
+    // Entry level line
+    if show_risk_lines
+        line.new(
+            bar_index, close, bar_index + 10, close,
+            color = signal_direction == 'bullish' ? color.green : color.red,
+            width = 1, style = line.style_dashed
+        )
+        // Target line
+        line.new(
+            bar_index, target, bar_index + 10, target,
+            color = color.green, width = 1, style = line.style_dotted
+        )
+        // Stop line
+        line.new(
+            bar_index, stop, bar_index + 10, stop,
+            color = color.red, width = 1, style = line.style_dotted
+        )
+
+    // Signal label
+    dir_symbol = signal_direction == 'bullish' ? '▲' : '▼'
+    label.new(
+        bar_index,
+        signal_direction == 'bullish' ? low - atr_val * 0.5 : high + atr_val * 0.5,
+        text = dir_symbol + ' ' + str.tostring(signal_prob, '#') + '%\n' +
+               'RR: ' + str.tostring(rr_ratio, '#.##') + ':1\n' +
+               '→ ' + str.tostring(target, '#.####') + '\n' +
+               '⛔ ' + str.tostring(stop, '#.####'),
+        color = signal_direction == 'bullish' ? color.green : color.red,
+        textcolor = color.white,
+        style = signal_direction == 'bullish' ? label.style_label_up : label.style_label_down,
+        size = size.small
+    )
+
+// ═══════════════════════════════════════════════════════════════════
+// 10. Alerts
+// ═══════════════════════════════════════════════════════════════════
+
+bullish_signal = signal_direction == 'bullish' and signal_prob >= min_probability
+bearish_signal = signal_direction == 'bearish' and signal_prob >= min_probability
+
+alertcondition(
+    bullish_signal,
+    title = 'Three Push Bullish Reversal',
+    message = 'Bullish 3-Push Reversal | Prob: ' + str.tostring(signal_prob, '#') + '% | RR: ' + str.tostring(rr_ratio, '#.##') + ':1'
+)
+
+alertcondition(
+    bearish_signal,
+    title = 'Three Push Bearish Reversal',
+    message = 'Bearish 3-Push Reversal | Prob: ' + str.tostring(signal_prob, '#') + '% | RR: ' + str.tostring(rr_ratio, '#.##') + ':1'
+)
+
+// ═══════════════════════════════════════════════════════════════════
+// 11. Information Table (top-right overlay)
+// ═══════════════════════════════════════════════════════════════════
+
+var table info_table = table.new(position.top_right, 8, 2,
+    border_width = 1, border_color = color.gray, frame_color = color.gray)
+
+if barstate.islast
+    table.cell(info_table, 0, 0, 'Al Brooks 3-Push Reversal', text_color = color.white, text_size = size.small)
+    table.cell(info_table, 1, 0, '', text_size = size.small)
+    table.cell(info_table, 0, 1, 'Direction', text_color = color.gray, text_size = size.small)
+    table.cell(info_table, 1, 1, signal_direction, text_color = signal_direction == 'bullish' ? color.green : color.red, text_size = size.small)
+    table.cell(info_table, 0, 2, 'Probability', text_color = color.gray, text_size = size.small)
+    table.cell(info_table, 1, 2, str.tostring(signal_prob, '#.#') + '%', text_color = signal_color, text_size = size.small)
+    table.cell(info_table, 0, 3, 'R/R Ratio', text_color = color.gray, text_size = size.small)
+    table.cell(info_table, 1, 3, str.tostring(rr_ratio, '#.##') + ':1', text_color = rr_ratio >= 1.5 ? color.green : color.orange, text_size = size.small)
+    table.cell(info_table, 0, 4, 'Expected Move', text_color = color.gray, text_size = size.small)
+    table.cell(info_table, 1, 4, str.tostring(exp_move, '#.####'), text_color = color.white, text_size = size.small)
+    table.cell(info_table, 0, 5, 'Expected DD', text_color = color.gray, text_size = size.small)
+    table.cell(info_table, 1, 5, str.tostring(exp_dd, '#.####'), text_color = color.white, text_size = size.small)
+    table.cell(info_table, 0, 6, 'Entry', text_color = color.gray, text_size = size.small)
+    table.cell(info_table, 1, 6, str.tostring(close, '#.####'), text_color = color.white, text_size = size.small)
+    table.cell(info_table, 0, 7, 'Pattern Type', text_color = color.gray, text_size = size.small)
+    table.cell(info_table, 1, 7, has_bullish ? '3-Push Down' : has_bearish ? '3-Push Up' : 'None', text_color = color.white, text_size = size.small)

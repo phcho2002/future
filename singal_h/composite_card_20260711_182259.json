@@ -1,0 +1,154 @@
+{
+  "timestamp": "2026-07-11 18:22:59",
+  "data_source": "xtquant",
+  "top8_strongest": [
+    {
+      "symbol": "M0",
+      "name": "豆粕",
+      "composite": 78.0,
+      "daily": 77,
+      "hourly": 72,
+      "f4": "多2星",
+      "f6": "-"
+    },
+    {
+      "symbol": "OI0",
+      "name": "菜油",
+      "composite": 78.0,
+      "daily": 77,
+      "hourly": 72,
+      "f4": "多1星",
+      "f6": "-"
+    },
+    {
+      "symbol": "CU0",
+      "name": "铜",
+      "composite": 74.4,
+      "daily": 69,
+      "hourly": 75,
+      "f4": "多1星",
+      "f6": "-"
+    },
+    {
+      "symbol": "RM0",
+      "name": "菜粕",
+      "composite": 72.0,
+      "daily": 69,
+      "hourly": 69,
+      "f4": "多2星",
+      "f6": "-"
+    },
+    {
+      "symbol": "SN0",
+      "name": "锡",
+      "composite": 66.0,
+      "daily": 64,
+      "hourly": 69,
+      "f4": "多2星",
+      "f6": "-"
+    },
+    {
+      "symbol": "TF0",
+      "name": "5年期国债期货",
+      "composite": 65.8,
+      "daily": 65,
+      "hourly": 67,
+      "f4": "-",
+      "f6": "-"
+    },
+    {
+      "symbol": "V0",
+      "name": "PVC",
+      "composite": 63.0,
+      "daily": 57,
+      "hourly": 72,
+      "f4": "-",
+      "f6": "-"
+    },
+    {
+      "symbol": "NI0",
+      "name": "镍",
+      "composite": 60.8,
+      "daily": 48,
+      "hourly": 80,
+      "f4": "多1星",
+      "f6": "-"
+    }
+  ],
+  "bottom8_weakest": [
+    {
+      "symbol": "LC0",
+      "name": "碳酸锂",
+      "composite": 37.0,
+      "daily": 37,
+      "hourly": 37,
+      "f4": "多1星",
+      "f6": "-"
+    },
+    {
+      "symbol": "IM0",
+      "name": "中证1000指数期货",
+      "composite": 38.4,
+      "daily": 34,
+      "hourly": 45,
+      "f4": "多2星",
+      "f6": "-"
+    },
+    {
+      "symbol": "JM0",
+      "name": "焦煤",
+      "composite": 39.0,
+      "daily": 39,
+      "hourly": 39,
+      "f4": "多2星",
+      "f6": "-"
+    },
+    {
+      "symbol": "IF0",
+      "name": "沪深300指数期货",
+      "composite": 39.2,
+      "daily": 38,
+      "hourly": 41,
+      "f4": "多1星",
+      "f6": "-"
+    },
+    {
+      "symbol": "AO0",
+      "name": "氧化铝",
+      "composite": 40.2,
+      "daily": 39,
+      "hourly": 42,
+      "f4": "多1星",
+      "f6": "-"
+    },
+    {
+      "symbol": "SR0",
+      "name": "白糖",
+      "composite": 40.4,
+      "daily": 36,
+      "hourly": 47,
+      "f4": "-",
+      "f6": "-"
+    },
+    {
+      "symbol": "IC0",
+      "name": "中证500指数期货",
+      "composite": 41.2,
+      "daily": 40,
+      "hourly": 43,
+      "f4": "多2星",
+      "f6": "-"
+    },
+    {
+      "symbol": "SC0",
+      "name": "上海原油",
+      "composite": 41.599999999999994,
+      "daily": 48,
+      "hourly": 32,
+      "f4": "多1星",
+      "f6": "-"
+    }
+  ],
+  "resonance_long": [],
+  "resonance_short": []
+}

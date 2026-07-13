@@ -49,13 +49,25 @@ def signal_proximity_score(result) -> float:
 
 
 def infer_direction(result) -> str:
-    """根据最后一推方向推断交易方向"""
+    """确定交易方向，必须与 signal.levels（入场/止损/目标）一致。
+
+    signal.side 是引擎按突破/反转模型算出的真实方向，且 levels（entry/stop/
+    target）就是按这个方向构造的——它是唯一权威。三推反转的"最后一推方向"
+    只是当引擎尚未给出方向（side==NONE，例如未突破）时的结构提示，不能覆盖
+    signal.side，否则会出现"做多但止损在上方"的矛盾行。
+    """
+    side = result.signal.side
+    if side == SignalSide.LONG:
+        return "做多"
+    if side == SignalSide.SHORT:
+        return "做空"
+    # 引擎无明确方向时，才用最后一推方向作结构提示（仅供邻近度参考）
     if result.push_set.pushes:
         last_dir = result.push_set.pushes[-1].direction
         if last_dir.value == "bull":
-            return "做空"  # 第三推向上 → 看跌反转
+            return "做空(提示)"  # 第三推向上 → 潜在看跌反转
         elif last_dir.value == "bear":
-            return "做多"  # 第三推向下 → 看涨反转
+            return "做多(提示)"  # 第三推向下 → 潜在看涨反转
     return "待定"
 
 

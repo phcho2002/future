@@ -1,6 +1,6 @@
 # future-quant
 
-基于 Python + 天勤 (TqSdk) 的量化交易研究系统。当前版本重点实现：
+基于 Python + 迅投 (xtquant) 的量化交易研究系统。当前版本重点实现：
 
 - 模块 1.1：市场结构判定，识别牛市、熊市、交易区间、窄通道、宽通道。
 - 模块 1.2：通道类型识别（斜率按 ATR 归一化，跨价位品种可比）。
@@ -11,9 +11,9 @@
 
 ## 数据源
 
-数据层完全基于 [天勤 TqSdk](https://www.shinnytech.com/tqsdk/)，通过主力连续合约（`KQ.m@`）获取 15 分钟 K 线。凭证从 `D:/work_ai/tq_auth.py` 自动读取（`TqAuth(user, pwd)`）。
+数据层完全基于 [迅投 xtquant](https://dict.thinktrader.net/nativeApi/xtquant.html)，通过主力连续合约获取 15 分钟 K 线。凭证从 `D:/work_ai/xt_token.py` 自动读取。
 
-> 免费版单次最多 8964 根 K 线；15 分钟周期约对应数月历史，足够回测。需要更长历史请使用付费版。
+> xtquant 可取深历史，足以覆盖回测所需区间。
 
 ## 安装
 

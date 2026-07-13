@@ -1,0 +1,86 @@
+{
+  "timestamp": "2026-07-07T09:38:14.228378",
+  "scan_results": {
+    "wyckoff": "OK",
+    "dual_ma": "OK",
+    "renko_chart": "OK"
+  },
+  "cards": [
+    {
+      "rank": 1,
+      "symbol": "SC0",
+      "name": "上海原油",
+      "direction": "做多",
+      "score": 90.3,
+      "current_price": 439.2,
+      "entry_price": 439.2,
+      "support": "nan",
+      "resistance": "440.6",
+      "trigger": "Phase_B — Spring/弹簧效应 — 价格假跌破支撑位437.67后迅速收回，最低探至435.60，第1根K线阳线放量收回，确认主",
+      "rsi": 34.0,
+      "risk": [
+        "暂无显著风险"
+      ],
+      "source_system": "future_2_wyckoff",
+      "hist_pf": 0,
+      "hist_winrate": 0
+    },
+    {
+      "rank": 2,
+      "symbol": "IH0",
+      "name": "上证50指数期货",
+      "direction": "做空",
+      "score": 68.3,
+      "current_price": 2905.2,
+      "entry_price": 2905.2,
+      "support": "2897.2",
+      "resistance": "2931.1",
+      "trigger": "缠绕突破 2次",
+      "rsi": null,
+      "risk": [
+        "暂无显著风险"
+      ],
+      "source_system": "future_4_dual_ma",
+      "hist_pf": 0,
+      "hist_winrate": 0
+    },
+    {
+      "rank": 3,
+      "symbol": "V0",
+      "name": "PVC",
+      "direction": "做多",
+      "score": 63.5,
+      "current_price": 4450.0,
+      "entry_price": 4457.0,
+      "support": "4428.8",
+      "resistance": "4472.9",
+      "trigger": "缠绕突破 2次",
+      "rsi": null,
+      "risk": [
+        "暂无显著风险"
+      ],
+      "source_system": "future_4_dual_ma",
+      "hist_pf": 0,
+      "hist_winrate": 0
+    },
+    {
+      "rank": 4,
+      "symbol": "ZN0",
+      "name": "沪锌",
+      "direction": "做空",
+      "score": 66.7,
+      "current_price": 24515.0,
+      "entry_price": 24455.0,
+      "support": "24479.2",
+      "resistance": "nan",
+      "trigger": "缠绕突破 3次",
+      "rsi": null,
+      "risk": [
+        "暂无显著风险"
+      ],
+      "source_system": "future_4_dual_ma",
+      "hist_pf": 0,
+      "hist_winrate": 0
+    }
+  ]
+}

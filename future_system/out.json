@@ -1,0 +1,154 @@
+{
+  "notes": [
+    "total universe=40",
+    "daily source=live asof=2026-07-13 08:46:59 n=40",
+    "60m loaded=40",
+    "30m loaded=40",
+    "mark prices=40",
+    "[financial] equity=4,000,000 cash=4,000,000 margin=0 pos=0 trades=0",
+    "[commodity] STOP range/NI0 @ 129180.0",
+    "[commodity] ADD range/SA0 +5 @ 1087.0",
+    "[commodity] equity=3,998,598 cash=3,950,329 margin=47,430 pos=2 trades=5",
+    "ledger db=D:\\work_ai\\future_system\\data\\trading_ledger.db",
+    "ledger snapshot=D:\\work_ai\\future_system\\data\\ledger_snapshot.json"
+  ],
+  "books": {
+    "financial": {
+      "capital": 4000000.0,
+      "regime_counts": {
+        "TREND": 1,
+        "RANGE": 3,
+        "NEUTRAL": 2
+      },
+      "trend": [],
+      "range": [
+        {
+          "symbol": "IF0",
+          "direction": -1,
+          "strength": 0.6617550095471838,
+          "setup": "failed_break_short",
+          "reason": "hold_failed_break_short",
+          "regime": "RANGE",
+          "entry": 4794.0,
+          "stop": 4832.348871330085,
+          "tp1": 4755.651128669915,
+          "tp2": 4669.549516284322,
+          "current_stop": 4728.313990377575,
+          "tp1_fraction": 0.5,
+          "initial_risk": 38.348871330084876,
+          "rr_tp1": 1.0,
+          "rr_tp2": 3.2452189438505394,
+          "remaining_frac": 0.5
+        },
+        {
+          "symbol": "TS0",
+          "direction": -1,
+          "strength": 0.47207104745785283,
+          "setup": "failed_break_short",
+          "reason": "hold_failed_break_short",
+          "regime": "RANGE",
+          "entry": 102.644,
+          "stop": 102.65649045613453,
+          "tp1": 102.63150954386548,
+          "tp2": 102.61901908773095,
+          "current_stop": 102.65649045613453,
+          "tp1_fraction": 0.5,
+          "initial_risk": 0.012490456134528927,
+          "rr_tp1": 1.0,
+          "rr_tp2": 2.0,
+          "remaining_frac": 1.0
+        }
+      ],
+      "trend_margin_usage": 0.0,
+      "range_margin_usage": 0.0,
+      "ledger_equity": 4000000.0,
+      "ledger_cash": 4000000.0,
+      "ledger_positions": 0
+    },
+    "commodity": {
+      "capital": 4000000.0,
+      "regime_counts": {
+        "TREND": 14,
+        "RANGE": 16,
+        "NEUTRAL": 4
+      },
+      "trend": [
+        {
+          "symbol": "LC0",
+          "direction": -1,
+          "strength": 0.3826153846153846,
+          "tier": "first_probe",
+          "reason": "first_probe_hold",
+          "regime": "TREND"
+        }
+      ],
+      "range": [
+        {
+          "symbol": "SA0",
+          "direction": -1,
+          "strength": 0.6222192106652492,
+          "setup": "failed_break_short",
+          "reason": "hold_failed_break_short",
+          "regime": "RANGE",
+          "entry": 1086.0,
+          "stop": 1093.5066243144206,
+          "tp1": 1078.4933756855794,
+          "tp2": 1065.7037460294769,
+          "current_stop": 1093.5066243144206,
+          "tp1_fraction": 0.5,
+          "initial_risk": 7.5066243144206055,
+          "rr_tp1": 1.0,
+          "rr_tp2": 2.703779105014355,
+          "remaining_frac": 1.0
+        }
+      ],
+      "trend_margin_usage": 0.005306000000000001,
+      "range_margin_usage": 0.006521999999999999,
+      "ledger_equity": 3998598.3759999997,
+      "ledger_cash": 3950328.7759999996,
+      "ledger_positions": 2
+    }
+  },
+  "ledger": {
+    "run_id": "20260713_084935_b6d1d8",
+    "n_trades": 5,
+    "accounts": {
+      "financial": {
+        "equity": 4000000.0,
+        "cash": 4000000.0,
+        "reserved_margin": 0.0,
+        "realized_pnl": 0.0
+      },
+      "commodity": {
+        "equity": 3998598.3759999997,
+        "cash": 3950328.7759999996,
+        "reserved_margin": 47429.600000000006,
+        "realized_pnl": -2132.423
+      }
+    },
+    "positions": [
+      {
+        "book_id": "commodity",
+        "sleeve": "range",
+        "symbol": "SA0",
+        "direction": -1,
+        "lots": 10,
+        "entry_price": 1087.0,
+        "stop": 1090.7012808502816,
+        "tp1": 1081.2987191497184,
+        "tp2": 1065.7291203644063
+      },
+      {
+        "book_id": "commodity",
+        "sleeve": "trend",
+        "symbol": "LC0",
+        "direction": -1,
+        "lots": 1,
+        "entry_price": 152440.0,
+        "stop": null,
+        "tp1": null,
+        "tp2": null
+      }
+    ]
+  }
+}

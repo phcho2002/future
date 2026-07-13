@@ -1,0 +1,47 @@
+# stock_4 假突破→真突破 股票日线系统 配置
+# 移植自 future_bb/SecondBreakoutEngine 四阶段状态机，适配 A 股日线
+
+# ============ 数据层 ============
+data:
+  tdx_vipdoc: "D:/new_tdx/vipdoc"   # 通达信 vipdoc 根目录
+  lookback_bars: 800                # 每只股票读取最近 N 根日线（约3年，需 > ema_period + pattern_lookback）
+
+# ============ 策略参数（四阶段状态机）============
+strategy:
+  pattern_lookback: 20       # 蓄势形态回看窗口（K线根数）
+  box_range_max: 0.12        # 箱体最大波幅 (近N根 最高-最低 / 最低)，日线比期货小时线宽
+  box_touch_min: 2           # 箱体上下边界各自最小触碰次数
+  box_touch_tol: 0.01        # 边界触碰容差（1%）
+  wedge_atr_shrink: 0.8      # 收敛楔形：近期ATR / 前期ATR < 此值
+  wedge_range_shrink: 0.8    # 收敛楔形：后半段波幅 / 前半段波幅 < 此值
+  breakout_threshold: 0.01   # 突破价格阈值（1%，期货0.3%→日线1%）
+  fail_confirm_bars: 2       # 假突破确认：收盘回到形态内需持续的根数
+  second_break_max_gap: 20   # 首次→二次突破最大间隔（超时作废）
+  second_break_min_gap: 2    # 首次→二次突破最小间隔
+  ema_period: 200            # EMA 趋势过滤周期
+  atr_period: 14             # ATR 计算周期
+  # 可选增强：均线多头排列过滤（close > MA20 > MA60）
+  use_ma_filter: false
+  ma_short: 20
+  ma_long: 60
+
+# ============ 回测参数（A股规则）============
+backtest:
+  initial_capital: 100000    # 初始资金（元）
+  risk_per_trade: 0.02       # 每笔风险占资金比例（2%）
+  commission_rate: 0.00025   # 佣金费率（万2.5，双边）
+  min_commission: 5.0        # 单笔最低佣金（元）
+  stamp_duty: 0.0005         # 卖出印花税（0.05%）
+  slippage: 0.0              # 滑点（元，按每股）
+  initial_stop_atr: 1.5      # 初始止损 = 突破位 - 1.5×ATR
+  trail_atr_mult: 2.0        # 移动止损 = 跟踪最低价 - 2.0×ATR
+  max_hold_days: 60          # 最大持仓天数（0=不限制）
+  start_date: "20210101"     # 回测起始日期
+  limit_pct: 0.10            # 涨跌停幅度（主板10%；创业板/科创板自动按20%）
+
+# ============ 扫描参数 ============
+scan:
+  signal_days: 1             # 扫描最近 N 天产生的信号（1=今日）
+  min_volume_ratio: 0.5      # 最低量比（当日量 / MA20量，过滤低流动性）
+  exclude_st: true           # 排除 ST/*ST 股（需名称数据）
+  workers: 8                 # 并行扫描进程数

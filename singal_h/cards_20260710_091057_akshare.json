@@ -1,0 +1,74 @@
+{
+  "timestamp": "2026-07-10T09:11:08.439775",
+  "data_source": "akshare realtime + system signals",
+  "cards": [
+    {
+      "rank": 1,
+      "symbol": "IC",
+      "name": "中证500指数期货连续",
+      "sector": "股指",
+      "direction": "做多",
+      "score": 170.5,
+      "current_price": 8502.4,
+      "change_pct": 0.0277039,
+      "intraday_pos": 0.98,
+      "trigger": "akshare实时+0系统共振",
+      "sys_count": 0,
+      "decision": "强烈看多",
+      "risk": [
+        "无系统共振确认"
+      ]
+    },
+    {
+      "rank": 2,
+      "symbol": "IF",
+      "name": "沪深300指数期货连续",
+      "sector": "股指",
+      "direction": "做多",
+      "score": 125.4,
+      "current_price": 4780.8,
+      "change_pct": 0.0191865,
+      "intraday_pos": 0.83,
+      "trigger": "akshare实时+0系统共振",
+      "sys_count": 0,
+      "decision": "强烈看多",
+      "risk": [
+        "无系统共振确认"
+      ]
+    },
+    {
+      "rank": 3,
+      "symbol": "IM",
+      "name": "中证连续指数期货连续",
+      "sector": "股指",
+      "direction": "做多",
+      "score": 117.7,
+      "current_price": 8127.4,
+      "change_pct": 0.0164586,
+      "intraday_pos": 0.95,
+      "trigger": "akshare实时+0系统共振",
+      "sys_count": 0,
+      "decision": "强烈看多",
+      "risk": [
+        "无系统共振确认"
+      ]
+    },
+    {
+      "rank": 4,
+      "symbol": "焦煤",
+      "name": "焦煤连续",
+      "sector": "其他",
+      "direction": "做空",
+      "score": -1360.3,
+      "current_price": 0.0,
+      "change_pct": -0.0282946,
+      "intraday_pos": -30.85,
+      "trigger": "akshare实时+0系统共振",
+      "sys_count": 0,
+      "decision": "强烈看空",
+      "risk": [
+        "无系统共振确认"
+      ]
+    }
+  ]
+}

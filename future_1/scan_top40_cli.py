@@ -6,9 +6,11 @@ TOP40 期货 15分钟 K线 三推衰竭信号扫描
 import sys, time, json
 from pathlib import Path
 from dataclasses import asdict
-
-sys.path.insert(0, str(Path(r"D:\work_ai\future_1").resolve()))
-sys.path.insert(0, str(Path(r"D:\work_ai").resolve()))
+# 兼容 Linux/Windows：从脚本位置向上推导到 work_ai 根目录
+_SCRIPT_DIR = Path(__file__).resolve().parent
+_WORK_AI = _SCRIPT_DIR.parent  # .../work_ai/future_1 -> .../work_ai
+sys.path.insert(0, str(_SCRIPT_DIR))
+sys.path.insert(0, str(_WORK_AI))
 
 import pandas as pd
 import numpy as np

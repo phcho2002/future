@@ -24,18 +24,16 @@ param(
 
 $ErrorActionPreference = "Stop"
 
-# 定位项目根目录（脚本所在目录）
+# 定位项目目录与 work_ai 共享环境（Python 3.12 + D:\work_ai\.venv）
 $scriptDir = Split-Path -Parent $MyInvocation.MyCommand.Path
+$workAiRoot = Split-Path -Parent $scriptDir
+$py = Join-Path $workAiRoot ".venv\Scripts\python.exe"
 Set-Location $scriptDir
 
-# 若存在虚拟环境则激活
-$venvActivate = Join-Path $scriptDir ".venv\Scripts\Activate.ps1"
-if (Test-Path $venvActivate) {
-    Write-Host "[run] 激活虚拟环境 ..." -ForegroundColor Cyan
-    & $venvActivate
-}
-else {
-    Write-Host "[run] 未找到 .venv，使用系统 Python。首次请运行: .\run.ps1 install" -ForegroundColor Yellow
+if (-not (Test-Path $py)) {
+    Write-Host "[run] 未找到共享环境: $py" -ForegroundColor Yellow
+    Write-Host "[run] 首次请在 work_ai 根目录安装: .\run.ps1 install" -ForegroundColor Yellow
+    if ($Command -ne "install") { exit 1 }
 }
 
 # 确保输出目录存在
@@ -44,33 +42,34 @@ if (-not (Test-Path $outputDir)) { New-Item -ItemType Directory -Path $outputDir
 
 switch ($Command) {
     "install" {
-        Write-Host "[run] 安装依赖 ..." -ForegroundColor Cyan
-        if (-not (Test-Path ".venv")) {
-            python -m venv .venv
-            & ".venv\Scripts\Activate.ps1"
+        Write-Host "[run] 安装 work_ai 共享依赖 (Python 3.12) ..." -ForegroundColor Cyan
+        $venvDir = Join-Path $workAiRoot ".venv"
+        if (-not (Test-Path $py)) {
+            py -3.12 -m venv $venvDir --system-site-packages
+            $py = Join-Path $venvDir "Scripts\python.exe"
         }
-        python -m pip install --upgrade pip
-        pip install -r requirements.txt
+        & $py -m pip install --upgrade pip
+        & $py -m pip install -r (Join-Path $workAiRoot "requirements.txt")
     }
 
     "backtest" {
         Write-Host "[run] 回测 ..." -ForegroundColor Cyan
-        python backtest.py @ScriptArgs
+        & $py backtest.py @ScriptArgs
     }
 
     "scan" {
         Write-Host "[run] 扫描最新信号 ..." -ForegroundColor Cyan
-        python run_scan.py @ScriptArgs
+        & $py run_scan.py @ScriptArgs
     }
 
     "optimize" {
         Write-Host "[run] 参数优化 ..." -ForegroundColor Cyan
-        python optimize.py @ScriptArgs
+        & $py optimize.py @ScriptArgs
     }
 
     "analyze" {
         Write-Host "[run] 深度分析 ..." -ForegroundColor Cyan
-        python analyze.py @ScriptArgs
+        & $py analyze.py @ScriptArgs
     }
 
     default {

@@ -10,7 +10,7 @@
   4. 多周期 K 线共振（均线排列 + 斜率近似高周期，不再依赖 datetime 合成）
   5. 日内动能 / 开盘区分界线
 
-数据源：统一走 future_data.get_klines（tqsdk 后端 + TTL 缓存），akshare 仅作回退。
+数据源：统一走 future_data.get_klines（xtquant 后端 + TTL 缓存），akshare 仅作回退。
 合约清单：复用数据库 futures_top40 表（已含 exchange），无需本地维护合约字典。
 
 用法：
@@ -33,7 +33,7 @@ import numpy as np
 
 warnings.filterwarnings('ignore')
 
-# ---- 接入全系统统一行情入口 future_data（tqsdk 后端 + TTL 缓存）----
+# ---- 接入全系统统一行情入口 future_data（xtquant 后端 + TTL 缓存）----
 sys.path.insert(0, r"d:\work_ai")
 try:
     from future_data import get_klines as _tq_get_klines
@@ -44,6 +44,9 @@ except Exception:  # noqa: BLE001
 import akshare as ak
 
 DB_PATH = r"d:\work_ai\futures_data.db"
+
+# 全局开关：当脚本以 --akshare-only 运行时，完全不加载 xtquant 后端
+_AKSHARE_ONLY = os.environ.get("FUTURES_STRENGTH_AKSHARE_ONLY", "0") == "1"
 
 
 # ============================================================
@@ -59,6 +62,13 @@ PERIOD_CONFIG = {
     "30":   {"label": "30分钟", "length": 2000, "short_w": 20, "long_w": 60},
     "60":   {"label": "小时线",  "length": 1500, "short_w": 20, "long_w": 60},
     "1440": {"label": "日线",    "length": 200,  "short_w": 20, "long_w": 60},
+}
+
+# 按周期标签决定写入 strength_ranking 表的强/弱取名数：(strong_n, weak_n)。
+# 仅日线与小时线写入该表；其它周期不写。值为 None 表示该周期不写。
+STRENGTH_RANKING_TOPN = {
+    "日线":   (4, 4),   # 日线：强前4 + 弱后4
+    "小时线": (2, 2),   # 小时线：强前2 + 弱后2
 }
 
 
@@ -89,8 +99,10 @@ def _normalize(df):
     rename = {c: str(c).strip().lower() for c in df.columns}
     df = df.rename(columns=rename)
     # 兼容 akshare 中文列名
-    cn_map = {"日期": "date", "开盘": "open", "最高": "high", "最低": "low",
-              "收盘": "close", "成交量": "volume", "持仓量": "hold", "动态结算价": "settle"}
+    cn_map = {"日期": "date", "开盘": "open", "开盘价": "open",
+              "最高": "high", "最高价": "high", "最低": "low", "最低价": "low",
+              "收盘": "close", "收盘价": "close", "成交量": "volume",
+              "持仓量": "hold", "动态结算价": "settle"}
     df = df.rename(columns=cn_map)
     if "datetime" not in df.columns and "date" in df.columns:
         df["datetime"] = pd.to_datetime(df["date"])
@@ -109,11 +121,11 @@ def _normalize(df):
 def fetch_klines(symbol, exchange, period, length):
     """
     获取某合约 K 线，返回规范化 DataFrame 或 None。
-    主路径：future_data.get_klines（tqsdk + TTL 缓存）。
-    回退：akshare（日线 futures_main_sina / 分钟 futures_zh_minute_sina）。
+    主路径：future_data.get_klines（默认 xtquant + TTL 缓存；可 FUTURE_DATA_BACKEND=xtquant）。
+    回退：直接 akshare（日线 futures_main_sina / 分钟 futures_zh_minute_sina）。
     """
     df = None
-    if _HAS_FUTURE_DATA and exchange:
+    if not _AKSHARE_ONLY and _HAS_FUTURE_DATA and exchange:
         try:
             df = _tq_get_klines(symbol, exchange, period=str(period), length=int(length))
         except Exception:
@@ -121,7 +133,7 @@ def fetch_klines(symbol, exchange, period, length):
     df = _normalize(df)
 
     if df is None or df.empty:
-        # akshare 回退
+        # 直接 akshare 回退（与 future_data 默认后端一致）
         try:
             if str(period) == "1440":
                 end = datetime.now().strftime("%Y%m%d")
@@ -140,8 +152,18 @@ def fetch_klines(symbol, exchange, period, length):
 # 3. 合约清单层（复用数据库 futures_top40）
 # ============================================================
 
-def get_universe(top=40, db_path=DB_PATH):
-    """从 futures_top40 读取品种清单（已含 exchange）。"""
+def get_universe(top=40, db_path=DB_PATH, json_path=None):
+    """读取品种清单：优先 futures_top40.json，没有则回退数据库。"""
+    json_path = json_path or r"d:\work_ai\futures_top40.json"
+    if os.path.exists(json_path):
+        import json
+        with open(json_path, "r", encoding="utf-8") as f:
+            data = json.load(f)
+        rows = data.get("symbols", [])
+        df = pd.DataFrame(rows, columns=["symbol", "name", "exchange"])
+        if top:
+            df = df.head(int(top))
+        return df
     conn = sqlite3.connect(db_path)
     try:
         sql = ("SELECT symbol, name, exchange, 最新价格 AS price, 最新持仓量 AS oi "
@@ -465,6 +487,65 @@ def _table_names(prefix):
     }
 
 
+def save_strength_ranking(results_df, period_label, db_path=DB_PATH,
+                           scan_date=None, now=None):
+    """将日线/小时线的强/弱头部品种写入统一长表 strength_ranking。
+
+    长表结构（每行一个品种）：
+        period     TEXT  周期标签（日线 / 小时线）
+        scan_date  TEXT  写入日期 YYYY-MM-DD
+        scan_time  TEXT  写入时间 YYYY-MM-DD HH:MM:SS
+        side       TEXT  'strong' / 'weak'
+        rank       INT   当侧的排名（强=1..n 由强到弱；弱=1..n 由弱到强）
+        symbol     TEXT  合约代码
+        name       TEXT  品种名
+        score      REAL  总分
+    日线写强前4 + 弱后4；小时线写强前2 + 弱后2。其它周期不写。
+    """
+    topn = STRENGTH_RANKING_TOPN.get(period_label)
+    if not topn:
+        return 0  # 该周期不写
+    strong_n, weak_n = topn
+    if results_df is None or len(results_df) == 0:
+        return 0
+    strong_n = min(strong_n, len(results_df))
+    weak_n = min(weak_n, len(results_df))
+
+    now = now or datetime.now()
+    scan_date = scan_date or now.strftime("%Y-%m-%d")
+    scan_time = now.strftime("%Y-%m-%d %H:%M:%S")
+
+    rows = []
+    # 强：results_df 已按总分降序，head 即最强
+    strong = results_df.head(strong_n)
+    for i, (_, r) in enumerate(strong.iterrows(), 1):
+        rows.append((period_label, scan_date, scan_time, "strong", i,
+                     str(r["symbol"]), str(r["name"]), float(r["总分"])))
+    # 弱：tail 即最弱；排名由弱到强（rank=1 最弱）
+    weak = results_df.tail(weak_n).iloc[::-1]
+    for i, (_, r) in enumerate(weak.iterrows(), 1):
+        rows.append((period_label, scan_date, scan_time, "weak", i,
+                     str(r["symbol"]), str(r["name"]), float(r["总分"])))
+
+    conn = sqlite3.connect(db_path)
+    try:
+        cur = conn.cursor()
+        cur.execute("""CREATE TABLE IF NOT EXISTS strength_ranking (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            period TEXT, scan_date TEXT, scan_time TEXT,
+            side TEXT, rank INTEGER,
+            symbol TEXT, name TEXT, score REAL
+        )""")
+        cur.executemany(
+            "INSERT INTO strength_ranking "
+            "(period, scan_date, scan_time, side, rank, symbol, name, score) "
+            "VALUES (?,?,?,?,?,?,?,?)", rows)
+        conn.commit()
+    finally:
+        conn.close()
+    return len(rows)
+
+
 def save_results(results_df, prefix, db_path=DB_PATH, run_key=None, period_label=""):
     """写库：全量表 + 强弱前3 + 快照追踪表 + 运行日志。"""
     tn = _table_names(prefix)
@@ -480,45 +561,38 @@ def save_results(results_df, prefix, db_path=DB_PATH, run_key=None, period_label
         strong3.to_sql(tn["top3"], conn, if_exists="replace", index=False)
         weak3.to_sql(tn["bot3"], conn, if_exists="replace", index=False)
 
-        # 快照追踪表（按 run_key 主键 upsert）
+        # 快照追踪表：保持与现存表结构兼容（hourly_top3_tracking 已存在旧 schema），
+        # 写入 run_label + 总count 等字段，不强制新建。
         run_key = run_key or datetime.now().strftime("%Y%m%d_%H%M%S")
-        cur.execute(f"""
-            CREATE TABLE IF NOT EXISTS {tn['track']} (
-                run_key TEXT PRIMARY KEY, run_time TEXT, period_label TEXT,
-                s1_symbol TEXT, s1_name TEXT, s1_score INTEGER, s1_price REAL,
-                s2_symbol TEXT, s2_name TEXT, s2_score INTEGER, s2_price REAL,
-                s3_symbol TEXT, s3_name TEXT, s3_score INTEGER, s3_price REAL,
-                w1_symbol TEXT, w1_name TEXT, w1_score INTEGER, w1_price REAL,
-                w2_symbol TEXT, w2_name TEXT, w2_score INTEGER, w2_price REAL,
-                w3_symbol TEXT, w3_name TEXT, w3_score INTEGER, w3_price REAL,
-                max_score INTEGER, max_name TEXT, min_score INTEGER, min_name TEXT, avg_score REAL
-            )
-        """)
         s = strong3.reset_index(drop=True)
         w = weak3.reset_index(drop=True)
         if len(s) >= 3 and len(w) >= 3:
-            cur.execute(f"""
-                INSERT OR REPLACE INTO {tn['track']}
-                (run_key, run_time, period_label,
-                 s1_symbol,s1_name,s1_score,s1_price, s2_symbol,s2_name,s2_score,s2_price, s3_symbol,s3_name,s3_score,s3_price,
-                 w1_symbol,w1_name,w1_score,w1_price, w2_symbol,w2_name,w2_score,w2_price, w3_symbol,w3_name,w3_score,w3_price,
-                 max_score,max_name,min_score,min_name,avg_score)
-                VALUES (?,?,?,
-                        ?,?,?,?, ?,?,?,?, ?,?,?,?,
-                        ?,?,?,?, ?,?,?,?, ?,?,?,?,
-                        ?,?,?,?,?)
-            """, (
-                run_key, datetime.now().strftime("%Y-%m-%d %H:%M:%S"), period_label,
-                s.at[0, "symbol"], s.at[0, "name"], int(s.at[0, "总分"]), float(s.at[0, "最新价"]),
-                s.at[1, "symbol"], s.at[1, "name"], int(s.at[1, "总分"]), float(s.at[1, "最新价"]),
-                s.at[2, "symbol"], s.at[2, "name"], int(s.at[2, "总分"]), float(s.at[2, "最新价"]),
-                w.at[0, "symbol"], w.at[0, "name"], int(w.at[0, "总分"]), float(w.at[0, "最新价"]),
-                w.at[1, "symbol"], w.at[1, "name"], int(w.at[1, "总分"]), float(w.at[1, "最新价"]),
-                w.at[2, "symbol"], w.at[2, "name"], int(w.at[2, "总分"]), float(w.at[2, "最新价"]),
-                int(results_df["总分"].max()), str(results_df.loc[results_df["总分"].idxmax(), "name"]),
-                int(results_df["总分"].min()), str(results_df.loc[results_df["总分"].idxmin(), "name"]),
-                round(float(results_df["总分"].mean()), 1),
-            ))
+            try:
+                cur.execute(f"""
+                    INSERT OR REPLACE INTO {tn['track']}
+                    (run_time, run_label,
+                     s1_symbol, s1_contract, s1_name, s1_score,
+                     s2_symbol, s2_contract, s2_name, s2_score,
+                     s3_symbol, s3_contract, s3_name, s3_score,
+                     w1_symbol, w1_contract, w1_name, w1_score,
+                     w2_symbol, w2_contract, w2_name, w2_score,
+                     w3_symbol, w3_contract, w3_name, w3_score,
+                     max_score, max_name, min_score, min_name, avg_score, total_count)
+                    VALUES (?,?, ?,?,?,?, ?,?,?,?, ?,?,?,?, ?,?,?,?, ?,?,?,?, ?,?,?,?, ?,?,?,?,?)
+                """, (
+                    datetime.now().strftime("%Y-%m-%d %H:%M:%S"), period_label,
+                    s.at[0, "symbol"], s.at[0, "symbol"], s.at[0, "name"], int(s.at[0, "总分"]),
+                    s.at[1, "symbol"], s.at[1, "symbol"], s.at[1, "name"], int(s.at[1, "总分"]),
+                    s.at[2, "symbol"], s.at[2, "symbol"], s.at[2, "name"], int(s.at[2, "总分"]),
+                    w.at[0, "symbol"], w.at[0, "symbol"], w.at[0, "name"], int(w.at[0, "总分"]),
+                    w.at[1, "symbol"], w.at[1, "symbol"], w.at[1, "name"], int(w.at[1, "总分"]),
+                    w.at[2, "symbol"], w.at[2, "symbol"], w.at[2, "name"], int(w.at[2, "总分"]),
+                    int(results_df["总分"].max()), str(results_df.loc[results_df["总分"].idxmax(), "name"]),
+                    int(results_df["总分"].min()), str(results_df.loc[results_df["总分"].idxmin(), "name"]),
+                    round(float(results_df["总分"].mean()), 1), len(results_df),
+                ))
+            except Exception as e:
+                print(f"  警告：top3_tracking 写入失败（不影响主表）：{e}")
 
         # 统一运行日志
         cur.execute("""CREATE TABLE IF NOT EXISTS run_log
@@ -659,8 +733,16 @@ def run(period="1440", top=40, length=None, db_path=DB_PATH, save=True, render=T
     short_w, long_w = cfg["short_w"], cfg["long_w"]
 
     _print_block(f"  期货强弱分析 - {period_label} (period={period})")
-    print(f"  数据源: {'future_data(tqsdk+缓存)' if _HAS_FUTURE_DATA else 'akshare'} | "
-          f"length={length} | top={top}")
+    _backend = "akshare"
+    if _HAS_FUTURE_DATA and not _AKSHARE_ONLY:
+        try:
+            from future_data import get_backend as _gb
+            _backend = f"future_data({_gb()}+缓存)"
+        except Exception:
+            _backend = "future_data"
+    elif _AKSHARE_ONLY:
+        _backend = "akshare only"
+    print(f"  数据源: {_backend} | length={length} | top={top}")
 
     universe = get_universe(top=top, db_path=db_path)
     print(f"\n从 futures_top40 读取 {len(universe)} 个品种")
@@ -701,10 +783,20 @@ def run(period="1440", top=40, length=None, db_path=DB_PATH, save=True, render=T
         save_results(results_df, prefix, db_path=db_path,
                      run_key=run_key, period_label=period_label)
         print(f"  已写入 {prefix}_analysis_all / strong_top3 / weak_bottom3 / top3_tracking")
+        # 日线/小时线：额外写入统一强弱头部长表 strength_ranking
+        n = save_strength_ranking(results_df, period_label, db_path=db_path, now=datetime.now())
+        if n:
+            topn = STRENGTH_RANKING_TOPN.get(period_label)
+            print(f"  已写入 strength_ranking（{period_label}：强{topn[0]} + 弱{topn[1]} = {n} 行）")
 
     if render:
-        print("\n生成报告...")
-        render_report(results_df, strong3, weak3, period_label, errors, db_path)
+        # 日线只写数据库，不生成报告文件；其他周期保留终端摘要+文件
+        if period == "1440":
+            print("\n[日线] 仅写入数据库，跳过报告文件生成")
+            print(f"  数据库:   {db_path}")
+        else:
+            print("\n生成报告...")
+            render_report(results_df, strong3, weak3, period_label, errors, db_path)
 
     return results_df
 
@@ -718,7 +810,12 @@ def main():
     parser.add_argument("--db", default=DB_PATH, help="数据库路径")
     parser.add_argument("--no-save", action="store_true", help="不写库")
     parser.add_argument("--no-render", action="store_true", help="不输出报告")
+    parser.add_argument("--akshare-only", action="store_true", help="强制只使用 akshare，跳过 xtquant")
     args = parser.parse_args()
+    if args.akshare_only:
+        os.environ["FUTURES_STRENGTH_AKSHARE_ONLY"] = "1"
+        global _AKSHARE_ONLY
+        _AKSHARE_ONLY = True
     run(period=args.period, top=args.top, length=args.length,
         db_path=args.db, save=not args.no_save, render=not args.no_render)
 

@@ -2,14 +2,13 @@
 data_loader.py
 ==============
 1. 从 D:/work_ai/futures_data.db 读取品种表 (symbol / name / exchange)
-2. 通过统一入口 future_data（tqsdk 后端 + TTL 缓存）拉取分钟 K 线；
+2. 通过统一入口 future_data（xtquant 后端 + TTL 缓存）拉取分钟 K 线；
    失败可回退到 akshare。
 3. 本地 parquet 缓存，超时自动刷新
 
-迁移说明（2026-06）：
-  原本只用 akshare 的 futures_zh_minute_sina（单次仅 ~320 根，逐品种慢）。
-  现在默认走全系统统一的 future_data.get_klines（tqsdk 后端，可取深历史，
-  TTL 缓存全系统共享 D:/work_ai/quote_cache）。akshare 路径保留为回退。
+说明（2026-07）：
+  默认走全系统统一的 future_data.get_klines（xtquant 后端，可取深历史，
+  TTL 缓存全系统共享 D:/work_ai/quote_cache）。akshare 路径保留为备份。
 """
 from __future__ import annotations
 
@@ -121,16 +120,16 @@ def fetch_klines_tq(
     ttl_hours: float = 6,
     force: bool = False,
 ) -> pd.DataFrame:
-    """通过统一入口 future_data（tqsdk 后端）拉取单品种分钟 K 线。
+    """通过统一入口 future_data（xtquant 后端）拉取单品种分钟 K 线。
 
     exchange 缺省时从 DB 的 futures_top40 自动查（symbol->exchange）。
     返回规范化后的 DataFrame（datetime/open/high/low/close/volume）。
 
-    相对 akshare 的改进：tqsdk 可取深历史（~8964 根 vs sina ~320），
+    相对 akshare 的改进：xtquant 可取深历史，
     TTL 缓存全系统共享。
     """
     if not _HAS_FUTURE_DATA:
-        raise RuntimeError("future_data 不可用，无法走 tqsdk 路径")
+        raise RuntimeError("future_data 不可用，无法走 xtquant 路径")
     if exchange is None:
         exchange = _tq_exch_map().get(symbol)
     if exchange is None:
@@ -147,12 +146,12 @@ def load_klines(
     cfg: Optional[dict] = None,
     use_cache: bool = True,
     force_refresh: bool = False,
-    backend: str = "tqsdk",
+    backend: str = "xtquant",
 ) -> pd.DataFrame:
     """读取单品种 K 线：缓存优先，超时或失败则联网刷新。
 
     backend:
-      - "tqsdk"（默认）：走统一入口 future_data（含其自身 TTL 缓存 + 全系统共享缓存）。
+      - "xtquant"（默认）：走统一入口 future_data（含其自身 TTL 缓存 + 全系统共享缓存）。
       - "akshare"：保留原 akshare 路径（兼容/回退用）。
     """
     cfg = cfg or load_config()
@@ -162,8 +161,8 @@ def load_klines(
     # config.yaml 的 backend 字段可覆盖函数参数（便于全局切换后端）
     backend = dc.get("backend", backend)
 
-    # tqsdk 路径：统一入口自带 TTL 缓存，直接用它，避免双重缓存
-    if backend == "tqsdk" and _HAS_FUTURE_DATA:
+    # xtquant 路径：统一入口自带 TTL 缓存，直接用它，避免双重缓存
+    if backend in ("xtquant", "tqsdk") and _HAS_FUTURE_DATA:
         return fetch_klines_tq(
             symbol, period=period,
             length=dc.get("data_length", 8000),
@@ -202,13 +201,13 @@ def load_klines_inject(
       - load_klines_inject：注入模式滚动窗口（默认 300 根），增量更新、窗口恒定，
         仅适合找「当前信号」的扫描部分，不要用于回测（样本太浅）。
 
-    走 future_data.inject_klines（tqsdk 后端 + inject/ 子目录滚动缓存）。
+    走 future_data.inject_klines（xtquant 后端 + inject/ 子目录滚动缓存）。
     """
     cfg = cfg or load_config()
     dc = cfg["data"]
     period = dc["period"]
     if not _HAS_FUTURE_DATA:
-        raise RuntimeError("future_data 不可用，注入模式需 tqsdk 后端")
+        raise RuntimeError("future_data 不可用，注入模式需 xtquant 后端")
     if exchange is None:
         exchange = _tq_exch_map().get(symbol)
     if exchange is None:
@@ -231,7 +230,7 @@ def load_all_klines_inject(
     dc = cfg["data"]
     period = dc["period"]
     if not _HAS_FUTURE_DATA:
-        raise RuntimeError("future_data 不可用，注入模式需 tqsdk 后端")
+        raise RuntimeError("future_data 不可用，注入模式需 xtquant 后端")
     syms = read_symbols(cfg, table)
     tuples = [(r.symbol, r.name, r.exchange) for r in syms.itertuples(index=False)]
     out_raw = _tq_inject_many(tuples, period=period, length=length)
